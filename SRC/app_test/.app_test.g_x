@@ -1,0 +1,37 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="2">
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Generated_Code/IO_Map.c" FileDate="2024-04-19, 10:47:41" FileAge="1713516461423" FileType="45637" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2024-04-26, 11:45:56" FileAge="1714124756815" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2024-04-26, 11:45:56" FileAge="1714124756800" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2024-04-26, 22:06:25" FileAge="1714161985493" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/API.h" FileDate="2024-04-22, 10:24:49" FileAge="1713774289162" FileType="45637" CompNumb="8" />
+      <File Name="Sources/Events.h" FileDate="2024-04-26, 11:45:56" FileAge="1714124756823" FileType="131328" />
+      <File Name="Documentation/app_test.txt" FileDate="2024-04-25, 09:59:16" FileAge="1714031956400" FileType="3072" />
+      <File Name="Generated_Code/API.c" FileDate="2024-04-22, 10:24:49" FileAge="1713774289169" FileType="45637" CompNumb="8" />
+      <File Name="Documentation/app_test_SIGNALS.txt" FileDate="2024-04-30, 14:48:08" FileAge="1714481288895" FileType="3072" />
+      <File Name="Sources/main.c" FileDate="2024-04-26, 23:06:17" FileAge="1714165577960" FileType="128" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.prm" FileDate="2024-04-23, 10:47:13" FileAge="1713862033022" FileType="8" CompNumb="7" />
+      <File Name="Generated_Code/WDog1.h" FileDate="2024-04-26, 22:06:25" FileAge="1714161985480" FileType="45637" CompNumb="13" />
+      <File Name="Sources/Events.c" FileDate="2024-04-29, 11:10:39" FileAge="1714381839729" FileType="131328" />
+      <File Name="Generated_Code/PE_Const.h" FileDate="2024-04-19, 10:47:41" FileAge="1713516461486" FileType="45637" />
+      <File Name="Generated_Code/WDog1.c" FileDate="2024-04-26, 22:06:25" FileAge="1714161985471" FileType="45637" CompNumb="13" />
+      <File Name="Generated_Code/CI2C1.h" FileDate="2024-04-19, 11:05:11" FileAge="1713517511412" FileType="45637" CompNumb="9" />
+      <File Name="Documentation/app_test_Settings.xml" FileDate="2024-04-26, 22:06:26" FileAge="1714161986026" FileType="3072" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2024-04-19, 10:47:41" FileAge="1713516461501" FileType="45637" />
+      <File Name="Generated_Code/CI2C1.c" FileDate="2024-04-29, 17:13:03" FileAge="1714403583107" FileType="45637" CompNumb="9" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2024-04-19, 10:47:41" FileAge="1713516461478" FileType="45637" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2024-04-19, 10:47:41" FileAge="1713516461493" FileType="45637" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>23</CodeGenReference>
+</CodeGenerationInfo>

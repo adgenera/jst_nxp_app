@@ -1,0 +1,1 @@
+fuer den ADC wird ein 4 Byte align ram bereich mit dem namen adcLists benoetigt.

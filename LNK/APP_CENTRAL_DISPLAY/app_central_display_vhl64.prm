@@ -1,0 +1,26 @@
+/* This is a linker parameter file for the MC9S12ZVHL32 */
+NAMES
+
+END
+
+SEGMENTS  /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT below. */
+      RAM           = READ_WRITE  0x001000 TO 0x0017FF;
+      APP           = READ_ONLY  0xFF8200 TO 0xFFE7FA;
+END
+
+PLACEMENT /* here all predefined and user segments are placed into the SEGMENTS defined above. */
+      _PRESTART,              /* Used in HIWARE format: jump to _Startup at the code start */
+      STARTUP,                /* startup data structures */
+      ROM_VAR,                /* constant variables */
+      STRINGS,                /* string literals */
+      NON_BANKED,             /* runtime routines which must not be banked */
+      DEFAULT_ROM,
+      COPY              INTO  APP;
+
+      DEFAULT_RAM             /* all variables, the default RAM location */
+                        INTO  RAM;
+END
+
+INIT _EntryPoint                       /* The entry point of the application. This function is generated into the CPU module. */
+
+STACKSIZE 0x0200                       /* Size of the system stack. Value can be changed on the "Build options" tab */

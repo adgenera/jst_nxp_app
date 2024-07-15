@@ -1,0 +1,60 @@
+// Allow symbols to have up to 63 characters
+-idlen(63)
+
+
+// inhibit messages for Processor Expert libraries
+-elib(19, 10)
+-e766
+-e537
+
+
+// Output options: One line, file info always; Use full path names
+-hF1
++ffn
+
+// Normally my format is defined as follows:
+//-"format=%(\q%f\q %l %C%) %t %n: %m"
+// For eclipse-usage, the GCC error format is necessary,
+// since we have only the default eclipse error parser available.
+-"format=%(%f:%l:%C:%) %t %n: %m"
+
+// And also for eclipse, the reference locations provided by
+// Lint, put into square brackets “[Reference: File: ... Line: ...]”
+// are not correctly handled, therefore we switch them off.
+// Enable warning 831 if you are interested.
+-frl
+
+// Do not break lines
+-width(0)
+
+// And make sure no foreign includes change the format
++flm
+
+// Do not stop make when finding warnings, notes, or infos
+-zero(400)
+// Do not stop make on errors
+-zero
+
+// Allow function-like macros
+-e9026
+
+// Ignore Info 793: ANSI/ISO limit of 31 'significant characters in an external identifier'
+-e793
+
+// Ignore Warning 641: Converting enum 'xxx' to 'int'
+-estring(641,int)
+
+// Ignore Note 9059: C comment contains C++ comment [MISRA 2012 Rule 3.1, required]
+-e9059
+
+// Ignore Info 830: Location cited in prior message
+-e830
+
+// Ignore PC-Lint from libraries, only show errors
+-wlib(1)
+
+// Ignore Warning 546: Suspicious use of &
+-e546
+
+// Identify type "boolean" as strong boolean type; does not work as expected, yet
+//-strong(B,boolean)

@@ -1,0 +1,786 @@
+*** EVALUATION ***
+PROGRAM "jst_bl.elf"
+
+*********************************************************************************************
+TARGET SECTION
+---------------------------------------------------------------------------------------------
+Processor   : Freescale S12Z
+Memory Model: MEDIUM1
+File Format : ELF\DWARF 2.0
+Linker      : SmartLinker V-5.0.55 Build 19351, Dec 18 2019
+
+*********************************************************************************************
+FILE SECTION
+---------------------------------------------------------------------------------------------
+API_c.obj                               Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+BL_c.obj                                Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+CI2C1_c.obj                             Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+Cpu_c.obj                               Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+Events_c.obj                            Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+IFsh1_c.obj                             Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+Vectors_c.obj                           Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+WDog1_c.obj                             Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+main_c.obj                              Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+timer_c.obj                             Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+Dispatcher_c.obj                        Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+starts12z_c.obj                         Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+rts12z.o (ansii.lib)                    Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+string.o (ansii.lib)                    Model: MEDIUM1,       Lang: ANSI-C,        Compiler Version: C/C++ Compiler for S12/L-ISA v-5.0.47 build 19351
+
+*********************************************************************************************
+STARTUP SECTION
+---------------------------------------------------------------------------------------------
+Entry point: 0xFFE800 (Dispatcher)
+_startupData is allocated at 0xFFE838 and uses 20 Bytes
+extern struct _tagStartup {
+  unsigned nofZeroOut     1
+  _Range   pZeroOut       0x1100     207
+  _Copy    *toCopyDownBeg 0xFFFA9C
+  int      nofInitBodies  0
+  _Cpp     *initBodies    0xFFE853
+  int      nofFiniBodies  0
+  _Cpp     *finiBodies    0xFFE853
+} _startupData;
+
+*********************************************************************************************
+SECTION-ALLOCATION SECTION
+Section Name                    Size  Type     From       To       Segment
+---------------------------------------------------------------------------------------------
+.init                             56     R   0xFFE800   0xFFE837   BL
+.startData                        27     R   0xFFE838   0xFFE852   BL
+NON_BANKED                       694     R   0xFFE853   0xFFEB08   BL
+.text                           2771     R   0xFFEB09   0xFFF5DB   BL
+.copy                             12     R   0xFFFA9C   0xFFFAA7   BL
+.stack                           256   R/W     0x1000     0x10FF   RAM
+.data                              1   R/W     0x1100     0x1100   RAM
+.__absdata__InterruptVectorTable__        492     R   0xFFFE10   0xFFFFFB   .absSeg0
+.__absdata__ResetVectorTable__          4     R   0xFFFFFC   0xFFFFFF   .absSeg1
+.common                           57   R/W     0x1101     0x1139   RAM
+CI2C1_CODE                       426     R   0xFFF5DC   0xFFF785   BL
+CI2C1_DATA                       148   R/W     0x113A     0x11CD   RAM
+IFsh1_CODE                       770     R   0xFFF786   0xFFFA87   BL
+IFsh1_DATA                         1   R/W     0x11CE     0x11CE   RAM
+WDog1_CODE                        20     R   0xFFFA88   0xFFFA9B   BL
+
+Summary of section sizes per section type:
+READ_ONLY (R):        1498 (dec:     5272)
+READ_WRITE (R/W):      1CF (dec:      463)
+
+*********************************************************************************************
+VECTOR-ALLOCATION SECTION
+    Address     InitValue   InitFunction
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+OBJECT-ALLOCATION SECTION
+     Name               Module                 Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+MODULE:                 -- API_c.obj --
+- PROCEDURES:
+     API_Init                                FFEB09      1C      28       1   .text       
+- VARIABLES:
+MODULE:                 -- BL_c.obj --
+- PROCEDURES:
+     parse_header                            FFEB25      2D      45       1   .text       
+     check_checksum                          FFEB52      95     149       7   .text       
+     parse_payload                           FFEBE7      A3     163       1   .text       
+     BL_FSM                                  FFEC8A     310     784       1   .text       
+- VARIABLES:
+     bl_state                                  1100       1       1      22   .data       
+     ret                                       1101       1       1      23   .common     
+     bl_flags                                  1102       2       2      32   .common     
+     commands                                  1104      12      18      25   .common     
+     bl_program                                1116      18      24      36   .common     
+     bl_fsm_status                             112E       1       1      19   .common     
+- LABELS:
+     __SEG_START__PRESTART                   FFE800       0       0       3               
+MODULE:                 -- CI2C1_c.obj --
+- PROCEDURES:
+     CI2C1_Interrupt                         FFE853     22E     558       1   NON_BANKED  
+     CI2C1_SendBlock                         FFF5DC      9B     155       5   CI2C1_CODE  
+     CI2C1_RecvBlock                         FFF677      CB     203       2   CI2C1_CODE  
+     CI2C1_Init                              FFF742      44      68       1   CI2C1_CODE  
+- VARIABLES:
+     CI2C1_SerFlag                             113A       1       1       6   CI2C1_DATA  
+     CI2C1_SndRcvTemp                          113B       2       2       2   CI2C1_DATA  
+     OutBufferS                                113D      40      64       8   CI2C1_DATA  
+     OutPtrWS                                  117D       3       3       5   CI2C1_DATA  
+     OutPtrRS                                  1180       3       3       9   CI2C1_DATA  
+     OutLenS                                   1183       2       2      12   CI2C1_DATA  
+     InpBufferS                                1185      40      64       6   CI2C1_DATA  
+     InpPtrWS                                  11C5       3       3       5   CI2C1_DATA  
+     InpPtrRS                                  11C8       3       3       5   CI2C1_DATA  
+     InpLenS                                   11CB       2       2       8   CI2C1_DATA  
+     EnUser                                    11CD       1       1       1   CI2C1_DATA  
+MODULE:                 -- Cpu_c.obj --
+- PROCEDURES:
+     Cpu_Interrupt                           FFEA81       3       3     120   NON_BANKED  
+     _EntryPoint                             FFEA84      5D      93       1   NON_BANKED  
+     Low_level_init                          FFEF9A     334     820       1   .text       
+- VARIABLES:
+     CCR_reg                                   112F       1       1      17   .common     
+MODULE:                 -- Events_c.obj --
+- PROCEDURES:
+     CI2C1_OnRxChar                          FFF2CE     1B1     433       1   .text       
+     CI2C1_OnTxChar                          FFF47F       6       6       1   .text       
+     CI2C1_OnReadReq                         FFF485      95     149       1   .text       
+     CI2C1_OnArbitLost                       FFF51A       6       6       1   .text       
+     CI2C1_OnError                           FFF520       6       6       1   .text       
+     CI2C1_OnWriteReq                        FFF526      18      24       1   .text       
+     CI2C1_OnFreeTxBuf                       FFF53E       B      11       1   .text       
+- VARIABLES:
+     command                                   1130       1       1       9   .common     
+MODULE:                 -- IFsh1_c.obj --
+- PROCEDURES:
+     FnCmdInRam_                             FFEAE1       A      10       2   NON_BANKED  
+     IFsh1_Interrupt                         FFEAEB       A      10       1   NON_BANKED  
+     WriteArray                              FFF786     154     340       1   IFsh1_CODE  
+     IFsh1_SetBlockFlash                     FFF8DA      60      96       2   IFsh1_CODE  
+     IFsh1_GetBlockFlash                     FFF93A      7D     125       2   IFsh1_CODE  
+     IFsh1_EraseSector                       FFF9B7      C7     199       2   IFsh1_CODE  
+     IFsh1_Init                              FFFA7E       A      10       1   IFsh1_CODE  
+- VARIABLES:
+     EnEvent                                   11CE       1       1       1   IFsh1_DATA  
+MODULE:                 -- Vectors_c.obj --
+- PROCEDURES:
+- VARIABLES:
+     _InterruptVectorTable                   FFFE10     1EC     492       0   .__absdata__InterruptVectorTable__
+     _ResetVectorTable                       FFFFFC       4       4       0   .__absdata__ResetVectorTable__
+MODULE:                 -- WDog1_c.obj --
+- PROCEDURES:
+     WDog1_Clear                             FFFA88       A      10       2   WDog1_CODE  
+     WDog1_Trigger                           FFFA92       A      10       1   WDog1_CODE  
+- VARIABLES:
+MODULE:                 -- main_c.obj --
+- PROCEDURES:
+     main                                    FFF549      15      21       1   .text       
+- VARIABLES:
+     us100                                     1131       1       1       3   .common     
+     cnt                                       1132       1       1      16   .common     
+     sent                                      1133       2       2       5   .common     
+     flags                                     1135       1       1       7   .common     
+MODULE:                 -- timer_c.obj --
+- PROCEDURES:
+     API_interrupt                           FFEAF5      14      20       1   NON_BANKED  
+- VARIABLES:
+     ms_clock                                  1136       4       4       2   .common     
+MODULE:                 -- Dispatcher_c.obj --
+- PROCEDURES:
+     Dispatcher                              FFE800      38      56       1   .init       
+- VARIABLES:
+- LABELS:
+     __SEG_END_SSTACK                          1100       0       0       2               
+MODULE:                 -- starts12z_c.obj --
+- PROCEDURES:
+     DoZeroOut                               FFF55E      19      25       1   .text       
+     DoCopyDown                              FFF577      15      21       1   .text       
+     _Startup                                FFF58C      10      16       1   .text       
+- VARIABLES:
+     _startupData                            FFE838       A      10       3   .startData  
+MODULE:                 -- rts12z.o (ansii.lib) --
+- PROCEDURES:
+     __copy                                  FFF59C       7       7       2   .text       
+- VARIABLES:
+MODULE:                 -- string.o (ansii.lib) --
+- PROCEDURES:
+     memcpy                                  FFF5A3      39      57       3   .text       
+- VARIABLES:
+
+*********************************************************************************************
+MODULE STATISTIC
+  Name                                      Data   Code  Const
+---------------------------------------------------------------------------------------------
+  API_c.obj                                    0     28      0
+  BL_c.obj                                    47   1141      0
+  CI2C1_c.obj                                148    984      0
+  Cpu_c.obj                                    1    916      0
+  Events_c.obj                                 1    635      0
+  IFsh1_c.obj                                  1    790      0
+  Vectors_c.obj                                0      0    496
+  WDog1_c.obj                                  0     20      0
+  main_c.obj                                   5     21      0
+  timer_c.obj                                  4     20      0
+  Dispatcher_c.obj                             0     56      0
+  starts12z_c.obj                              0     62      0
+  rts12z.o (ansii.lib)                         0      7      0
+  string.o (ansii.lib)                         0     57      0
+  other                                      256     27     12
+
+*********************************************************************************************
+SECTION USE IN OBJECT-ALLOCATION SECTION
+---------------------------------------------------------------------------------------------
+SECTION: ".text"
+  API_Init parse_header check_checksum parse_payload BL_FSM Low_level_init 
+  CI2C1_OnRxChar CI2C1_OnTxChar CI2C1_OnReadReq CI2C1_OnArbitLost CI2C1_OnError 
+  CI2C1_OnWriteReq CI2C1_OnFreeTxBuf main DoZeroOut DoCopyDown _Startup __copy 
+  memcpy 
+SECTION: ".data"
+  bl_state 
+SECTION: ".init"
+  Dispatcher 
+SECTION: "NON_BANKED"
+  CI2C1_Interrupt Cpu_Interrupt _EntryPoint FnCmdInRam_ IFsh1_Interrupt 
+  API_interrupt 
+SECTION: ".common"
+  ret bl_flags commands bl_program bl_fsm_status CCR_reg command us100 cnt 
+  sent flags ms_clock 
+SECTION: "CI2C1_CODE"
+  CI2C1_SendBlock CI2C1_RecvBlock CI2C1_Init 
+SECTION: "CI2C1_DATA"
+  CI2C1_SerFlag CI2C1_SndRcvTemp OutBufferS OutPtrWS OutPtrRS OutLenS 
+  InpBufferS InpPtrWS InpPtrRS InpLenS EnUser 
+SECTION: "IFsh1_CODE"
+  WriteArray IFsh1_SetBlockFlash IFsh1_GetBlockFlash IFsh1_EraseSector 
+  IFsh1_Init 
+SECTION: "IFsh1_DATA"
+  EnEvent 
+SECTION: ".__absdata__InterruptVectorTable__"
+  _InterruptVectorTable 
+SECTION: ".__absdata__ResetVectorTable__"
+  _ResetVectorTable 
+SECTION: "WDog1_CODE"
+  WDog1_Clear WDog1_Trigger 
+
+*********************************************************************************************
+OBJECT LIST SORTED BY ADDRESS
+     Name                                      Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+     bl_state                                  1100       1       1      22   .data       
+     ret                                       1101       1       1      23   .common     
+     bl_flags                                  1102       2       2      32   .common     
+     commands                                  1104      12      18      25   .common     
+     bl_program                                1116      18      24      36   .common     
+     bl_fsm_status                             112E       1       1      19   .common     
+     CCR_reg                                   112F       1       1      17   .common     
+     command                                   1130       1       1       9   .common     
+     us100                                     1131       1       1       3   .common     
+     cnt                                       1132       1       1      16   .common     
+     sent                                      1133       2       2       5   .common     
+     flags                                     1135       1       1       7   .common     
+     ms_clock                                  1136       4       4       2   .common     
+     CI2C1_SerFlag                             113A       1       1       6   CI2C1_DATA  
+     CI2C1_SndRcvTemp                          113B       2       2       2   CI2C1_DATA  
+     OutBufferS                                113D      40      64       8   CI2C1_DATA  
+     OutPtrWS                                  117D       3       3       5   CI2C1_DATA  
+     OutPtrRS                                  1180       3       3       9   CI2C1_DATA  
+     OutLenS                                   1183       2       2      12   CI2C1_DATA  
+     InpBufferS                                1185      40      64       6   CI2C1_DATA  
+     InpPtrWS                                  11C5       3       3       5   CI2C1_DATA  
+     InpPtrRS                                  11C8       3       3       5   CI2C1_DATA  
+     InpLenS                                   11CB       2       2       8   CI2C1_DATA  
+     EnUser                                    11CD       1       1       1   CI2C1_DATA  
+     EnEvent                                   11CE       1       1       1   IFsh1_DATA  
+     Dispatcher                              FFE800      38      56       1   .init       
+     CI2C1_Interrupt                         FFE853     22E     558       1   NON_BANKED  
+     Cpu_Interrupt                           FFEA81       3       3     120   NON_BANKED  
+     _EntryPoint                             FFEA84      5D      93       1   NON_BANKED  
+     FnCmdInRam_                             FFEAE1       A      10       2   NON_BANKED  
+     IFsh1_Interrupt                         FFEAEB       A      10       1   NON_BANKED  
+     API_interrupt                           FFEAF5      14      20       1   NON_BANKED  
+     API_Init                                FFEB09      1C      28       1   .text       
+     parse_header                            FFEB25      2D      45       1   .text       
+     check_checksum                          FFEB52      95     149       7   .text       
+     parse_payload                           FFEBE7      A3     163       1   .text       
+     BL_FSM                                  FFEC8A     310     784       1   .text       
+     Low_level_init                          FFEF9A     334     820       1   .text       
+     CI2C1_OnRxChar                          FFF2CE     1B1     433       1   .text       
+     CI2C1_OnTxChar                          FFF47F       6       6       1   .text       
+     CI2C1_OnReadReq                         FFF485      95     149       1   .text       
+     CI2C1_OnArbitLost                       FFF51A       6       6       1   .text       
+     CI2C1_OnError                           FFF520       6       6       1   .text       
+     CI2C1_OnWriteReq                        FFF526      18      24       1   .text       
+     CI2C1_OnFreeTxBuf                       FFF53E       B      11       1   .text       
+     main                                    FFF549      15      21       1   .text       
+     DoZeroOut                               FFF55E      19      25       1   .text       
+     DoCopyDown                              FFF577      15      21       1   .text       
+     _Startup                                FFF58C      10      16       1   .text       
+     __copy                                  FFF59C       7       7       2   .text       
+     memcpy                                  FFF5A3      39      57       3   .text       
+     CI2C1_SendBlock                         FFF5DC      9B     155       5   CI2C1_CODE  
+     CI2C1_RecvBlock                         FFF677      CB     203       2   CI2C1_CODE  
+     CI2C1_Init                              FFF742      44      68       1   CI2C1_CODE  
+     WriteArray                              FFF786     154     340       1   IFsh1_CODE  
+     IFsh1_SetBlockFlash                     FFF8DA      60      96       2   IFsh1_CODE  
+     IFsh1_GetBlockFlash                     FFF93A      7D     125       2   IFsh1_CODE  
+     IFsh1_EraseSector                       FFF9B7      C7     199       2   IFsh1_CODE  
+     IFsh1_Init                              FFFA7E       A      10       1   IFsh1_CODE  
+     WDog1_Clear                             FFFA88       A      10       2   WDog1_CODE  
+     WDog1_Trigger                           FFFA92       A      10       1   WDog1_CODE  
+     _InterruptVectorTable                   FFFE10     1EC     492       0   .__absdata__InterruptVectorTable__
+     _ResetVectorTable                       FFFFFC       4       4       0   .__absdata__ResetVectorTable__
+
+*********************************************************************************************
+UNUSED-OBJECTS SECTION
+---------------------------------------------------------------------------------------------
+NOT USED PROCEDURES
+CI2C1_c.obj:
+  CI2C1_Enable CI2C1_Disable CI2C1_SendChar CI2C1_ClearTxBuf CI2C1_ClearRxBuf 
+  CI2C1_GetCharsInTxBuf CI2C1_GetCharsInRxBuf 
+Cpu_c.obj:
+  Cpu_Delay100US 
+IFsh1_c.obj:
+  CallFnCmdInRam WriteWord IFsh1_EraseVerify_ IFsh1_SetProtection_ 
+  IFsh1_EnableEvent IFsh1_DisableEvent IFsh1_SetByteFlash IFsh1_GetByteFlash 
+  IFsh1_SetWordFlash IFsh1_GetWordFlash IFsh1_SetLongFlash IFsh1_GetLongFlash 
+  IFsh1_DataPtr2Addr IFsh1_FuncPtr2Addr 
+timer_c.obj:
+  wait_s wait_ms get_time init_time busy_waiting_ms 
+rts12z.o (ansii.lib):
+  __clear __stack_protect_init __stack_check_fail __stack_check 
+string.o (ansii.lib):
+  strerror memchr memcmp memcpy2 _memcpy_8bitCount memmove memset 
+  _memset_clear_8bitCount strlen strset strcat strncat strcpy strncpy strcmp 
+  strncmp strchr strrchr strspn strcspn strpbrk strstr strtok strcoll strxfrm 
+NOT USED VARIABLES
+API_c.obj:
+  .dwarf_type.void .dwarf.API_Init .dwarf_line.API_Init .dwarf_frame.API_Init 
+  .dwarf_pubnames.API_Init .dwarf_aranges.API_Init 
+BL_c.obj:
+  .dwarf.bl_state .dwarf.ret .dwarf.bl_flags .dwarf.commands 
+  .dwarf.bl_temp_payload .dwarf.bl_program .dwarf.bl_fsm_status 
+  .dwarf_type.unsigned char .dwarf_type.unsigned long .dwarf_type.void 
+  .dwarf_type.285 .dwarf_typedef.bl_flags_ut .dwarf_type.bl_flags_st 
+  .dwarf_type.unsigned int .dwarf_type.286 .dwarf_typedef.commands_ut 
+  .dwarf_type.Generic .dwarf_type.287 .dwarf_type.Erase .dwarf_type.288 
+  .dwarf_typedef.erase_payload_st .dwarf_type.289 .dwarf_type.Program_Header 
+  .dwarf_type.290 .dwarf_typedef.program_header_st .dwarf_type.291 
+  .dwarf_type.Program_Payload .dwarf_type.292 .dwarf_typedef.program_payload_st 
+  .dwarf_type.293 .dwarf_type.294 .dwarf_type.Function .dwarf_type.Status 
+  .dwarf_type.295 .dwarf_type.296 .dwarf_typedef.data_program_st 
+  .dwarf_type.297 .dwarf_type.298 .dwarf_type.299 .dwarf_typedef.fsm_status_st 
+  .dwarf.parse_header .dwarf.check_checksum .dwarf.parse_payload .dwarf.BL_FSM 
+  .dwarf_loc.parse_header .dwarf_loc.check_checksum .dwarf_loc.parse_payload 
+  .dwarf_loc.BL_FSM .dwarf_line.parse_header .dwarf_line.check_checksum 
+  .dwarf_line.parse_payload .dwarf_line.BL_FSM .dwarf_frame.parse_header 
+  .dwarf_frame.check_checksum .dwarf_frame.parse_payload .dwarf_frame.BL_FSM 
+  .dwarf_pubnames.ret .dwarf_pubnames.bl_flags .dwarf_pubnames.commands 
+  .dwarf_pubnames.bl_temp_payload .dwarf_pubnames.bl_program 
+  .dwarf_pubnames.bl_fsm_status .dwarf_pubnames.parse_header 
+  .dwarf_pubnames.check_checksum .dwarf_pubnames.parse_payload 
+  .dwarf_pubnames.BL_FSM .dwarf_aranges.ret .dwarf_aranges.bl_flags 
+  .dwarf_aranges.commands .dwarf_aranges.bl_temp_payload 
+  .dwarf_aranges.bl_program .dwarf_aranges.bl_fsm_status 
+  .dwarf_aranges.parse_header .dwarf_aranges.check_checksum 
+  .dwarf_aranges.parse_payload .dwarf_aranges.BL_FSM bl_temp_payload 
+CI2C1_c.obj:
+  .dwarf.CI2C1_SerFlag .dwarf.ChrTemp .dwarf.CI2C1_SndRcvTemp 
+  .dwarf.OutBufferS .dwarf.OutPtrWS .dwarf.OutPtrRS .dwarf.OutLenS 
+  .dwarf.InpBufferS .dwarf.InpPtrWS .dwarf.InpPtrRS .dwarf.InpLenS 
+  .dwarf.EnUser .dwarf_type.void .dwarf_type.unsigned char .dwarf_type.297 
+  .dwarf_type.unsigned int .dwarf_type.298 .dwarf_type.299 .dwarf_type.300 
+  .dwarf_type.301 .dwarf_type.302 .dwarf_type.303 .dwarf_type.304 
+  .dwarf_type.305 .dwarf_type.306 .dwarf.CI2C1_Interrupt .dwarf.CI2C1_Enable 
+  .dwarf.CI2C1_Disable .dwarf.CI2C1_SendChar .dwarf.CI2C1_SendBlock 
+  .dwarf.CI2C1_RecvBlock .dwarf.CI2C1_ClearTxBuf .dwarf.CI2C1_ClearRxBuf 
+  .dwarf.CI2C1_GetCharsInTxBuf .dwarf.CI2C1_GetCharsInRxBuf .dwarf.CI2C1_Init 
+  .dwarf_loc.CI2C1_Interrupt .dwarf_loc.CI2C1_SendChar 
+  .dwarf_loc.CI2C1_SendBlock .dwarf_loc.CI2C1_RecvBlock 
+  .dwarf_line.CI2C1_Interrupt .dwarf_line.CI2C1_Enable 
+  .dwarf_line.CI2C1_Disable .dwarf_line.CI2C1_SendChar 
+  .dwarf_line.CI2C1_SendBlock .dwarf_line.CI2C1_RecvBlock 
+  .dwarf_line.CI2C1_ClearTxBuf .dwarf_line.CI2C1_ClearRxBuf 
+  .dwarf_line.CI2C1_GetCharsInTxBuf .dwarf_line.CI2C1_GetCharsInRxBuf 
+  .dwarf_line.CI2C1_Init .dwarf_frame.CI2C1_Interrupt .dwarf_frame.CI2C1_Enable 
+  .dwarf_frame.CI2C1_Disable .dwarf_frame.CI2C1_SendChar 
+  .dwarf_frame.CI2C1_SendBlock .dwarf_frame.CI2C1_RecvBlock 
+  .dwarf_frame.CI2C1_ClearTxBuf .dwarf_frame.CI2C1_ClearRxBuf 
+  .dwarf_frame.CI2C1_GetCharsInTxBuf .dwarf_frame.CI2C1_GetCharsInRxBuf 
+  .dwarf_frame.CI2C1_Init .dwarf_pubnames.CI2C1_SndRcvTemp 
+  .dwarf_pubnames.CI2C1_Interrupt .dwarf_pubnames.CI2C1_Enable 
+  .dwarf_pubnames.CI2C1_Disable .dwarf_pubnames.CI2C1_SendChar 
+  .dwarf_pubnames.CI2C1_SendBlock .dwarf_pubnames.CI2C1_RecvBlock 
+  .dwarf_pubnames.CI2C1_ClearTxBuf .dwarf_pubnames.CI2C1_ClearRxBuf 
+  .dwarf_pubnames.CI2C1_GetCharsInTxBuf .dwarf_pubnames.CI2C1_GetCharsInRxBuf 
+  .dwarf_pubnames.CI2C1_Init .dwarf_aranges.CI2C1_SndRcvTemp 
+  .dwarf_aranges.CI2C1_Interrupt .dwarf_aranges.CI2C1_Enable 
+  .dwarf_aranges.CI2C1_Disable .dwarf_aranges.CI2C1_SendChar 
+  .dwarf_aranges.CI2C1_SendBlock .dwarf_aranges.CI2C1_RecvBlock 
+  .dwarf_aranges.CI2C1_ClearTxBuf .dwarf_aranges.CI2C1_ClearRxBuf 
+  .dwarf_aranges.CI2C1_GetCharsInTxBuf .dwarf_aranges.CI2C1_GetCharsInRxBuf 
+  .dwarf_aranges.CI2C1_Init ChrTemp 
+Cpu_c.obj:
+  .dwarf.CCR_reg .dwarf_type.void .dwarf_type.unsigned char 
+  .dwarf.Cpu_Interrupt .dwarf.Cpu_Delay100US .dwarf._EntryPoint 
+  .dwarf.Low_level_init .dwarf_loc.Low_level_init .dwarf_line.Cpu_Interrupt 
+  .dwarf_line.Cpu_Delay100US .dwarf_line._EntryPoint .dwarf_line.Low_level_init 
+  .dwarf_frame.Cpu_Interrupt .dwarf_frame.Cpu_Delay100US 
+  .dwarf_frame._EntryPoint .dwarf_frame.Low_level_init .dwarf_pubnames.CCR_reg 
+  .dwarf_pubnames.Cpu_Interrupt .dwarf_pubnames.Cpu_Delay100US 
+  .dwarf_pubnames._EntryPoint .dwarf_pubnames.Low_level_init 
+  .dwarf_aranges.CCR_reg .dwarf_aranges.Cpu_Interrupt 
+  .dwarf_aranges.Cpu_Delay100US .dwarf_aranges._EntryPoint 
+  .dwarf_aranges.Low_level_init 
+Events_c.obj:
+  .dwarf.data .dwarf.command .dwarf_type.void .dwarf_type.unsigned char 
+  .dwarf.CI2C1_OnRxChar .dwarf.CI2C1_OnTxChar .dwarf.CI2C1_OnReadReq 
+  .dwarf.CI2C1_OnArbitLost .dwarf.CI2C1_OnError .dwarf.CI2C1_OnWriteReq 
+  .dwarf.CI2C1_OnFreeTxBuf .dwarf_loc.CI2C1_OnRxChar .dwarf_loc.CI2C1_OnReadReq 
+  .dwarf_loc.CI2C1_OnWriteReq .dwarf_line.CI2C1_OnRxChar 
+  .dwarf_line.CI2C1_OnTxChar .dwarf_line.CI2C1_OnReadReq 
+  .dwarf_line.CI2C1_OnArbitLost .dwarf_line.CI2C1_OnError 
+  .dwarf_line.CI2C1_OnWriteReq .dwarf_line.CI2C1_OnFreeTxBuf 
+  .dwarf_frame.CI2C1_OnRxChar .dwarf_frame.CI2C1_OnTxChar 
+  .dwarf_frame.CI2C1_OnReadReq .dwarf_frame.CI2C1_OnArbitLost 
+  .dwarf_frame.CI2C1_OnError .dwarf_frame.CI2C1_OnWriteReq 
+  .dwarf_frame.CI2C1_OnFreeTxBuf .dwarf_pubnames.data 
+  .dwarf_pubnames.CI2C1_OnRxChar .dwarf_pubnames.CI2C1_OnTxChar 
+  .dwarf_pubnames.CI2C1_OnReadReq .dwarf_pubnames.CI2C1_OnArbitLost 
+  .dwarf_pubnames.CI2C1_OnError .dwarf_pubnames.CI2C1_OnWriteReq 
+  .dwarf_pubnames.CI2C1_OnFreeTxBuf .dwarf_aranges.data 
+  .dwarf_aranges.CI2C1_OnRxChar .dwarf_aranges.CI2C1_OnTxChar 
+  .dwarf_aranges.CI2C1_OnReadReq .dwarf_aranges.CI2C1_OnArbitLost 
+  .dwarf_aranges.CI2C1_OnError .dwarf_aranges.CI2C1_OnWriteReq 
+  .dwarf_aranges.CI2C1_OnFreeTxBuf data 
+IFsh1_c.obj:
+  .dwarf.EnEvent .dwarf_type.void .dwarf_type.485 
+  .dwarf_typedef.FnCmdInRamStruct .dwarf_type.486 .dwarf_type.unsigned char 
+  .dwarf_type.unsigned long .dwarf_type.unsigned int .dwarf_type.487 
+  .dwarf_type.488 .dwarf_type.489 .dwarf_type.490 .dwarf_type.491 
+  .dwarf_type.492 .dwarf_type.493 .dwarf_type.494 .dwarf_type.495 
+  .dwarf_type.496 .dwarf.FnCmdInRam_ .dwarf.CallFnCmdInRam .dwarf.WriteWord 
+  .dwarf.WriteArray .dwarf.IFsh1_EraseVerify_ .dwarf.IFsh1_SetProtection_ 
+  .dwarf.IFsh1_EnableEvent .dwarf.IFsh1_DisableEvent .dwarf.IFsh1_SetByteFlash 
+  .dwarf.IFsh1_GetByteFlash .dwarf.IFsh1_SetWordFlash .dwarf.IFsh1_GetWordFlash 
+  .dwarf.IFsh1_SetLongFlash .dwarf.IFsh1_GetLongFlash 
+  .dwarf.IFsh1_SetBlockFlash .dwarf.IFsh1_GetBlockFlash 
+  .dwarf.IFsh1_EraseSector .dwarf.IFsh1_DataPtr2Addr .dwarf.IFsh1_FuncPtr2Addr 
+  .dwarf.IFsh1_Init .dwarf.IFsh1_Interrupt .dwarf_loc.CallFnCmdInRam 
+  .dwarf_loc.WriteWord .dwarf_loc.WriteArray .dwarf_loc.IFsh1_EraseVerify_ 
+  .dwarf_loc.IFsh1_SetProtection_ .dwarf_loc.IFsh1_SetByteFlash 
+  .dwarf_loc.IFsh1_GetByteFlash .dwarf_loc.IFsh1_SetWordFlash 
+  .dwarf_loc.IFsh1_GetWordFlash .dwarf_loc.IFsh1_SetLongFlash 
+  .dwarf_loc.IFsh1_GetLongFlash .dwarf_loc.IFsh1_SetBlockFlash 
+  .dwarf_loc.IFsh1_GetBlockFlash .dwarf_loc.IFsh1_EraseSector 
+  .dwarf_loc.IFsh1_DataPtr2Addr .dwarf_loc.IFsh1_FuncPtr2Addr 
+  .dwarf_line.FnCmdInRam_ .dwarf_line.CallFnCmdInRam .dwarf_line.WriteWord 
+  .dwarf_line.WriteArray .dwarf_line.IFsh1_EraseVerify_ 
+  .dwarf_line.IFsh1_SetProtection_ .dwarf_line.IFsh1_EnableEvent 
+  .dwarf_line.IFsh1_DisableEvent .dwarf_line.IFsh1_SetByteFlash 
+  .dwarf_line.IFsh1_GetByteFlash .dwarf_line.IFsh1_SetWordFlash 
+  .dwarf_line.IFsh1_GetWordFlash .dwarf_line.IFsh1_SetLongFlash 
+  .dwarf_line.IFsh1_GetLongFlash .dwarf_line.IFsh1_SetBlockFlash 
+  .dwarf_line.IFsh1_GetBlockFlash .dwarf_line.IFsh1_EraseSector 
+  .dwarf_line.IFsh1_DataPtr2Addr .dwarf_line.IFsh1_FuncPtr2Addr 
+  .dwarf_line.IFsh1_Init .dwarf_line.IFsh1_Interrupt .dwarf_frame.FnCmdInRam_ 
+  .dwarf_frame.CallFnCmdInRam .dwarf_frame.WriteWord .dwarf_frame.WriteArray 
+  .dwarf_frame.IFsh1_EraseVerify_ .dwarf_frame.IFsh1_SetProtection_ 
+  .dwarf_frame.IFsh1_EnableEvent .dwarf_frame.IFsh1_DisableEvent 
+  .dwarf_frame.IFsh1_SetByteFlash .dwarf_frame.IFsh1_GetByteFlash 
+  .dwarf_frame.IFsh1_SetWordFlash .dwarf_frame.IFsh1_GetWordFlash 
+  .dwarf_frame.IFsh1_SetLongFlash .dwarf_frame.IFsh1_GetLongFlash 
+  .dwarf_frame.IFsh1_SetBlockFlash .dwarf_frame.IFsh1_GetBlockFlash 
+  .dwarf_frame.IFsh1_EraseSector .dwarf_frame.IFsh1_DataPtr2Addr 
+  .dwarf_frame.IFsh1_FuncPtr2Addr .dwarf_frame.IFsh1_Init 
+  .dwarf_frame.IFsh1_Interrupt .dwarf_pubnames.IFsh1_EraseVerify_ 
+  .dwarf_pubnames.IFsh1_SetProtection_ .dwarf_pubnames.IFsh1_EnableEvent 
+  .dwarf_pubnames.IFsh1_DisableEvent .dwarf_pubnames.IFsh1_SetByteFlash 
+  .dwarf_pubnames.IFsh1_GetByteFlash .dwarf_pubnames.IFsh1_SetWordFlash 
+  .dwarf_pubnames.IFsh1_GetWordFlash .dwarf_pubnames.IFsh1_SetLongFlash 
+  .dwarf_pubnames.IFsh1_GetLongFlash .dwarf_pubnames.IFsh1_SetBlockFlash 
+  .dwarf_pubnames.IFsh1_GetBlockFlash .dwarf_pubnames.IFsh1_EraseSector 
+  .dwarf_pubnames.IFsh1_DataPtr2Addr .dwarf_pubnames.IFsh1_FuncPtr2Addr 
+  .dwarf_pubnames.IFsh1_Init .dwarf_pubnames.IFsh1_Interrupt 
+  .dwarf_aranges.FnCmdInRam_ .dwarf_aranges.CallFnCmdInRam 
+  .dwarf_aranges.WriteWord .dwarf_aranges.WriteArray 
+  .dwarf_aranges.IFsh1_EraseVerify_ .dwarf_aranges.IFsh1_SetProtection_ 
+  .dwarf_aranges.IFsh1_EnableEvent .dwarf_aranges.IFsh1_DisableEvent 
+  .dwarf_aranges.IFsh1_SetByteFlash .dwarf_aranges.IFsh1_GetByteFlash 
+  .dwarf_aranges.IFsh1_SetWordFlash .dwarf_aranges.IFsh1_GetWordFlash 
+  .dwarf_aranges.IFsh1_SetLongFlash .dwarf_aranges.IFsh1_GetLongFlash 
+  .dwarf_aranges.IFsh1_SetBlockFlash .dwarf_aranges.IFsh1_GetBlockFlash 
+  .dwarf_aranges.IFsh1_EraseSector .dwarf_aranges.IFsh1_DataPtr2Addr 
+  .dwarf_aranges.IFsh1_FuncPtr2Addr .dwarf_aranges.IFsh1_Init 
+  .dwarf_aranges.IFsh1_Interrupt 
+Vectors_c.obj:
+  .dwarf._InterruptVectorTable .dwarf._ResetVectorTable .dwarf_type.34 
+  .dwarf_type.35 .dwarf_typedef.InterruptTableEntry .dwarf_type.unsigned char 
+  .dwarf_type.36 .dwarf_type.37 .dwarf_type.void .dwarf_type.38 
+  .dwarf_pubnames._InterruptVectorTable .dwarf_pubnames._ResetVectorTable 
+  .dwarf_aranges._InterruptVectorTable .dwarf_aranges._ResetVectorTable 
+WDog1_c.obj:
+  .dwarf_type.unsigned char .dwarf.WDog1_Clear .dwarf.WDog1_Trigger 
+  .dwarf_line.WDog1_Clear .dwarf_line.WDog1_Trigger .dwarf_frame.WDog1_Clear 
+  .dwarf_frame.WDog1_Trigger .dwarf_pubnames.WDog1_Clear 
+  .dwarf_pubnames.WDog1_Trigger .dwarf_aranges.WDog1_Clear 
+  .dwarf_aranges.WDog1_Trigger 
+main_c.obj:
+  .dwarf.us100 .dwarf.cnt .dwarf.sent .dwarf.flags .dwarf_type.unsigned char 
+  .dwarf_type.unsigned int .dwarf_type.void .dwarf_type.120 
+  .dwarf_typedef.flags_t .dwarf_type.121 .dwarf.main .dwarf_line.main 
+  .dwarf_frame.main .dwarf_pubnames.us100 .dwarf_pubnames.cnt 
+  .dwarf_pubnames.sent .dwarf_pubnames.flags .dwarf_pubnames.main 
+  .dwarf_aranges.us100 .dwarf_aranges.cnt .dwarf_aranges.sent 
+  .dwarf_aranges.flags .dwarf_aranges.main 
+timer_c.obj:
+  .dwarf.ms_clock .dwarf_type.unsigned long .dwarf_type.void .dwarf.wait_s 
+  .dwarf.wait_ms .dwarf.get_time .dwarf.init_time .dwarf.busy_waiting_ms 
+  .dwarf.API_interrupt .dwarf_loc.wait_s .dwarf_loc.wait_ms 
+  .dwarf_loc.busy_waiting_ms .dwarf_line.wait_s .dwarf_line.wait_ms 
+  .dwarf_line.get_time .dwarf_line.init_time .dwarf_line.busy_waiting_ms 
+  .dwarf_line.API_interrupt .dwarf_frame.wait_s .dwarf_frame.wait_ms 
+  .dwarf_frame.get_time .dwarf_frame.init_time .dwarf_frame.busy_waiting_ms 
+  .dwarf_frame.API_interrupt .dwarf_pubnames.wait_s .dwarf_pubnames.wait_ms 
+  .dwarf_pubnames.get_time .dwarf_pubnames.init_time 
+  .dwarf_pubnames.busy_waiting_ms .dwarf_pubnames.API_interrupt 
+  .dwarf_aranges.wait_s .dwarf_aranges.wait_ms .dwarf_aranges.get_time 
+  .dwarf_aranges.init_time .dwarf_aranges.busy_waiting_ms 
+  .dwarf_aranges.API_interrupt 
+Dispatcher_c.obj:
+  .dwarf_type.void .dwarf_type.unsigned long .dwarf.Dispatcher 
+  .dwarf_loc.Dispatcher .dwarf_line.Dispatcher .dwarf_frame.Dispatcher 
+  .dwarf_pubnames.Dispatcher .dwarf_aranges.Dispatcher 
+starts12z_c.obj:
+  .dwarf._startupData .dwarf_type.void .dwarf_type._tagStartup 
+  .dwarf_type.unsigned long .dwarf_type.89 .dwarf_type._Range 
+  .dwarf_typedef._Range .dwarf_type.90 .dwarf_type.unsigned char .dwarf_type.91 
+  .dwarf_type._Copy .dwarf_typedef._Copy .dwarf_type.92 .dwarf.DoZeroOut 
+  .dwarf.DoCopyDown .dwarf._Startup .dwarf_line.DoZeroOut 
+  .dwarf_line.DoCopyDown .dwarf_line._Startup .dwarf_frame.DoZeroOut 
+  .dwarf_frame.DoCopyDown .dwarf_frame._Startup .dwarf_pubnames._startupData 
+  .dwarf_pubnames._Startup .dwarf_aranges._startupData .dwarf_aranges.DoZeroOut 
+  .dwarf_aranges.DoCopyDown .dwarf_aranges._Startup 
+rts12z.o (ansii.lib):
+  .dwarf.__stack_guard .dwarf.errno .dwarf_type.void .dwarf_type.42 
+  .dwarf_type.char .dwarf_type.int .dwarf.__copy .dwarf.__clear 
+  .dwarf.__stack_protect_init .dwarf.__stack_check_fail .dwarf.__stack_check 
+  .dwarf_loc.__stack_protect_init .dwarf_loc.__stack_check .dwarf_line.__copy 
+  .dwarf_line.__clear .dwarf_line.__stack_protect_init 
+  .dwarf_line.__stack_check_fail .dwarf_line.__stack_check .dwarf_frame.__copy 
+  .dwarf_frame.__clear .dwarf_frame.__stack_protect_init 
+  .dwarf_frame.__stack_check_fail .dwarf_frame.__stack_check 
+  .dwarf_pubnames.__stack_guard .dwarf_pubnames.errno .dwarf_pubnames.__copy 
+  .dwarf_pubnames.__clear .dwarf_pubnames.__stack_protect_init 
+  .dwarf_pubnames.__stack_check_fail .dwarf_pubnames.__stack_check 
+  .dwarf_aranges.__stack_guard .dwarf_aranges.errno .dwarf_aranges.__copy 
+  .dwarf_aranges.__clear .dwarf_aranges.__stack_protect_init 
+  .dwarf_aranges.__stack_check_fail .dwarf_aranges.__stack_check __stack_guard 
+  errno 
+string.o (ansii.lib):
+  .dwarf._ZZ6strtokPcPKcE4next .dwarf_type.844 .dwarf_type.char 
+  .dwarf_type.845 .dwarf_type.void .dwarf_type.846 .dwarf_type.int 
+  .dwarf_type.unsigned long .dwarf_type.847 .dwarf_type.848 .dwarf_type.849 
+  .dwarf_type.850 .dwarf_type.851 .dwarf_type.852 .dwarf_type.853 
+  .dwarf_type.854 .dwarf_type.855 .dwarf_type.856 .dwarf_type.857 
+  .dwarf_type.858 .dwarf_type.859 .dwarf_type.860 .dwarf_type.unsigned char 
+  .dwarf_type.861 .dwarf_type.862 .dwarf_type.863 .dwarf_type.864 
+  .dwarf_type.865 .dwarf_type.866 .dwarf_type.867 .dwarf_type.868 
+  .dwarf_type.869 .dwarf_type.870 .dwarf_type.871 .dwarf_type.872 
+  .dwarf_type.873 .dwarf_type.874 .dwarf_type.875 .dwarf_type.876 
+  .dwarf_type.877 .dwarf_type.878 .dwarf_type.879 .dwarf_type.880 
+  .dwarf_type.881 .dwarf_type.882 .dwarf_type.883 .dwarf_type.884 
+  .dwarf_type.885 .dwarf_type.886 .dwarf_type.887 .dwarf_type.888 
+  .dwarf_type.889 .dwarf_type.890 .dwarf_type.891 .dwarf_type.892 
+  .dwarf_type.893 .dwarf_type.894 .dwarf_type.895 .dwarf_type.896 
+  .dwarf_type.897 .dwarf_type.898 .dwarf_type.899 .dwarf_type.900 
+  .dwarf_type.901 .dwarf_type.902 .dwarf_type.903 .dwarf_type.904 
+  .dwarf_type.905 .dwarf_type.906 .dwarf_type.907 .dwarf_type.908 
+  .dwarf_type.909 .dwarf_type.910 .dwarf_type.911 .dwarf_type.912 
+  .dwarf_type.913 .dwarf_type.914 .dwarf_type.915 .dwarf_type.916 
+  .dwarf_type.917 .dwarf_type.918 .dwarf_type.919 .dwarf_type.920 
+  .dwarf.strerror .dwarf.memchr .dwarf.memcmp .dwarf.memcpy2 .dwarf.memcpy 
+  .dwarf._memcpy_8bitCount .dwarf.memmove .dwarf.memset 
+  .dwarf._memset_clear_8bitCount .dwarf.strlen .dwarf.strset .dwarf.strcat 
+  .dwarf.strncat .dwarf.strcpy .dwarf.strncpy .dwarf.strcmp .dwarf.strncmp 
+  .dwarf.strchr .dwarf.strrchr .dwarf.strspn .dwarf.strcspn .dwarf.strpbrk 
+  .dwarf.strstr .dwarf.strtok .dwarf.strcoll .dwarf.strxfrm .dwarf_loc.memchr 
+  .dwarf_loc.memcmp .dwarf_loc.memcpy2 .dwarf_loc.memcpy 
+  .dwarf_loc._memcpy_8bitCount .dwarf_loc.memmove .dwarf_loc.memset 
+  .dwarf_loc._memset_clear_8bitCount .dwarf_loc.strlen .dwarf_loc.strset 
+  .dwarf_loc.strcat .dwarf_loc.strncat .dwarf_loc.strcpy .dwarf_loc.strncpy 
+  .dwarf_loc.strcmp .dwarf_loc.strncmp .dwarf_loc.strchr .dwarf_loc.strrchr 
+  .dwarf_loc.strspn .dwarf_loc.strcspn .dwarf_loc.strpbrk .dwarf_loc.strstr 
+  .dwarf_loc.strtok .dwarf_loc.strcoll .dwarf_loc.strxfrm .dwarf_line.strerror 
+  .dwarf_line.memchr .dwarf_line.memcmp .dwarf_line.memcpy2 .dwarf_line.memcpy 
+  .dwarf_line._memcpy_8bitCount .dwarf_line.memmove .dwarf_line.memset 
+  .dwarf_line._memset_clear_8bitCount .dwarf_line.strlen .dwarf_line.strset 
+  .dwarf_line.strcat .dwarf_line.strncat .dwarf_line.strcpy .dwarf_line.strncpy 
+  .dwarf_line.strcmp .dwarf_line.strncmp .dwarf_line.strchr .dwarf_line.strrchr 
+  .dwarf_line.strspn .dwarf_line.strcspn .dwarf_line.strpbrk .dwarf_line.strstr 
+  .dwarf_line.strtok .dwarf_line.strcoll .dwarf_line.strxfrm 
+  .dwarf_frame.strerror .dwarf_frame.memchr .dwarf_frame.memcmp 
+  .dwarf_frame.memcpy2 .dwarf_frame.memcpy .dwarf_frame._memcpy_8bitCount 
+  .dwarf_frame.memmove .dwarf_frame.memset .dwarf_frame._memset_clear_8bitCount 
+  .dwarf_frame.strlen .dwarf_frame.strset .dwarf_frame.strcat 
+  .dwarf_frame.strncat .dwarf_frame.strcpy .dwarf_frame.strncpy 
+  .dwarf_frame.strcmp .dwarf_frame.strncmp .dwarf_frame.strchr 
+  .dwarf_frame.strrchr .dwarf_frame.strspn .dwarf_frame.strcspn 
+  .dwarf_frame.strpbrk .dwarf_frame.strstr .dwarf_frame.strtok 
+  .dwarf_frame.strcoll .dwarf_frame.strxfrm .dwarf_pubnames.strerror 
+  .dwarf_pubnames.memchr .dwarf_pubnames.memcmp .dwarf_pubnames.memcpy2 
+  .dwarf_pubnames.memcpy .dwarf_pubnames._memcpy_8bitCount 
+  .dwarf_pubnames.memmove .dwarf_pubnames.memset 
+  .dwarf_pubnames._memset_clear_8bitCount .dwarf_pubnames.strlen 
+  .dwarf_pubnames.strset .dwarf_pubnames.strcat .dwarf_pubnames.strncat 
+  .dwarf_pubnames.strcpy .dwarf_pubnames.strncpy .dwarf_pubnames.strcmp 
+  .dwarf_pubnames.strncmp .dwarf_pubnames.strchr .dwarf_pubnames.strrchr 
+  .dwarf_pubnames.strspn .dwarf_pubnames.strcspn .dwarf_pubnames.strpbrk 
+  .dwarf_pubnames.strstr .dwarf_pubnames.strtok .dwarf_pubnames.strcoll 
+  .dwarf_pubnames.strxfrm .dwarf_aranges.strerror .dwarf_aranges.memchr 
+  .dwarf_aranges.memcmp .dwarf_aranges.memcpy2 .dwarf_aranges.memcpy 
+  .dwarf_aranges._memcpy_8bitCount .dwarf_aranges.memmove .dwarf_aranges.memset 
+  .dwarf_aranges._memset_clear_8bitCount .dwarf_aranges.strlen 
+  .dwarf_aranges.strset .dwarf_aranges.strcat .dwarf_aranges.strncat 
+  .dwarf_aranges.strcpy .dwarf_aranges.strncpy .dwarf_aranges.strcmp 
+  .dwarf_aranges.strncmp .dwarf_aranges.strchr .dwarf_aranges.strrchr 
+  .dwarf_aranges.strspn .dwarf_aranges.strcspn .dwarf_aranges.strpbrk 
+  .dwarf_aranges.strstr .dwarf_aranges.strtok .dwarf_aranges.strcoll 
+  .dwarf_aranges.strxfrm @66 _ZZ6strtokPcPKcE4next 
+
+*********************************************************************************************
+COPYDOWN SECTION
+---------------------------------------------------------------------------------------------
+------- ROM-ADDRESS: 0xFFFA9C ---- SIZE       7 ---
+Filling bytes inserted
+ 0000000100 1100
+------- ROM-ADDRESS: 0xFFFAA3 ---- RAM-ADDRESS: 0x1100 ---- SIZE       1 ---
+Name of initialized Object : bl_state
+ 01
+------- ROM-ADDRESS: 0xFFFAA4 ---- SIZE       4 ---
+Filling bytes inserted
+ 00000000
+
+*********************************************************************************************
+OBJECT-DEPENDENCIES SECTION
+---------------------------------------------------------------------------------------------
+Dispatcher                USES __SEG_END_SSTACK __SEG_START__PRESTART 
+                                _EntryPoint 
+CI2C1_Interrupt           USES CI2C1_OnReadReq OutLenS OutPtrRS OutBufferS 
+                                CI2C1_OnWriteReq InpLenS InpPtrWS InpBufferS CI2C1_SerFlag 
+                                CI2C1_OnArbitLost CI2C1_OnError CI2C1_OnRxChar CI2C1_OnTxChar 
+                                CI2C1_OnFreeTxBuf 
+_EntryPoint               USES _Startup 
+API_interrupt             USES us100 ms_clock 
+parse_header              USES bl_program commands 
+check_checksum            USES bl_program 
+parse_payload             USES commands bl_program memcpy check_checksum 
+BL_FSM                    USES bl_state WDog1_Clear bl_fsm_status bl_flags 
+                                commands __SEG_START__PRESTART IFsh1_EraseSector ret 
+                                parse_header parse_payload bl_program IFsh1_SetBlockFlash 
+                                WDog1_Trigger IFsh1_GetBlockFlash check_checksum 
+Low_level_init            USES CI2C1_Init IFsh1_Init API_Init 
+CI2C1_OnRxChar            USES flags CI2C1_SndRcvTemp command CI2C1_RecvBlock 
+                                commands bl_fsm_status bl_flags cnt 
+CI2C1_OnTxChar            USES flags 
+CI2C1_OnReadReq           USES flags bl_flags command sent CI2C1_SendBlock 
+                                commands 
+CI2C1_OnArbitLost         USES flags 
+CI2C1_OnError             USES flags 
+CI2C1_OnWriteReq          USES flags bl_flags 
+CI2C1_OnFreeTxBuf         USES bl_flags 
+main                      USES Low_level_init us100 BL_FSM 
+DoZeroOut                 USES _startupData 
+DoCopyDown                USES _startupData 
+_Startup                  USES __SEG_END_SSTACK DoZeroOut DoCopyDown main 
+CI2C1_SendBlock           USES CCR_reg OutLenS OutPtrWS OutBufferS 
+CI2C1_RecvBlock           USES CCR_reg CI2C1_SerFlag InpLenS InpPtrRS 
+                                InpBufferS 
+CI2C1_Init                USES CI2C1_SerFlag EnUser InpLenS InpBufferS 
+                                InpPtrRS InpPtrWS OutLenS OutBufferS OutPtrRS OutPtrWS 
+WriteArray                USES CCR_reg FnCmdInRam_ __copy 
+IFsh1_SetBlockFlash       USES WriteArray 
+IFsh1_EraseSector         USES CCR_reg FnCmdInRam_ __copy 
+IFsh1_Init                USES EnEvent 
+_InterruptVectorTable     USES Cpu_Interrupt CI2C1_Interrupt API_interrupt 
+                                IFsh1_Interrupt 
+_ResetVectorTable         USES Dispatcher 
+
+*********************************************************************************************
+DEPENDENCY TREE
+*********************************************************************************************
+ main and _Startup Group
+ | 
+ +- main                
+ |  | 
+ |  +- Low_level_init      
+ |  |  | 
+ |  |  +- CI2C1_Init          
+ |  |  |    
+ |  |  +- IFsh1_Init          
+ |  |  |    
+ |  |  +- API_Init            
+ |  |       
+ |  +- BL_FSM              
+ |     | 
+ |     +- WDog1_Clear         
+ |     |    
+ |     +- IFsh1_EraseSector   
+ |     |  | 
+ |     |  +- FnCmdInRam_         
+ |     |  |    
+ |     |  +- __copy              
+ |     |       
+ |     +- parse_header        
+ |     |    
+ |     +- parse_payload       
+ |     |  | 
+ |     |  +- memcpy              
+ |     |  |    
+ |     |  +- check_checksum      
+ |     |       
+ |     +- IFsh1_SetBlockFlash 
+ |     |  | 
+ |     |  +- WriteArray          
+ |     |     | 
+ |     |     +- FnCmdInRam_          (see above)
+ |     |     |  
+ |     |     +- __copy               (see above)
+ |     |        
+ |     +- WDog1_Trigger       
+ |     |    
+ |     +- IFsh1_GetBlockFlash 
+ |     |    
+ |     +- check_checksum       (see above)
+ |        
+ +- Dispatcher          
+    | 
+    +- _EntryPoint         
+       | 
+       +- _Startup            
+          | 
+          +- DoZeroOut           
+          |    
+          +- DoCopyDown          
+          |    
+          +- main                 (see above)
+             
+ _InterruptVectorTable
+ | 
+ +- Cpu_Interrupt       
+ |    
+ +- CI2C1_Interrupt     
+ |  | 
+ |  +- CI2C1_OnReadReq     
+ |  |  | 
+ |  |  +- CI2C1_SendBlock     
+ |  |       
+ |  +- CI2C1_OnWriteReq    
+ |  |    
+ |  +- CI2C1_OnArbitLost   
+ |  |    
+ |  +- CI2C1_OnError       
+ |  |    
+ |  +- CI2C1_OnRxChar      
+ |  |  | 
+ |  |  +- CI2C1_RecvBlock     
+ |  |       
+ |  +- CI2C1_OnTxChar      
+ |  |    
+ |  +- CI2C1_OnFreeTxBuf   
+ |       
+ +- API_interrupt       
+ |    
+ +- IFsh1_Interrupt     
+      
+ _ResetVectorTable   
+ | 
+ +- Dispatcher           (see above)
+    
+*********************************************************************************************
+STATISTIC SECTION
+---------------------------------------------------------------------------------------------
+
+ExeFile:
+--------
+Number of blocks to be downloaded: 7
+Total size of all blocks to be downloaded: 5272
+

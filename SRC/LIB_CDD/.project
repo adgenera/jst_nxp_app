@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>LIB_CDD</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>_DevCENTRAL_DISPLAY</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/.build/LIB_CDD/_DevCENTRAL_DISPLAY/build-LIB_CDD-_DevCENTRAL_DISPLAY</locationURI>
+		</link>
+		<link>
+			<name>_RELEASE_CENTRAL_DISPLAY</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/.build/LIB_CDD/_RELEASE_CENTRAL_DISPLAY/build-LIB_CDD-_RELEASE_CENTRAL_DISPLAY</locationURI>
+		</link>
+		<link>
+			<name>_DevCENTRAL_DISPLAY/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib</locationURI>
+		</link>
+		<link>
+			<name>_RELEASE_CENTRAL_DISPLAY/JST_BY_RELEASE_LIB_CENTRAL_DISPLAY.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/LIB/JST_BY_RELEASE_LIB_CENTRAL_DISPLAY.lib</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

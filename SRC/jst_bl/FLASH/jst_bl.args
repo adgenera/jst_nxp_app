@@ -1,0 +1,21 @@
+-M
+"$(ProjDirPath)/Project_Settings/Linker_Files/MC9S12ZVHL32.prm"
+-ViewHidden
+-WmsgFob"%f%e:%l:%k:%d:%m\n"
+-WmsgSd1100
+-WmsgSd1912 
+-Add("$(ProjDirPath)/FLASH/Sources/API_c.obj"
+"$(ProjDirPath)/FLASH/Sources/BL_c.obj"
+"$(ProjDirPath)/FLASH/Sources/CI2C1_c.obj"
+"$(ProjDirPath)/FLASH/Sources/Cpu_c.obj"
+"$(ProjDirPath)/FLASH/Sources/Events_c.obj"
+"$(ProjDirPath)/FLASH/Sources/IFsh1_c.obj"
+"$(ProjDirPath)/FLASH/Sources/InpB1_c.obj"
+"$(ProjDirPath)/FLASH/Sources/Vectors_c.obj"
+"$(ProjDirPath)/FLASH/Sources/WDog1_c.obj"
+"$(ProjDirPath)/FLASH/Sources/asm_main_asm.obj"
+"$(ProjDirPath)/FLASH/Sources/main_c.obj"
+"$(ProjDirPath)/FLASH/Sources/timer_c.obj"
+"$(ProjDirPath)/FLASH/Project_Settings/Startup_Code/Dispatcher_c.obj"
+"$(ProjDirPath)/FLASH/Project_Settings/Startup_Code/starts12z_c.obj"
+"$(MCUToolsBaseDirEnv)/S12lisa_Support/s12lisac/lib_medium/ansii.lib" )

@@ -1,0 +1,33 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="2">
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.prm" FileDate="2024-07-15, 13:32:51" FileAge="1721043171592" FileType="8" CompNumb="6" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171580" FileType="45637" CompNumb="6" />
+      <File Name="Documentation/motor_test_Settings.xml" FileDate="2024-07-15, 13:32:51" FileAge="1721043171660" FileType="3072" />
+      <File Name="Documentation/motor_test_SIGNALS.txt" FileDate="2024-07-15, 13:33:15" FileAge="1721043195030" FileType="3072" />
+      <File Name="Documentation/motor_test.txt" FileDate="2024-07-15, 13:32:51" FileAge="1721043171668" FileType="3072" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2024-07-15, 13:32:51" FileAge="1721043171586" FileType="45637" CompNumb="6" />
+      <File Name="Generated_Code/PE_Const.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171533" FileType="45637" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171526" FileType="45637" />
+      <File Name="Generated_Code/MC.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171566" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/IO_Map.c" FileDate="2024-07-15, 13:32:51" FileAge="1721043171489" FileType="45637" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171553" FileType="45637" />
+      <File Name="Sources/Events.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171620" FileType="131328" />
+      <File Name="Generated_Code/MC.c" FileDate="2024-07-15, 13:32:51" FileAge="1721043171562" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2024-07-15, 13:32:51" FileAge="1721043171558" FileType="45637" />
+      <File Name="Sources/Events.c" FileDate="2024-07-15, 13:32:51" FileAge="1721043171625" FileType="131328" />
+      <File Name="Sources/main.c" FileDate="2024-07-15, 13:32:51" FileAge="1721043171572" FileType="128" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2024-07-15, 13:32:51" FileAge="1721043171606" FileType="45637" CompNumb="6" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>3</CodeGenReference>
+</CodeGenerationInfo>

@@ -1,0 +1,1095 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule configRelations="2" moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="com.freescale.s12z.toolchain.release.908847807.546945784">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.freescale.s12z.toolchain.release.908847807.546945784" moduleId="org.eclipse.cdt.core.settings" name="_DevCENTRAL_DISPLAY">
+				<externalSettings>
+					<externalSetting>
+						<entry flags="RESOLVED" kind="macro" name="DEVICE_TYPE" value="CLOCK"/>
+					</externalSetting>
+				</externalSettings>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LltErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.S08ErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="JST_BY_DEBUG_CENTRAL_DISPLAY_S12Z_VHL32" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.S08ErrorParser;" id="com.freescale.s12z.toolchain.release.908847807.546945784" isPrebuildInvalidatingBuild="false" isVersionInfoProjSpecific="false" name="_DevCENTRAL_DISPLAY" parent="com.freescale.s12z.toolchain.release" postannouncebuildStep="" postbuildStep="${ProjDirPath}/../../SCRIPTS/postbuild.cmd ${BuildArtifactFilePrefix} ${ConfigName} ${BuildLocation} ${BuildArtifactFileName} \${SVNREV}" preannouncebuildStep="" prebuildStep="" produceBuildErrorsWithMissingReferences="true">
+					<folderInfo id="com.freescale.s12z.toolchain.release.908847807.546945784." name="/" resourcePath="">
+						<toolChain errorParsers="" id="com.freescale.s12z.toolchain.release.323274920" name="S12Z Toolchain" superClass="com.freescale.s12z.toolchain.release">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="com.freescale.s12z.toolchain.targetPlatform.1399275424" isAbstract="false" name="S12Z Target Platform" superClass="com.freescale.s12z.toolchain.targetPlatform"/>
+							<builder autoBuildTarget="" buildPath="${ProjDirPath}/../../.build/_DevCENTRAL_DISPLAY" cleanBuildTarget="" enableAutoBuild="true" enableCleanBuild="true" enabledIncrementalBuild="true" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.S08ErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.s12z.toolchain.builder.384973323" incrementalBuildTarget="" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make Builder" parallelBuildOn="true" parallelBuildWorkspaceOn="true" parallelizationNumber="optimal" superClass="com.freescale.s12z.toolchain.builder"/>
+							<tool command="&quot;${S12Z_ToolsDir}/mwccs12lisa&quot;" commandLinePattern="${COMMAND} -E ${FLAGS} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.preprocessor.536293735" name="S12Z Preprocessor" superClass="com.freescale.s12z.toolchain.preprocessor"/>
+							<tool command="&quot;${S12Z_ToolsDir}/decoder&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.disassembler.884886748" name="S12Z Disassembler" superClass="com.freescale.s12z.toolchain.disassembler"/>
+							<tool command="&quot;${S12Z_ToolsDir}/burner&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.burner.317144392" name="S12Z Burner" superClass="com.freescale.s12z.toolchain.burner"/>
+							<tool command="&quot;${S12Z_ToolsDir}/linker&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT}" errorParsers="" id="com.freescale.s12z.toolchain.linker.664118461" name="S12Z Linker" superClass="com.freescale.s12z.toolchain.linker">
+								<option id="com.freescale.s12z.toolchain.linker.output.b.414585114" name="Generate S-Record file" superClass="com.freescale.s12z.toolchain.linker.output.b" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.output.s.919221816" name="Strip Symbolic Information" superClass="com.freescale.s12z.toolchain.linker.output.s" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.output.statf.743887701" name="Specify Statistic File (e.g. statistic.txt)" superClass="com.freescale.s12z.toolchain.linker.output.statf" value="${BuildArtifactFileName}_stats.txt" valueType="string"/>
+								<option id="com.freescale.s12z.toolchain.linker.base.linkOrder.1551837701" name="Link Order" superClass="com.freescale.s12z.toolchain.linker.base.linkOrder" valueType="stringList">
+									<listOptionValue builtIn="false" value="COMMON_AL/APP_CTRL/Al_App_Ctrl.c"/>
+									<listOptionValue builtIn="false" value="COMMON_AL/ILLUM/Al_Illum.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/HAL/CDD/ILLUM/Cdd_Illum.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/HAL/IOIF/IoIf.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/HAL/LINIF/LinIf.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/ISOTP/IsoTp.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/ISOTP/IsoTp_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/ECURST/ECURst.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/EOLROUT/EolRoutines/AdcStatus.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/EOLROUT/EolRoutines/PwmCtrl.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/EOLROUT/EolRoutines/RtcRoutine.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/EOLROUT/EolRoutines/TestMode.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/EOLROUT/EolRoutines/ZeroDetect.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/LINDIAG/LinDiag.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/RWDBID/RWdbId.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/RWDBID/RWdbId_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/Uds.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/Uds_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/DET/Det.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ECUM/EcuM.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ISR/Isr_VectorTable.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ROMTEST/RomTest.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/main.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Adc0_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Al_App_Ctrl_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Cdd_Illum_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Cdd_Motor_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Cdd_Prtc_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/EcuM_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/LinDiag_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/LinIf_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Lin_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Mtr_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_AL/RTC/Al_Rtc.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/HAL/CDD/PRTC/Cdd_Prtc.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/HAL/EA/Ea.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/EOLROUT/EolRoutines/DisplayControl.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/COM/UDS/RMBA/Rmba.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ALUTEST/AluTest.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Rtc_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_AL/DISPLAY/Al_Display.c"/>
+									<listOptionValue builtIn="false" value="COMMON_AL/MOTOR/Al_Motor.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ERRHANDLER/ErrH.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Ea_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/IoIf_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Linphy_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Mcu_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Port_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Sci0_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Al_Illum_PBcfg.c"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.linker.general.otherFlags.177850166" name="Other Flags" superClass="com.freescale.s12z.toolchain.linker.general.otherFlags" value="" valueType="string"/>
+								<option id="com.freescale.s12z.toolchain.linker.input.paramFile.2020135637" name="Parameter File" superClass="com.freescale.s12z.toolchain.linker.input.paramFile" value="${ProjDirPath}/../../LNK/APP_CENTRAL_DISPLAY/app_central_display_vhl64.prm" valueType="string"/>
+								<option id="com.freescale.s12z.toolchain.linker.output.sfixups.1392425415" name="Generate Fixups in abs File" superClass="com.freescale.s12z.toolchain.linker.output.sfixups" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.opt.ConstDist.453843770" name="Enable Automatic const Placement" superClass="com.freescale.s12z.toolchain.linker.opt.ConstDist" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.opt.DataDist.1397366744" name="Enable Automatic Data Placement" superClass="com.freescale.s12z.toolchain.linker.opt.DataDist" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.input.searchpath.1803966897" name="Search Paths" superClass="com.freescale.s12z.toolchain.linker.input.searchpath" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD/_DevCLOCK}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL/Debug}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../LIB/&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.linker.input.libs.752138457" name="Libraries" superClass="com.freescale.s12z.toolchain.linker.input.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../LIB/LIB_MCAL_DEBUG.lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.linker.output.StackConsumption.202769518" name="Enable Stack Consumption Computation" superClass="com.freescale.s12z.toolchain.linker.output.StackConsumption" value="false" valueType="boolean"/>
+								<inputType id="com.freescale.s12z.toolchain.linker.inputType.825486767" name="S12Z Linker Input" superClass="com.freescale.s12z.toolchain.linker.inputType">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+								<outputType id="com.freescale.s12z.toolchain.linker.executable.outputType.103394850" name="S12Z Linker Executable Output" outputPrefix="${ProjDirPath}/../../OUT/APP_CENTRAL_DISPLAY/" superClass="com.freescale.s12z.toolchain.linker.executable.outputType"/>
+							</tool>
+							<tool command="&quot;${S12Z_ToolsDir}/mwccs12lisa&quot;" commandLinePattern="${COMMAND} -c ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} -DSVN_REVISION=$(SVNREV) -DSVN_LOCATION=$(SVNLOC)" errorParsers="" id="com.freescale.s12z.toolchain.compiler.1867637089" name="S12Z Compiler" superClass="com.freescale.s12z.toolchain.compiler">
+								<option id="com.freescale.s12z.toolchain.compiler.general.debug.437046495" name="Generate Debug Information" superClass="com.freescale.s12z.toolchain.compiler.general.debug" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.input.include.1922661894" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.s12z.toolchain.compiler.input.include" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_AL/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ECUM&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ISR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../LIB_CDD/COMMON_BSW/HAL/CDD/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/D_CENTRAL_DISPLAY_CFG&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_CFG&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.compiler.input.includeRecursive.2140461672" name="Search User Paths Recursively" superClass="com.freescale.s12z.toolchain.compiler.input.includeRecursive"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.98892021.940396597" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.1343590964.1317044709" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.987855032" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.298101077" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.1175356014" name="Enable Warnings" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings" value="com.freescale.s12z.toolchain.warnings.enableWarnings.full" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.1921403423" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.191731459" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.264588092" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.1416887898" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.796731764" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.371034444" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.603314881" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1036136210" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1902250624" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.42630745" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.606856859" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.1912262352" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.840582652" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.1310514421" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.882812343" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.729552009" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.2054656502" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.957482362" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.1135410031" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.1564572724" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.2092476745" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.144513530" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.1568470277" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.1076575269" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.2099175832" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.1812649697" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.574550489" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.926522327" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.286329093" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.139985613" name="Enable Warnings" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings" value="com.freescale.s12z.toolchain.warnings.enableWarnings.full" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.77440114.1658035386" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.681067398.661390656" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.1170032004.2033229969" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.1490445052.303406469" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.710597921.76482150" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.890913398.1131064292" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.648170816.1254454523" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.1082738129.1818781186" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.695790734.293136836" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.179247776.adjusted.1811473334.1173267064" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.179247776" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.254092693.adjusted.272143090.819398636" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.254092693" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.optimization.level.1256593497" name="Optimization Level" superClass="com.freescale.s12z.toolchain.compiler.optimization.level" value="com.freescale.s12z.toolchain.compiler.optimization.level.level0" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.optimization.inlineLevel.1260789374" name="Inline Level" superClass="com.freescale.s12z.toolchain.compiler.optimization.inlineLevel" value="com.freescale.s12z.toolchain.compiler.optimization.inlineLevel.smart" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.optimization.autoinline.1410823007" name="Auto Inline" superClass="com.freescale.s12z.toolchain.compiler.optimization.autoinline" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.macros.allowRedefs.41332784" name="Allow Macro Redefinition" superClass="com.freescale.s12z.toolchain.compiler.macros.allowRedefs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.697459515.adjusted.249727451.237237335" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.697459515" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.395358254.adjusted.479407121.744352105" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.395358254" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.1828929240.1117098280" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1420416271.875974509" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.1258459798.1115364812" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.1999350903.167916806" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.877109778.1555710428" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1262144622.1670653590" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1528778579.1792854864" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1083838725.1866217134" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.418235574.52294824" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1542847042.562475966" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.380158544.956068023" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.788351814.adjusted.602659992.1053131056" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.788351814" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1606135074.adjusted.1762192220.367369945" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1606135074" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1720491048.adjusted.1265996934.2001402407" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1720491048" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.637293405.adjusted.1081347355.1599130035" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.637293405" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1088789059.adjusted.1584363706.1993456770" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1088789059" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.955167820.adjusted.369613533.158058508" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.955167820" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.input.sysInclude.778961516" name="Search System Paths (#include &lt;...&gt;)" superClass="com.freescale.s12z.toolchain.compiler.input.sysInclude" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}\..\..\INC&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}\..\LIB_MCAL\INC&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.compiler.input.sysIncludeRecursive.2145502026" name="Search System Paths Recursively" superClass="com.freescale.s12z.toolchain.compiler.input.sysIncludeRecursive"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1825486611.adjusted.932243527.111498099" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1825486611" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.688800187.adjusted.1812060905.1015946162" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.688800187" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1857114067.adjusted.1084076147.1866421977" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1857114067" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1796311256.adjusted.519669885.754906123" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1796311256" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.accessPaths.nosyspath.873263896" name="Always Search User Paths" superClass="com.freescale.s12z.toolchain.compiler.accessPaths.nosyspath" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.macros.definedMacros.615277927" name="Defined Macros" superClass="com.freescale.s12z.toolchain.compiler.macros.definedMacros" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="DEBUG_DEVELOPMENT=1"/>
+									<listOptionValue builtIn="false" value="USE_MOTOR_NB=3"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.390182250.adjusted.350502629" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.390182250" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1994203149.adjusted.104217409" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1994203149" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1315911557.adjusted.540145022" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1315911557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2020434548.adjusted.1491382786" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2020434548" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1804728896.adjusted.1316906157" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1804728896" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.201268753.adjusted.1692418732" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.201268753" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.adjusted.942731213" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.adjusted.2069332028" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.adjusted.1509646181" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.adjusted.458608012" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.adjusted.1160753842" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.adjusted.23572818" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.adjusted.583026587" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.adjusted.577817977" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.adjusted.1990172374" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.adjusted.1580665788" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.adjusted.762048623" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.adjusted.711682664" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.adjusted.300771347" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.adjusted.1449516225" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.adjusted.148677261" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.adjusted.519857563" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.adjusted.78645195" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.adjusted.1798881338" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.adjusted.1494014288" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.adjusted.1723594318" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.adjusted.652875265" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.adjusted.660797978" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.adjusted.90306712" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.adjusted.1105823233" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.adjusted.582004174" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.adjusted.1213904834" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.adjusted.1845710040" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.adjusted.1971726854" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.adjusted.248256325" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.adjusted.1643645003" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.adjusted.277151835" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.adjusted.1411347130" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.adjusted.130226332" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.adjusted.813280251" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.adjusted.574451093" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.adjusted.2029767079" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.adjusted.1893573274" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.adjusted.556130179" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.adjusted.1969139979" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.adjusted.385869456" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.adjusted.890814805" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.adjusted.491577602" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.adjusted.700822715" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.adjusted.1634906495" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.adjusted.67540962" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.adjusted.2081907542" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.adjusted.2095780113" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.adjusted.1499167196" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.adjusted.597115016" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.adjusted.727324828" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.adjusted.617619270" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.adjusted.70628055" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.adjusted.493172082" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.adjusted.277021467" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.adjusted.1038092678" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.adjusted.460288226" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.adjusted.1016736572" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.adjusted.1878932546" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.adjusted.1047237676" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.adjusted.1546802019" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.adjusted.1654129681" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.adjusted.1738909973" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.adjusted.1244467131" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.adjusted.212120517" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.adjusted.93762083" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.adjusted.1071260131" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.adjusted.2091425796" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.adjusted.749190729" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.adjusted.577936282" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.adjusted.1660842326" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.adjusted.1781272344" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.adjusted.1901999259" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.adjusted.1654827967" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.adjusted.390316150" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.adjusted.1642404510" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.adjusted.957755053" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.adjusted.1417055394" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.adjusted.181700477" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.adjusted.71120692" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.adjusted.1477870729" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.adjusted.61168959" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.adjusted.1375718516" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.adjusted.2031193753" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.adjusted.1436503408" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.adjusted.1037580516" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.adjusted.1416777646" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.adjusted.304705740" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.adjusted.1745032777" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.adjusted.1813663328" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.adjusted.1088578649" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.adjusted.1213956526" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.adjusted.1301965007" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.adjusted.1554454755" name="Enable Warnings" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348.adjusted.1605025937" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.824546932" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348.adjusted.1559619761" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348.adjusted.1247259318" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348.adjusted.1014488088" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.677998911" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.1901588615" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.1508151772" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.904780803" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.1306367561" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.adjusted.740298312" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<inputType id="com.freescale.s12z.toolchain.compiler.inputType2.c.1986108597" name="S12Z C Compiler Input" superClass="com.freescale.s12z.toolchain.compiler.inputType2.c"/>
+								<inputType id="com.freescale.s12z.toolchain.compiler.inputType2.cpp.771739118" name="S12Z C++ Compiler Input" superClass="com.freescale.s12z.toolchain.compiler.inputType2.cpp"/>
+							</tool>
+							<tool command="&quot;${S12Z_ToolsDir}/as12lisa&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.assembler.501397495" name="S12Z Assembler" superClass="com.freescale.s12z.toolchain.assembler">
+								<option id="com.freescale.s12z.toolchain.asm.input.searchPaths.1625278217" name="Include File Search Path" superClass="com.freescale.s12z.toolchain.asm.input.searchPaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
+								</option>
+								<inputType id="com.freescale.s12z.toolchain.asm.inputType.1274600371" name="S12Z Assembler Input" superClass="com.freescale.s12z.toolchain.asm.inputType"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="D_COMPASS|COMMON_BSW/MCAL_FS|D_LATERAL_G|D_CLOCK_BSW/BSW|_RELEASE_OAT|COMMON_BSW/HAL/CDD/DISPLAY|D_COMPASS_CFG|COMMON_BSW/MCAL_CS|COMMON_BSW/HAL/CDD/FAKE_PRTC|COMMON_BSW/MCAL_INC|COMMON_BSW/HAL/CDD|D_OAT|D_LATERAL_G_CFG|D_OAT_CFG|_RELEASE_STOPWATCH|_RELEASE_CLOCK|DOC|D_STOPWATCH|_RELEASE_COMPASS|D_STOPWATCH_CFG" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="LIB_MCAL;toolchain.librarian.config.s12z.release.1249072568.1702808137" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL/Debug"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="LIB_MCAL_DEBUG" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<externalSettings containerId="LIB_CDD;toolchain.librarian.config.s12z.release.1249072568.1702808137" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/LIB_CDD"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_CDD"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_CDD/_DevCLOCK"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="LIB_CDD_CENTRAL_DISPLAY_DEBUG" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+			</storageModule>
+		</cconfiguration>
+		<cconfiguration id="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966" moduleId="org.eclipse.cdt.core.settings" name="_RELEASE_CENTRAL_DISPLAY">
+				<externalSettings>
+					<externalSetting>
+						<entry flags="RESOLVED" kind="macro" name="DEVICE_TYPE" value="CLOCK"/>
+					</externalSetting>
+				</externalSettings>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LltErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.S08ErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="JST_BY_RELEASE_CENTRAL_DISPLAY_S12Z_VHL32" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="Release build clock" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.S08ErrorParser;" id="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966" isPrebuildInvalidatingBuild="false" isVersionInfoProjSpecific="false" name="_RELEASE_CENTRAL_DISPLAY" parent="com.freescale.s12z.toolchain.release" postannouncebuildStep="" postbuildStep="${ProjDirPath}/../../SCRIPTS/postbuild.cmd ${BuildArtifactFilePrefix} ${ConfigName} ${BuildLocation} ${BuildArtifactFileName} \${SVNREV}" preannouncebuildStep="" prebuildStep="" produceBuildErrorsWithMissingReferences="true">
+					<folderInfo id="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966." name="/" resourcePath="">
+						<toolChain errorParsers="" id="com.freescale.s12z.toolchain.release.1011857249" name="S12Z Toolchain" superClass="com.freescale.s12z.toolchain.release">
+							<targetPlatform binaryParser="org.eclipse.cdt.core.ELF" id="com.freescale.s12z.toolchain.targetPlatform.203892104" isAbstract="false" name="S12Z Target Platform" superClass="com.freescale.s12z.toolchain.targetPlatform"/>
+							<builder autoBuildTarget="" buildPath="${ProjDirPath}/../../.build/_RelCENTRAL_DISPLAY" cleanBuildTarget="" enableAutoBuild="true" enableCleanBuild="true" enabledIncrementalBuild="true" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.S08ErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.s12z.toolchain.builder.1983509691" incrementalBuildTarget="" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="GNU Make Builder" parallelBuildOn="true" parallelBuildWorkspaceOn="true" parallelizationNumber="optimal" superClass="com.freescale.s12z.toolchain.builder"/>
+							<tool command="&quot;${S12Z_ToolsDir}/mwccs12lisa&quot;" commandLinePattern="${COMMAND} -E ${FLAGS} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.preprocessor.307210229" name="S12Z Preprocessor" superClass="com.freescale.s12z.toolchain.preprocessor"/>
+							<tool command="&quot;${S12Z_ToolsDir}/decoder&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.disassembler.1405491413" name="S12Z Disassembler" superClass="com.freescale.s12z.toolchain.disassembler"/>
+							<tool command="&quot;${S12Z_ToolsDir}/burner&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.burner.1921693821" name="S12Z Burner" superClass="com.freescale.s12z.toolchain.burner"/>
+							<tool command="&quot;${S12Z_ToolsDir}/linker&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT}" errorParsers="" id="com.freescale.s12z.toolchain.linker.1129311162" name="S12Z Linker" superClass="com.freescale.s12z.toolchain.linker">
+								<option id="com.freescale.s12z.toolchain.linker.output.b.1371242137" name="Generate S-Record file" superClass="com.freescale.s12z.toolchain.linker.output.b" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.output.s.344662326" name="Strip Symbolic Information" superClass="com.freescale.s12z.toolchain.linker.output.s" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.output.statf.44063300" name="Specify Statistic File (e.g. statistic.txt)" superClass="com.freescale.s12z.toolchain.linker.output.statf" value="${BuildArtifactFileName}_stats.txt" valueType="string"/>
+								<option id="com.freescale.s12z.toolchain.linker.base.linkOrder.608806207" name="Link Order" superClass="com.freescale.s12z.toolchain.linker.base.linkOrder" valueType="stringList">
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ECUM/EcuM.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ISR/Isr_VectorTable.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/main.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Cdd_Motor_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/EcuM_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_AL/MOTOR/Al_Motor.c"/>
+									<listOptionValue builtIn="false" value="COMMON_BSW/SL/SYS/ERRHANDLER/ErrH.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Mcu_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Mtr_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="COMMON_CFG/Port_Lcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/Al_Motor_PBcfg.c"/>
+									<listOptionValue builtIn="false" value="D_CLOCK_CFG/IIc_Lcfg.c"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.linker.general.otherFlags.1741453948" name="Other Flags" superClass="com.freescale.s12z.toolchain.linker.general.otherFlags" value="" valueType="string"/>
+								<option id="com.freescale.s12z.toolchain.linker.input.paramFile.1086304656" name="Parameter File" superClass="com.freescale.s12z.toolchain.linker.input.paramFile" value="${ProjDirPath}/../../LNK/APP_CENTRAL_DISPLAY/app_central_display_vhl64.prm" valueType="string"/>
+								<option id="com.freescale.s12z.toolchain.linker.output.sfixups.1230997990" name="Generate Fixups in abs File" superClass="com.freescale.s12z.toolchain.linker.output.sfixups" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.opt.ConstDist.1251400004" name="Enable Automatic const Placement" superClass="com.freescale.s12z.toolchain.linker.opt.ConstDist" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.opt.DataDist.583699016" name="Enable Automatic Data Placement" superClass="com.freescale.s12z.toolchain.linker.opt.DataDist" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.linker.input.searchpath.403347349" name="Search Paths" superClass="com.freescale.s12z.toolchain.linker.input.searchpath" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL/Release}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD/_RELEASE_CENTRAL_DISPLAY}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../LIB/&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.linker.input.libs.1040232405" name="Libraries" superClass="com.freescale.s12z.toolchain.linker.input.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../LIB/LIB_MCAL.lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../../LIB/JST_BY_RELEASE_LIB_CENTRAL_DISPLAY.lib&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.linker.output.StackConsumption.457607391" name="Enable Stack Consumption Computation" superClass="com.freescale.s12z.toolchain.linker.output.StackConsumption" value="false" valueType="boolean"/>
+								<inputType id="com.freescale.s12z.toolchain.linker.inputType.317517646" name="S12Z Linker Input" superClass="com.freescale.s12z.toolchain.linker.inputType">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+								<outputType id="com.freescale.s12z.toolchain.linker.executable.outputType.883204946" name="S12Z Linker Executable Output" outputPrefix="${ProjDirPath}/../../OUT/APP_CENTRAL_DISPLAY/" superClass="com.freescale.s12z.toolchain.linker.executable.outputType"/>
+							</tool>
+							<tool command="&quot;${S12Z_ToolsDir}/mwccs12lisa&quot;" commandLinePattern="${COMMAND} -c ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS} -DSVN_REVISION=$(SVNREV) -DSVN_LOCATION=$(SVNLOC)" errorParsers="" id="com.freescale.s12z.toolchain.compiler.1970898167" name="S12Z Compiler" superClass="com.freescale.s12z.toolchain.compiler">
+								<option id="com.freescale.s12z.toolchain.compiler.general.debug.830986166" name="Generate Debug Information" superClass="com.freescale.s12z.toolchain.compiler.general.debug" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.input.include.1559187014" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.s12z.toolchain.compiler.input.include" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_AL/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ECUM&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ISR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../LIB_CDD/COMMON_BSW/HAL/CDD/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/D_CENTRAL_DISPLAY_CFG&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_CFG&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.compiler.input.includeRecursive.393155717" name="Search User Paths Recursively" superClass="com.freescale.s12z.toolchain.compiler.input.includeRecursive"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.98892021.940396597.262851653" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.1343590964.1317044709.366404414" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1155958497" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.1683490897" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.635794907" name="Enable Warnings" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings" value="com.freescale.s12z.toolchain.warnings.enableWarnings.full" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.1074464057" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.2043338170" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.81704225" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.11326856" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.701034563" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.418054104" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.1336672613" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1414733507" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1587028953" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1116986122" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1567943943" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.2043381806" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.17605486" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.257724071" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.691175131" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.989352834" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.924801479" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.166710462" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.1610837397" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.898896157" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.1017936304" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.685765283" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.948999530" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.1267609825" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.1907626106" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.188683040" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.1919208710" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.992774639" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.660465422" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.1612312562" name="Enable Warnings" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings" value="com.freescale.s12z.toolchain.warnings.enableWarnings.full" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.77440114.1658035386.418891768" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.681067398.661390656.1585292079" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557.adjusted.1170032004.2033229969.411123255" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.2077593557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.1490445052.303406469.1945777978" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.710597921.76482150.494113055" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.890913398.1131064292.928258378" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.648170816.1254454523.699443486" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.1082738129.1818781186.1546433029" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330.adjusted.695790734.293136836.2017007770" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1416462330" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.179247776.adjusted.1811473334.1173267064.1104272367" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.179247776" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.254092693.adjusted.272143090.819398636.935936348" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.254092693" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.optimization.level.1328531026" name="Optimization Level" superClass="com.freescale.s12z.toolchain.compiler.optimization.level" value="com.freescale.s12z.toolchain.compiler.optimization.level.level0" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.optimization.inlineLevel.240123791" name="Inline Level" superClass="com.freescale.s12z.toolchain.compiler.optimization.inlineLevel" value="com.freescale.s12z.toolchain.compiler.optimization.inlineLevel.smart" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.optimization.autoinline.189094089" name="Auto Inline" superClass="com.freescale.s12z.toolchain.compiler.optimization.autoinline" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.macros.allowRedefs.2091153562" name="Allow Macro Redefinition" superClass="com.freescale.s12z.toolchain.compiler.macros.allowRedefs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.697459515.adjusted.249727451.237237335.40271219" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.697459515" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.395358254.adjusted.479407121.744352105.1005272501" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.395358254" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.1828929240.1117098280.363117757" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1420416271.875974509.2013516488" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.1258459798.1115364812.1167203687" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.1999350903.167916806.398564946" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139.adjusted.877109778.1555710428.1710684559" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.220260139" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1262144622.1670653590.39575785" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1528778579.1792854864.462061945" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1083838725.1866217134.2092521614" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.418235574.52294824.311554352" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.1542847042.562475966.942981305" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739.adjusted.380158544.956068023.635231049" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2039467739" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.788351814.adjusted.602659992.1053131056.825010283" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.788351814" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1606135074.adjusted.1762192220.367369945.812679307" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1606135074" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1720491048.adjusted.1265996934.2001402407.1063631824" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1720491048" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.637293405.adjusted.1081347355.1599130035.1998203805" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.637293405" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1088789059.adjusted.1584363706.1993456770.1342486618" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1088789059" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.955167820.adjusted.369613533.158058508.1583387552" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.955167820" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.input.sysInclude.1353952017" name="Search System Paths (#include &lt;...&gt;)" superClass="com.freescale.s12z.toolchain.compiler.input.sysInclude" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}\..\..\INC&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}\..\LIB_MCAL\INC&quot;"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.compiler.input.sysIncludeRecursive.2135685947" name="Search System Paths Recursively" superClass="com.freescale.s12z.toolchain.compiler.input.sysIncludeRecursive"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1825486611.adjusted.932243527.111498099.782295812" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1825486611" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.688800187.adjusted.1812060905.1015946162.726948418" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.688800187" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1857114067.adjusted.1084076147.1866421977.288940724" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1857114067" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1796311256.adjusted.519669885.754906123.773286062" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1796311256" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.accessPaths.nosyspath.210367564" name="Always Search User Paths" superClass="com.freescale.s12z.toolchain.compiler.accessPaths.nosyspath" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.macros.definedMacros.1324898977" name="Defined Macros" superClass="com.freescale.s12z.toolchain.compiler.macros.definedMacros" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_MOTOR_NB=3"/>
+								</option>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.390182250.adjusted.350502629.186632767" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.390182250" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1994203149.adjusted.104217409.1273926183" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1994203149" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1315911557.adjusted.540145022.482178085" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1315911557" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2020434548.adjusted.1491382786.1287089112" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.2020434548" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1804728896.adjusted.1316906157.1810595243" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1804728896" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.201268753.adjusted.1692418732.624664822" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.201268753" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.605118487" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.810271078" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.1008319265" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma.1002387565" name="Illegal #pragmas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnIllPragma" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.1179136950" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.2005965648" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.920788706" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr.1488443542" name="Possible Unwanted Effects (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnPossibleErr" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.277275246" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.1894372932" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.573477666" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks.1040968135" name="Extended Error Checks (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnExtendedErrChecks" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.1472546826" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.1381199695" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.1731249259" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual.884365458" name="Hidden Virtual Functions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.warnHideVirtual" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.605656578" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1946443638" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.1817810314" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitConv.152606836" name="Implicit Arithmetic Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitConv" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.1801046408" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.1464118295" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.1135942506" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign.1531769384" name="Implicit Signed/Unsigned Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitSignUnsign" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.1051915857" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.1385520038" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.243390530" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt.2037199805" name="Implicit Float to Integer Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitFloatToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.1517882844" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.2062080376" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.2124586890" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float.1176516778" name="Implicit Integer to Float Conversions (all)" superClass="com.freescale.s12z.toolchain.compiler.warnings.implicitInt2Float" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.119689949" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.1901924878" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.1194122403" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt.1943491962" name="Pointer/Integer Conversions (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.ptrToInt" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.2034220324" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.1819624545" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.162828723" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs.1152802552" name="Unused Arguments (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedArgs" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.1196912625" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.8623972" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.1504963918" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.unusedVar.1033065308" name="Unused Variables (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.unusedVar" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.1668228803" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.1121798156" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.431290311" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.notused.47634505" name="Unused Result from Non-Void-Returning Function (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.notused" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.2116301323" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.61714043" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.1764523362" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.missingReturn.1007797860" name="Missing 'return' Value in Non-Void-Returning Function (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.missingReturn" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.1661334749" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.2138156857" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.984628515" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect.1470166880" name="Expression Has No Side Effect (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.noSideEffect" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.409580414" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.1015751715" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.1377032635" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.extraCommas.997179812" name="Extra Commas (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.extraCommas" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.1205120225" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.624477120" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.1169465570" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl.404462705" name="Empty Declarations (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.emptyDecl" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.232180302" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.1639091440" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.1786252627" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.classStruct.77380716" name="Inconsistent 'class'/'struct' Usage (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.classStruct" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.963695991" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.682074636" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.1668709514" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.includeCap.1266283541" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.includeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.281523527" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.1110281832" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.450728333" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap.1101364263" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.sysIncludeCap" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.49605285" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.1397773276" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.687202509" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded.1465831982" name="Pad Bytes Added (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.padBytesAdded" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.1264641621" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.948318068" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.873581252" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf.2128689811" name="Undefined Macro in #if/#elif (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.undefMacroIf" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.1356059820" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.1070432413" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.1157333599" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction.1879292337" name="Non-Inlined Functions (full)" superClass="com.freescale.s12z.toolchain.compiler.warnings.nonInlinedFunction" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.575016776" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.1548326652" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.1290494497" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting.2141589973" name="Token Not Formed by ## Operator (most)" superClass="com.freescale.s12z.toolchain.compiler.warnings.tokenpasting" value="true" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.1399022517" name="Enable Warnings" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348.1770179575" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.236815348" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609.1778504015" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1435096609" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.331561129.adjusted.851053267" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.331561129" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.892929889.adjusted.755722272" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.892929889" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1630964394.adjusted.1184419012" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1630964394" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1309733806.adjusted.2139294130" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1309733806" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.172426665.adjusted.1642910380" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.172426665" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1008234080.adjusted.1423133941" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1008234080" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1084589339.adjusted.2139344929" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1084589339" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1886463549.adjusted.1391526829" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1886463549" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<inputType id="com.freescale.s12z.toolchain.compiler.inputType2.c.1187717907" name="S12Z C Compiler Input" superClass="com.freescale.s12z.toolchain.compiler.inputType2.c"/>
+								<inputType id="com.freescale.s12z.toolchain.compiler.inputType2.cpp.832460442" name="S12Z C++ Compiler Input" superClass="com.freescale.s12z.toolchain.compiler.inputType2.cpp"/>
+							</tool>
+							<tool command="&quot;${S12Z_ToolsDir}/as12lisa&quot;" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="" id="com.freescale.s12z.toolchain.assembler.1567032936" name="S12Z Assembler" superClass="com.freescale.s12z.toolchain.assembler">
+								<option id="com.freescale.s12z.toolchain.asm.input.searchPaths.696775787" name="Include File Search Path" superClass="com.freescale.s12z.toolchain.asm.input.searchPaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
+								</option>
+								<inputType id="com.freescale.s12z.toolchain.asm.inputType.99323179" name="S12Z Assembler Input" superClass="com.freescale.s12z.toolchain.asm.inputType"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="_DevOAT|MODULE_TESTS|D_COMPASS|COMMON_BSW/MCAL_FS|_DevCOMPASS|D_LATERAL_G|D_CLOCK_BSW/BSW|_RELEASE_OAT|D_COMPASS_CFG|COMMON_BSW/HAL/CDD/DISPLAY|COMMON_BSW/HAL/CDD/FAKE_PRTC|COMMON_BSW/MCAL_CS|COMMON_BSW/MCAL_INC|_DevSTOPWATCH|COMMON_BSW/HAL/CDD|D_OAT_CFG|D_OAT|D_LATERAL_G_CFG|_RELEASE_STOPWATCH|_DevCLOCK|D_STOPWATCH|_RELEASE_COMPASS|D_STOPWATCH_CFG" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="LIB_MCAL;toolchain.librarian.config.s12z.release.1249072568" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL/Release"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="LIB_MCAL" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+				<externalSettings containerId="LIB_CDD;toolchain.librarian.config.s12z.release.1249072568" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier">
+					<externalSetting>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/LIB_CDD"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL/Release"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_MCAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_CDD"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/LIB_CDD/_RELEASE_CLOCK"/>
+						<entry flags="RESOLVED" kind="libraryFile" name="JST_BY_RELEASE_LIB_CENTRAL_DISPLAY" srcPrefixMapping="" srcRootPath=""/>
+					</externalSetting>
+				</externalSettings>
+			</storageModule>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="TRK_S12ZVH128_DEMOCODE.com.freescale.s12z.toolchain.project.executable.1253998312" name="Freescale S12Z Project" projectType="com.freescale.s12z.toolchain.project.executable"/>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="_DevCENTRAL_DISPLAY"/>
+		<configuration configurationName="Multiple configurations">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_DevCLOCK"/>
+		<configuration configurationName="_RELEASE_CLOCK">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_RelCLOCK">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_RELEASE_STOPWATCH">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_RELEASE_COMPASS"/>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/APP_CLOCK"/>
+		</configuration>
+		<configuration configurationName="_RELEASE_CENTRAL_DISPLAY"/>
+		<configuration configurationName="_RELEASE_OAT">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_DevCOMPASS"/>
+		<configuration configurationName="DevCLOCK">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_Release"/>
+		<configuration configurationName="_DevLateralG"/>
+		<configuration configurationName="_DevOAT">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+		<configuration configurationName="_DevSTOPWATCH">
+			<resource resourceType="PROJECT" workspacePath="/DEVICES"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings">
+		<doc-comment-owner id="org.eclipse.cdt.ui.doxygen">
+			<path value=""/>
+		</doc-comment-owner>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets">
+		<buildTargets>
+			<target name="lint" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/Users/StWurm/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j16</buildArguments>
+				<buildTarget>lint</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="all" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/Users/StWurm/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j16</buildArguments>
+				<buildTarget>all</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="lint_report" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/Users/StWurm/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j16</buildArguments>
+				<buildTarget>lint_report</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="clean" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/Users/StWurm/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j16</buildArguments>
+				<buildTarget>clean</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="lint_clean" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/Users/StWurm/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j16</buildArguments>
+				<buildTarget>lint_clean</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+			<target name="print_env" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/DATA/Tools/Freescale/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>print_env</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>false</runAllBuilders>
+			</target>
+			<target name="export_ship_env" path="" targetID="org.eclipse.cdt.build.MakeTargetBuilder">
+				<buildCommand>C:/DATA/Tools/Freescale/CW MCU v10.6.4/gnu/bin/mingw32-make</buildCommand>
+				<buildArguments>-j8</buildArguments>
+				<buildTarget>export_ship_env</buildTarget>
+				<stopOnError>true</stopOnError>
+				<useDefaultCommand>true</useDefaultCommand>
+				<runAllBuilders>true</runAllBuilders>
+			</target>
+		</buildTargets>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.config.debug.19236485;com.freescale.s12z.toolchain.config.debug.19236485.;com.freescale.s12z.toolchain.compiler.1717547357;com.freescale.s12z.toolchain.compiler.inputType2.c.1953422355">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947;com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947.;com.freescale.s12z.toolchain.compiler.2105639650;com.freescale.s12z.toolchain.compiler.inputType2.c.1691671570">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947.16920871;com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947.16920871.;com.freescale.s12z.toolchain.compiler.319211119;com.freescale.s12z.toolchain.compiler.inputType2.cpp.2031524391">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331.1602927172.278364712;com.freescale.s12z.toolchain.release.142411331.1602927172.278364712.;com.freescale.s12z.toolchain.compiler.734984978;com.freescale.s12z.toolchain.compiler.inputType2.c.866341990">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947.16920871;com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947.16920871.;com.freescale.s12z.toolchain.compiler.319211119;com.freescale.s12z.toolchain.compiler.inputType2.c.1259640359">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1563839817;com.freescale.s12z.toolchain.release.908847807.546945784.1563839817.;com.freescale.s12z.toolchain.compiler.1386773362;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1974411531">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1806161058;com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.;com.freescale.s12z.toolchain.compiler.1234198293;com.freescale.s12z.toolchain.compiler.inputType2.c.1179723547">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1760560538;com.freescale.s12z.toolchain.release.908847807.546945784.1760560538.;com.freescale.s12z.toolchain.compiler.1265721482;com.freescale.s12z.toolchain.compiler.inputType2.cpp.738462912">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.1005844858;com.freescale.s12z.toolchain.release.908847807.1005844858.;com.freescale.s12z.toolchain.compiler.1870640183;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1088715174">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331.1602927172;com.freescale.s12z.toolchain.release.142411331.1602927172.;com.freescale.s12z.toolchain.compiler.498832340;com.freescale.s12z.toolchain.compiler.inputType2.cpp.41740288">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331.1602927172.278364712.164062467;com.freescale.s12z.toolchain.release.142411331.1602927172.278364712.164062467.;com.freescale.s12z.toolchain.compiler.741363740;com.freescale.s12z.toolchain.compiler.inputType2.c.1828581161">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331;com.freescale.s12z.toolchain.release.142411331.;com.freescale.s12z.toolchain.compiler.579381283;com.freescale.s12z.toolchain.compiler.inputType2.c.32815751">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.637166268;com.freescale.s12z.toolchain.release.908847807.546945784.637166268.;com.freescale.s12z.toolchain.compiler.1773353217;com.freescale.s12z.toolchain.compiler.inputType2.c.1440307793">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.442738637;com.freescale.s12z.toolchain.release.908847807.546945784.442738637.;com.freescale.s12z.toolchain.compiler.1749006908;com.freescale.s12z.toolchain.compiler.inputType2.cpp.209512795">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1760560538;com.freescale.s12z.toolchain.release.908847807.546945784.1760560538.;com.freescale.s12z.toolchain.compiler.1265721482;com.freescale.s12z.toolchain.compiler.inputType2.c.1316617372">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.637166268.82145466;com.freescale.s12z.toolchain.release.908847807.546945784.637166268.82145466.;com.freescale.s12z.toolchain.compiler.136182862;com.freescale.s12z.toolchain.compiler.inputType2.cpp.394835729">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.442738637;com.freescale.s12z.toolchain.release.908847807.546945784.442738637.;com.freescale.s12z.toolchain.compiler.1749006908;com.freescale.s12z.toolchain.compiler.inputType2.c.543102416">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331.1602927172.278364712;com.freescale.s12z.toolchain.release.142411331.1602927172.278364712.;com.freescale.s12z.toolchain.compiler.734984978;com.freescale.s12z.toolchain.compiler.inputType2.cpp.893790822">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784;com.freescale.s12z.toolchain.release.908847807.546945784.;com.freescale.s12z.toolchain.compiler.1867637089;com.freescale.s12z.toolchain.compiler.inputType2.cpp.771739118">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.config.debug.19236485;com.freescale.s12z.toolchain.config.debug.19236485.;com.freescale.s12z.toolchain.compiler.1717547357;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1798229144">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.1780157921;com.freescale.s12z.toolchain.release.908847807.1780157921.;com.freescale.s12z.toolchain.compiler.1739553765;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1042878025">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807;com.freescale.s12z.toolchain.release.908847807.;com.freescale.s12z.toolchain.compiler.701413759;com.freescale.s12z.toolchain.compiler.inputType2.cpp.665718468">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331.1602927172.278364712.164062467;com.freescale.s12z.toolchain.release.142411331.1602927172.278364712.164062467.;com.freescale.s12z.toolchain.compiler.741363740;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1391258545">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.1780157921;com.freescale.s12z.toolchain.release.908847807.1780157921.;com.freescale.s12z.toolchain.compiler.1739553765;com.freescale.s12z.toolchain.compiler.inputType2.c.422604545">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1563839817;com.freescale.s12z.toolchain.release.908847807.546945784.1563839817.;com.freescale.s12z.toolchain.compiler.1386773362;com.freescale.s12z.toolchain.compiler.inputType2.c.39657512">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807;com.freescale.s12z.toolchain.release.908847807.;com.freescale.s12z.toolchain.compiler.701413759;com.freescale.s12z.toolchain.compiler.inputType2.c.491677485">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331.1602927172;com.freescale.s12z.toolchain.release.142411331.1602927172.;com.freescale.s12z.toolchain.compiler.498832340;com.freescale.s12z.toolchain.compiler.inputType2.c.771785175">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.142411331;com.freescale.s12z.toolchain.release.142411331.;com.freescale.s12z.toolchain.compiler.579381283;com.freescale.s12z.toolchain.compiler.inputType2.cpp.399273897">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966.903736131;com.freescale.s12z.toolchain.release.908847807.546945784.1189223966.903736131.;com.freescale.s12z.toolchain.compiler.750239987;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1536754882">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966.903736131;com.freescale.s12z.toolchain.release.908847807.546945784.1189223966.903736131.;com.freescale.s12z.toolchain.compiler.750239987;com.freescale.s12z.toolchain.compiler.inputType2.c.1936477507">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947;com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.459021947.;com.freescale.s12z.toolchain.compiler.2105639650;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1523984293">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.169553759;com.freescale.s12z.toolchain.release.908847807.546945784.169553759.;com.freescale.s12z.toolchain.compiler.1664870640;com.freescale.s12z.toolchain.compiler.inputType2.c.239629667">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784;com.freescale.s12z.toolchain.release.908847807.546945784.;com.freescale.s12z.toolchain.compiler.1867637089;com.freescale.s12z.toolchain.compiler.inputType2.c.1986108597">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.637166268;com.freescale.s12z.toolchain.release.908847807.546945784.637166268.;com.freescale.s12z.toolchain.compiler.1773353217;com.freescale.s12z.toolchain.compiler.inputType2.cpp.439680429">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.169553759;com.freescale.s12z.toolchain.release.908847807.546945784.169553759.;com.freescale.s12z.toolchain.compiler.1664870640;com.freescale.s12z.toolchain.compiler.inputType2.cpp.2015175340">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.1005844858;com.freescale.s12z.toolchain.release.908847807.1005844858.;com.freescale.s12z.toolchain.compiler.1870640183;com.freescale.s12z.toolchain.compiler.inputType2.c.738073072">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.637166268.82145466;com.freescale.s12z.toolchain.release.908847807.546945784.637166268.82145466.;com.freescale.s12z.toolchain.compiler.136182862;com.freescale.s12z.toolchain.compiler.inputType2.c.918483303">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966;com.freescale.s12z.toolchain.release.908847807.546945784.1189223966.;com.freescale.s12z.toolchain.compiler.1970898167;com.freescale.s12z.toolchain.compiler.inputType2.cpp.832460442">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1806161058;com.freescale.s12z.toolchain.release.908847807.546945784.1806161058.;com.freescale.s12z.toolchain.compiler.1234198293;com.freescale.s12z.toolchain.compiler.inputType2.cpp.1892381498">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+			<profile id="com.freescale.s12z.c.symbols.toolchain.discoveryProfile">
+				<buildOutputProvider>
+					<openAction enabled="true" filePath=""/>
+					<parser enabled="false"/>
+				</buildOutputProvider>
+				<scannerInfoProvider id="specsFile">
+					<runAction arguments="" command="" useDefault="true"/>
+					<parser enabled="true"/>
+				</scannerInfoProvider>
+			</profile>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.s12z.toolchain.release.908847807.546945784.1189223966;com.freescale.s12z.toolchain.release.908847807.546945784.1189223966.;com.freescale.s12z.toolchain.compiler.1970898167;com.freescale.s12z.toolchain.compiler.inputType2.c.1187717907">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.s12z.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+</cproject>

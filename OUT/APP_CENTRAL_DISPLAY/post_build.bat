@@ -1,0 +1,1 @@
+"C:\Program Files\srecord\bin\srec_cat.exe" .\FLASH\app_test.sx -crop 0x00FF8000 0x00FFE800 -offset -0x00FF8000 -Output .\FLASH\app_test.bin -Binary

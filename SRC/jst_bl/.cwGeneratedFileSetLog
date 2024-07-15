@@ -1,0 +1,12 @@
+Sources/main.c
+Sources/asm_main.asm
+Project_Settings/Linker_Files/MC9S12ZVHL32.prm
+Project_Settings/Startup_Code/starts12z.c
+Project_Headers/derivative.h
+Project_Headers/MC9S12ZVHL32.h
+Project_Headers/derivative.inc
+Project_Headers/MC9S12ZVHL32.inc
+Project_Headers/main_asm.h
+Lib/MC9S12ZVHL32.c
+.settings/com.freescale.core.ide.newprojectwizard.prefs
+ReferencedRSESystems.xml

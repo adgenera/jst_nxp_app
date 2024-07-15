@@ -1,0 +1,25 @@
+/* Compiler options for NXP S12Z Compiler (LISA) */
+
+/* Size definitions for S12Z */
+-si2
+-sl4
+-sp4
+
+
+/* Enable (ignore) assembly keywords */
++rw(asm,__asm)
+-d__asm=asm
+-dasm=_to_brackets
++rw(_to_brackets)
+-esym(586,asm)
+-esym(950,__asm,_to_brackets)
+
+/* Enable the (non-standard) __interrupt keyword */
++rw(__interrupt)
+-esym(950,__interrupt)
+
++fem
+
+/* Ignore Warning 430: Character '@', taken to specify location or a mask, is not standard C/C++ 
+ * Compiler supports location info by @ in source */
+-e430

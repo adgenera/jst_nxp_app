@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>LIB_MCAL</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>Debug</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/.build/LIB_MCAL/DEBUG/build-LIB_MCAL-Debug</locationURI>
+		</link>
+		<link>
+			<name>Release</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/.build/LIB_MCAL/RELEASE/build-LIB_MCAL-Release</locationURI>
+		</link>
+		<link>
+			<name>Debug/LIB_MCAL_DEBUG.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/LIB/LIB_MCAL_DEBUG.lib</locationURI>
+		</link>
+		<link>
+			<name>Release/LIB_MCAL.lib</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/LIB/LIB_MCAL.lib</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

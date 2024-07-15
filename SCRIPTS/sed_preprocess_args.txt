@@ -1,0 +1,7 @@
+s#-[iI]#\r\n-I#g
+s#"##g
+s#\$(ProjDirPath)#L:/SRC/DEVICES#g
+s#\$(CDD)#L:/SRC/LIB_CDD/COMMON_BSW/HAL/CDD#g
+s#\$(LIB_MCAL)#L:/SRC/LIB_MCAL#g
+s#\\#/#g
+s#\r##g
