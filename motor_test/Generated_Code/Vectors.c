@@ -5,7 +5,7 @@
 **     Processor   : MC9S12ZVHL32CLL
 **     Version     : Component 01.066, Driver 02.08, CPU db: 3.00.000
 **     Compiler    : CodeWarrior HCS12Z C Compiler
-**     Date/Time   : 2024-07-15, 13:32, # CodeGen: 1
+**     Date/Time   : 2024-07-15, 14:27, # CodeGen: 15
 **     Abstract    :
 **         This component "MC9S12ZVHL64_100" implements properties, methods,
 **         and events of the CPU.
@@ -96,7 +96,7 @@ const InterruptTableEntry _InterruptVectorTable[123] @0x00FF8010U = { /* Interru
   _VECTOR(Cpu_Interrupt),               /* 0x1B  0x00FF806C   1   ivVReserved100       unused by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x1C  0x00FF8070   1   ivVssd1              unused by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x1D  0x00FF8074   1   ivVssd0              unused by PE */
-  _VECTOR(Cpu_Interrupt),               /* 0x1E  0x00FF8078   1   ivVmctimovf          unused by PE */
+  _VECTOR(MC_ISR),                      /* 0x1E  0x00FF8078   1   ivVmctimovf          used by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x1F  0x00FF807C   1   ivVReserved96        unused by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x20  0x00FF8080   1   ivVReserved95        unused by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x21  0x00FF8084   1   ivVtim1paie          unused by PE */
@@ -191,7 +191,7 @@ const InterruptTableEntry _InterruptVectorTable[123] @0x00FF8010U = { /* Interru
   _VECTOR(Cpu_Interrupt),               /* 0x7A  0x00FF81E8   -   ivVme                unused by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x7B  0x00FF81EC   -   ivVsys               unused by PE */
   _VECTOR(Cpu_Interrupt),               /* 0x7C  0x00FF81F0   -   ivVswi               unused by PE */
-  _VECTOR(Cpu_IllegalOpcode),           /* 0x7D  0x00FF81F4   -   ivVtrap              used by PE */
+  _VECTOR(Cpu_Interrupt),               /* 0x7D  0x00FF81F4   -   ivVtrap              unused by PE */
   _VECTOR(Cpu_Interrupt)                /* 0x7E  0x00FF81F8   -   ivVspare             unused by PE */
 };
 

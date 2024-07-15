@@ -6,13 +6,7 @@
 #include "API.h"	
 #include "Wdg.h"
 
-#include "Dio.h"
-#include "Mtr.h"
-#include "Cdd_Motor.h"
-#include "Al_Motor.h"
-#include "ISR_VectorTable.h"
-#include "Mcu.h"
-#include "Port.h"
+#include "IIc_Lcfg.h"
 /**********************************************************************************************
  * External objects
 // **********************************************************************************************/
@@ -46,7 +40,7 @@ const uint16 jst_code @0x00FFE600 = 0x2540;
 /**********************************************************************************************
  * Local variables
  **********************************************************************************************/
-
+uint32 ms_counter = 0;
 /**********************************************************************************************
  * Local functions
  **********************************************************************************************/
@@ -68,15 +62,7 @@ void main (void)
 	DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
     
 	/* initialize the ECUM module */
-	//Ecum_Init ();
-	
-	Dio_Init();
-	Gpt_Init();
-	Mtr_Init();
-		   
-	IIC0_Init();
-	Cdd_Motor_Init();
-	Al_Motor_Init();
+	Ecum_Init ();
 
 	/* ******************************************************* *
 	 *                                                         *
@@ -87,14 +73,7 @@ void main (void)
 	 *  False configuration can result in hardware malfunction *
 	 *                                                         *
 	 * ******************************************************* */
-	//Ecum_Start ();
-	
-	ISR_Set_PriorityLevel(); /*lint !e522: Highest operation, function 'ISR_Set_PriorityLevel', lacks side-effects -> direct writing to registers */
-
-	/* initialize the MCU with 8 MHz oscillator */
-	Mcu_Init ();
-	/* initializing of the PORT module */
-	Port_Init ();
+	Ecum_Start ();
 	
 	/* Initialize external Peripherals */
 	    /* WDG is initialized separately **************************************** */
@@ -109,14 +88,21 @@ void main (void)
 	for (;;)
 	{			
   		if (ms) {
+  			if(1000 % ms_counter) {
+  				IIc_Set_KBI_Kompass_Peilung_HHSS();
+  			}
+  			if(2000 % ms_counter) {
+  				IIc_Set_KBI_Kompass_Peilung_HHSS();
+  				IIc_Set_KBI_Kompass_Peilung_MM();
+  				ms_counter = 0;
+  			}
   			//WDog1_Clear();
   			Wdg_Clear();
   			//APP_FSM();
   			/* Call ECUM MainFunction */
-  			//Ecum_MainFunction();
-  			Cdd_Motor_RunToNextFullStep (CDD_MOTOR_MTR_HHSS);
-  			Cdd_Motor_RunToNextFullStep (CDD_MOTOR_MTR_MM);
-  			ms = FALSE;		
+  			Ecum_MainFunction();
+  			ms = FALSE;	
+  			ms_counter++;
   		}
 	}
 }

@@ -7,7 +7,7 @@
 **     Version     : Component 01.066, Driver 02.08, CPU db: 3.00.000
 **     Datasheet   : Rev. 1.02 01/2014
 **     Compiler    : CodeWarrior HCS12Z C Compiler
-**     Date/Time   : 2024-07-15, 13:32, # CodeGen: 1
+**     Date/Time   : 2024-07-15, 14:03, # CodeGen: 3
 **     Abstract    :
 **         This component "MC9S12ZVHL64_100" implements properties, methods,
 **         and events of the CPU.
@@ -67,7 +67,7 @@
 #define __Cpu
 
 /* Active configuration define symbol */
-#define PEcfg_ZVHL32CLQ 1U
+#define PEcfg_ZVHL32CLL 1U
 
 /*Include shared modules, which are used for whole project*/
 #include "PE_Types.h"
@@ -112,18 +112,6 @@ void _EntryPoint(void);
 */
 
 /* Interrupt routine(s) prototypes */
-
-__interrupt void Cpu_IllegalOpcode(void);
-/*
-** ===================================================================
-**     Method      :  Cpu_IllegalOpcode (component MC9S12ZVHL64_100)
-**
-**     Description :
-**         This interrupt is called after unimplemented instruction 
-**         execution.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
 
 void Cpu_Delay100US(word us100);
 /*

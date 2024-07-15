@@ -32,7 +32,32 @@
 #include "Events.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+/*
+###################################################################
 
+ The interrupt service routine(s) must be implemented
+  by user in one of the following user modules.
+
+  If the "Generate ISR" option is enabled, Processor Expert generates
+  ISR templates in the CPU event module.
+
+  User modules:
+      main.c
+      Events.c
+
+###################################################################
+*/
+#pragma CODE_SEG __NEAR_SEG NON_BANKED
+ISR(MC_ISR)
+        {
+        // NOTE: The routine should include the following actions to obtain
+        //       correct functionality of the hardware.
+        //
+        //      The ISR is invoked by MCTOIF flag. The MCTOIF flag is cleared
+        //      if a "1" is written to the flag in MCCTL0 register.
+        //      Example: MCCTL0 = 1;
+	MCCTL0=1;
+        }
 #pragma CODE_SEG DEFAULT
 
 /*

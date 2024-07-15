@@ -1,0 +1,5 @@
+"${ProjDirPath}/post_build.bat"
+
+CHANGE WITH RIGHT NAME OF THE PROJECT AND ADDRESSES
+
+post_build.bat: "C:\Program Files\srecord\bin\srec_cat.exe" .\app_test.sx -crop 0x00FF8000 0x00FFE800 -offset -0x00FF8000 -Output .\app_test.bin -Binary

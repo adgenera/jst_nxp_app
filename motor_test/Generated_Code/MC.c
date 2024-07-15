@@ -6,7 +6,7 @@
 **     Component   : Init_MC
 **     Version     : Component 01.038, Driver 01.03, CPU db: 3.00.000
 **     Compiler    : CodeWarrior HCS12Z C Compiler
-**     Date/Time   : 2024-07-15, 13:32, # CodeGen: 1
+**     Date/Time   : 2024-07-15, 14:37, # CodeGen: 17
 **     Abstract    :
 **          This file implements the Motor Controller (MC) module initialization
 **          according to the Peripheral Initialization Component settings, and defines
@@ -15,20 +15,20 @@
 **          Component name                                 : MC
 **          Device                                         : MC
 **          Settings                                       : 
-**            Recirculation mode                           : High side transistors
+**            Recirculation mode                           : Low side transistors
 **            Fast mode                                    : no
 **            Dither Feature Enable                        : no
 **            Clock settings                               : 
-**              Prescaler                                  : 1
+**              Prescaler                                  : 8
 **              Period counter                             : 1000
-**              Period time                                : 31.25 us
+**              Period time                                : 250 us
 **          Motors                                         : 1
 **          Stop in wait mode                              : no
 **          Interrupts                                     : 
 **            Interrupt                                    : Vmctimovf
-**            MC Interrupt overflow enable                 : Disabled
+**            MC Interrupt overflow enable                 : Enabled
 **            Priority interrupt                           : 1
-**            ISR name                                     : 
+**            ISR name                                     : MC_ISR
 **          Initialization                                 : 
 **            Call Init method                             : yes
 **     Contents    :
@@ -81,6 +81,32 @@
 /* MODULE MC. */
 
 #include "MC.h"
+/*
+** ###################################################################
+**
+**  The interrupt service routine(s) must be implemented
+**  by user in one of the following user modules.
+**
+**  If the "Generate ISR" option is enabled, Processor Expert generates
+**  ISR templates in the CPU event module.
+**
+**  User modules:
+**      main.c
+**      Events.c
+**
+** ###################################################################
+#pragma CODE_SEG __NEAR_SEG NON_BANKED
+ISR(MC_ISR)
+        {
+        // NOTE: The routine should include the following actions to obtain
+        //       correct functionality of the hardware.
+        //
+        //      The ISR is invoked by MCTOIF flag. The MCTOIF flag is cleared
+        //      if a "1" is written to the flag in MCCTL0 register.
+        //      Example: MCCTL0 = 1;
+        }
+#pragma CODE_SEG DEFAULT
+*/
 
 /*
 ** ===================================================================
@@ -99,18 +125,18 @@ void MC_Init(void)
 {
   /* MCPER: P7=0,P6=0,P5=0,P4=0,P3=0,P2=0,P1=0,P0=0 */
   setReg8(MCPER, 0x00U);               /* Disable MC module */ 
-  /* MCCTL0: ??=0,MCPRE1=0,MCPRE0=0,MCSWAI=0,FAST=0,DITH=0,??=0,MCTOIF=1 */
-  setReg8(MCCTL0, 0x01U);               
-  /* MCCTL1: RECIRC=0,??=0,??=0,??=0,??=0,??=0,??=0,MCTOIE=0 */
-  setReg8(MCCTL1, 0x00U);               
-  /* MCCC0: MCOM1=0,MCOM0=0,MCAM1=0,MCAM0=1,??=0,??=0,CD1=0,CD0=0 */
-  setReg8(MCCC0, 0x10U);                
-  /* MCDC0: S=0,??=0,??=0,??=0,??=0,D10=0,D9=0,D8=0,D7=0,D6=0,D5=0,D4=0,D3=0,D2=0,D1=0,D0=0 */
-  setReg16(MCDC0, 0x00U);               
-  /* MCCC1: MCOM1=0,MCOM0=0,MCAM1=0,MCAM0=1,??=0,??=0,CD1=0,CD0=0 */
-  setReg8(MCCC1, 0x10U);                
-  /* MCDC1: S=0,??=0,??=0,??=0,??=0,D10=0,D9=0,D8=0,D7=0,D6=0,D5=0,D4=0,D3=0,D2=0,D1=0,D0=0 */
-  setReg16(MCDC1, 0x00U);               
+  /* MCCTL0: ??=0,MCPRE1=1,MCPRE0=1,MCSWAI=0,FAST=0,DITH=0,??=0,MCTOIF=1 */
+  setReg8(MCCTL0, 0x61U);               
+  /* MCCTL1: RECIRC=1,??=0,??=0,??=0,??=0,??=0,??=0,MCTOIE=1 */
+  setReg8(MCCTL1, 0x81U);               
+  /* MCCC0: MCOM1=1,MCOM0=1,MCAM1=0,MCAM0=1,??=0,??=0,CD1=0,CD0=0 */
+  setReg8(MCCC0, 0xD0U);                
+  /* MCDC0: S=1,??=0,??=0,??=0,??=0,D10=0,D9=1,D8=1,D7=1,D6=0,D5=0,D4=0,D3=0,D2=1,D1=0,D0=0 */
+  setReg16(MCDC0, 0x8384U);             
+  /* MCCC1: MCOM1=1,MCOM0=1,MCAM1=0,MCAM0=1,??=0,??=0,CD1=0,CD0=0 */
+  setReg8(MCCC1, 0xD0U);                
+  /* MCDC1: S=1,??=0,??=0,??=0,??=0,D10=0,D9=0,D8=0,D7=0,D6=0,D5=1,D4=1,D3=0,D2=0,D1=1,D0=0 */
+  setReg16(MCDC1, 0x8032U);             
   /* MCPER: ??=0,??=0,??=0,??=0,??=0,P10=0,P9=1,P8=1,P7=1,P6=1,P5=1,P4=0,P3=1,P2=0,P1=0,P0=0 */
   setReg16(MCPER, 0x03E8U);            /* Set period and enable the MC module */ 
 }

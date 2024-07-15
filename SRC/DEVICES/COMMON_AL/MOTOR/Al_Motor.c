@@ -517,7 +517,7 @@ static void Al_Motor_RunStateMgmt (Cdd_Motor_MotorNumberEnum motor_e)
    /* set direction and new target position */
    if (newPosition_b == (boolean)TRUE)
    {
-	  Cdd_Motor_SetSpeedFac(motor_e, CDD_MOTOR_SPEED_270DEG);
+	  Cdd_Motor_SetSpeedFac(motor_e, CDD_MOTOR_SPEED_1000US);
 	  Cdd_Motor_SetDirectionReq (motor_e, dir_e);
       Cdd_Motor_RunToPosition (motor_e, uSteps_ui32);
    }

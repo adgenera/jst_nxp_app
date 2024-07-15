@@ -47,7 +47,7 @@
       <group name="Internal peripherals">
         <list name="Shared BDM Module Settings" v="1">
           <group name="BDM Debug support">
-            <Stop_COP_and_RTI_in_Active_BDM_mode v="no" />
+            <Stop_COP_and_RTI_in_Active_BDM_mode v="yes" />
           </group>
         </list>
         <list name="Internal Peripherals IO" v="1">
@@ -122,9 +122,7 @@
       </group>
       <list name="Shared CPU interrupts - S12Z" v="1">
         <group name="CPU interrupts/resets">
-          <boolgroup name="Illegal Opcode" v="Enabled">
-            <Interrupt v="Vtrap" />
-          </boolgroup>
+          <boolgroup name="Illegal Opcode" v="Disabled" />
           <boolgroup name="Spare Opcode" v="Disabled" />
           <boolgroup name="SWI" v="Disabled" />
           <boolgroup name="LVD" v="Disabled" />
@@ -182,9 +180,7 @@
       <list name="SharedCpuEvents" v="1">
         <event name="OnReset" v="don&amp;apos;t generate code" />
         <event name="OnMachineException" v="don&amp;apos;t generate code" />
-        <event name="OnIllegalOpcode" v="generate code">
-          <Event_procedure_name v="Cpu_OnIllegalOpcode" />
-        </event>
+        <event name="OnIllegalOpcode" v="don&amp;apos;t generate code" />
         <event name="OnSpareOpcode" v="don&amp;apos;t generate code" />
         <event name="OnSwINT" v="don&amp;apos;t generate code" />
         <event name="OnSysCall" v="don&amp;apos;t generate code" />
@@ -267,12 +263,12 @@ asm(BGND);
       <Device v="MC" />
       <group name="Settings">
         <group name="Clock settings">
-          <Prescaler v="1" />
+          <Prescaler v="8" />
           <Period_counter v="1000" />
           <Dither_Feature_Enable v="no" />
-          <Period_time v="31.25 us" />
+          <Period_time v="250 us" />
         </group>
-        <Recirculation_mode v="High side transistors" />
+        <Recirculation_mode v="Low side transistors" />
         <Fast_mode v="no" />
         <Stop_in_wait_mode v="no" />
       </group>
@@ -281,14 +277,17 @@ asm(BGND);
           <PWM_channel_pair v="MC_motor0" />
           <boolgroup name="Coil 0" v="Enabled">
             <Channel_mode v="Left aligned" />
-            <Output_mode v="Half H-bridge, PWM on MnCxM" />
+            <Output_mode v="Dual full H-Bridge" />
             <PWM_conected v="PWM conected to minus pin" />
             <Channel_delay v="0" />
-            <Channel_duty v="0" />
-            <Motor_channel_period v="31.25 us" />
-            <Duty v="0 %" />
-            <Active_state_of_the_PWM_signal v="Low" />
-            <boolgroup name="Plus Pin" v="Disabled" />
+            <Channel_duty v="900" />
+            <Motor_channel_period v="250 us" />
+            <Duty v="90 %" />
+            <Active_state_of_the_PWM_signal v="High" />
+            <boolgroup name="Plus Pin" v="Enabled">
+              <Pin v="PU1_M0C0P_M0COSP" />
+              <Slew_rate_control_for_PU1 v="no" />
+            </boolgroup>
             <boolgroup name="Minus Pin" v="Enabled">
               <Pin v="PU0_IOC0_0_M0C0M_M0COSM" />
               <Slew_rate_control_for_PU0 v="no" />
@@ -296,14 +295,17 @@ asm(BGND);
           </boolgroup>
           <boolgroup name="Coil 1" v="Enabled">
             <Channel_mode v="Left aligned" />
-            <Output_mode v="Half H-bridge, PWM on MnCxM" />
+            <Output_mode v="Dual full H-Bridge" />
             <PWM_conected v="PWM conected to minus pin" />
             <Channel_delay v="0" />
-            <Channel_duty v="0" />
-            <Motor_channel_period v="31.25 us" />
-            <Duty v="0 %" />
-            <Active_state_of_the_PWM_signal v="Low" />
-            <boolgroup name="Plus Pin" v="Disabled" />
+            <Channel_duty v="50" />
+            <Motor_channel_period v="250 us" />
+            <Duty v="5 %" />
+            <Active_state_of_the_PWM_signal v="High" />
+            <boolgroup name="Plus Pin" v="Enabled">
+              <Pin v="PU3_M0C1P_M0SINP" />
+              <Slew_rate_control_for_PU3 v="no" />
+            </boolgroup>
             <boolgroup name="Minus Pin" v="Enabled">
               <Pin v="PU2_IOC0_1_M0C1M_M0SINM" />
               <Slew_rate_control_for_PU2 v="no" />
@@ -314,9 +316,9 @@ asm(BGND);
       <group name="Interrupts">
         <group name="MC interrupt">
           <Interrupt v="Vmctimovf" />
-          <MC_Interrupt_overflow v="Disabled" />
+          <MC_Interrupt_overflow v="Enabled" />
           <Priority_interrupt v="1" />
-          <ISR_name v="" />
+          <ISR_name v="MC_ISR" />
         </group>
       </group>
       <group name="Initialization">

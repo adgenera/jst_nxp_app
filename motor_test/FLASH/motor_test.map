@@ -23,25 +23,26 @@ Vectors_c.obj                           Model: MEDIUM1,       Lang: ANSI-C,     
 *********************************************************************************************
 STARTUP SECTION
 ---------------------------------------------------------------------------------------------
-Entry point: 0xFF8209 (_EntryPoint)
-_startupData is allocated at 0xFF8266 and uses 20 Bytes
+Entry point: 0xFF8203 (_EntryPoint)
+_startupData is allocated at 0xFF825D and uses 20 Bytes
 extern struct _tagStartup {
   unsigned nofZeroOut     0
-  _Copy    *toCopyDownBeg 0xFF83B7
+  _Copy    *toCopyDownBeg 0xFF83C0
   int      nofInitBodies  0
-  _Cpp     *initBodies    0xFF827A
+  _Cpp     *initBodies    0xFF8271
   int      nofFiniBodies  0
-  _Cpp     *finiBodies    0xFF827A
+  _Cpp     *finiBodies    0xFF8271
 } _startupData;
 
 *********************************************************************************************
 SECTION-ALLOCATION SECTION
 Section Name                    Size  Type     From       To       Segment
 ---------------------------------------------------------------------------------------------
-.init                            102     R   0xFF8200   0xFF8265   APP
-.startData                        27     R   0xFF8266   0xFF8280   APP
-.text                            310     R   0xFF8281   0xFF83B6   APP
-.copy                              4     R   0xFF83B7   0xFF83BA   APP
+.init                             93     R   0xFF8200   0xFF825C   APP
+.startData                        27     R   0xFF825D   0xFF8277   APP
+NON_BANKED                         6     R   0xFF8278   0xFF827D   APP
+.text                            322     R   0xFF827E   0xFF83BF   APP
+.copy                              4     R   0xFF83C0   0xFF83C3   APP
 .__absdata_ADC0RBP__               3   N/I      0x621      0x623   .absSeg0
 .__absdata_ADC0CBP__               3   N/I      0x61D      0x61F   .absSeg1
 .__absdata_ECCDPTR__               3   N/I      0x3C7      0x3C9   .absSeg2
@@ -504,7 +505,7 @@ Section Name                    Size  Type     From       To       Segment
 .stack                           512   R/W     0x1000     0x11FF   RAM
 
 Summary of section sizes per section type:
-READ_ONLY (R):         3AB (dec:      939)
+READ_ONLY (R):         3B4 (dec:      948)
 READ_WRITE (R/W):      200 (dec:      512)
 NO_INIT (N/I):         235 (dec:      565)
 
@@ -519,27 +520,26 @@ OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 MODULE:                 -- Events_c.obj --
 - PROCEDURES:
-     Cpu_OnIllegalOpcode                     FF8281       1       1       1   .text       
+     MC_ISR                                  FF8278       6       6       1   NON_BANKED  
 - VARIABLES:
 MODULE:                 -- main_c.obj --
 - PROCEDURES:
-     main                                    FF8282       6       6       1   .text       
+     main                                    FF827E       6       6       1   .text       
 - VARIABLES:
 MODULE:                 -- starts12z_c.obj --
 - PROCEDURES:
-     DoZeroOut                               FF8288      19      25       1   .text       
-     DoCopyDown                              FF82A1      15      21       1   .text       
-     _Startup                                FF82B6      10      16       1   .text       
+     DoZeroOut                               FF8284      19      25       1   .text       
+     DoCopyDown                              FF829D      15      21       1   .text       
+     _Startup                                FF82B2      10      16       1   .text       
 - VARIABLES:
-     _startupData                            FF8266       A      10       3   .startData  
+     _startupData                            FF825D       A      10       3   .startData  
 - LABELS:
      __SEG_END_SSTACK                          1200       0       0       1               
 MODULE:                 -- Cpu_c.obj --
 - PROCEDURES:
      Cpu_Interrupt                           FF8200       3       3     122   .init       
-     Cpu_IllegalOpcode                       FF8203       6       6       1   .init       
-     _EntryPoint                             FF8209      5D      93       1   .init       
-     PE_low_level_init                       FF82C6      D3     211       1   .text       
+     _EntryPoint                             FF8203      5A      90       1   .init       
+     PE_low_level_init                       FF82C2      DB     219       1   .text       
 - VARIABLES:
 MODULE:                 -- IO_Map_c.obj --
 - PROCEDURES:
@@ -1003,7 +1003,7 @@ MODULE:                 -- IO_Map_c.obj --
      _INT_CFADDR                                 17       1       1       0   .__absdata__INT_CFADDR__
 MODULE:                 -- MC_c.obj --
 - PROCEDURES:
-     MC_Init                                 FF8399      1E      30       1   .text       
+     MC_Init                                 FF839D      23      35       1   .text       
 - VARIABLES:
 MODULE:                 -- Vectors_c.obj --
 - PROCEDURES:
@@ -1015,12 +1015,12 @@ MODULE:                 -- Vectors_c.obj --
 MODULE STATISTIC
   Name                                      Data   Code  Const
 ---------------------------------------------------------------------------------------------
-  Events_c.obj                                 0      1      0
+  Events_c.obj                                 0      6      0
   main_c.obj                                   0      6      0
   starts12z_c.obj                              0     62      0
-  Cpu_c.obj                                    0    313      0
+  Cpu_c.obj                                    0    312      0
   IO_Map_c.obj                               565      0      0
-  MC_c.obj                                     0     30      0
+  MC_c.obj                                     0     35      0
   Vectors_c.obj                                0      0    496
   other                                      512     27      4
 
@@ -1028,10 +1028,11 @@ MODULE STATISTIC
 SECTION USE IN OBJECT-ALLOCATION SECTION
 ---------------------------------------------------------------------------------------------
 SECTION: ".text"
-  Cpu_OnIllegalOpcode main DoZeroOut DoCopyDown _Startup PE_low_level_init 
-  MC_Init 
+  main DoZeroOut DoCopyDown _Startup PE_low_level_init MC_Init 
 SECTION: ".init"
-  Cpu_Interrupt Cpu_IllegalOpcode _EntryPoint 
+  Cpu_Interrupt _EntryPoint 
+SECTION: "NON_BANKED"
+  MC_ISR 
 SECTION: ".__absdata_ADC0RBP__"
   ADC0RBP 
 SECTION: ".__absdata_ADC0CBP__"
@@ -2414,27 +2415,30 @@ OBJECT LIST SORTED BY ADDRESS
      _SSG0DCNT                                  B12       1       1       0   .__absdata__SSG0DCNT__
      _InterruptVectorTable                   FF8010     1EC     492       0   .__absdata__InterruptVectorTable__
      Cpu_Interrupt                           FF8200       3       3     122   .init       
-     Cpu_IllegalOpcode                       FF8203       6       6       1   .init       
-     _EntryPoint                             FF8209      5D      93       1   .init       
-     Cpu_OnIllegalOpcode                     FF8281       1       1       1   .text       
-     main                                    FF8282       6       6       1   .text       
-     DoZeroOut                               FF8288      19      25       1   .text       
-     DoCopyDown                              FF82A1      15      21       1   .text       
-     _Startup                                FF82B6      10      16       1   .text       
-     PE_low_level_init                       FF82C6      D3     211       1   .text       
-     MC_Init                                 FF8399      1E      30       1   .text       
+     _EntryPoint                             FF8203      5A      90       1   .init       
+     MC_ISR                                  FF8278       6       6       1   NON_BANKED  
+     main                                    FF827E       6       6       1   .text       
+     DoZeroOut                               FF8284      19      25       1   .text       
+     DoCopyDown                              FF829D      15      21       1   .text       
+     _Startup                                FF82B2      10      16       1   .text       
+     PE_low_level_init                       FF82C2      DB     219       1   .text       
+     MC_Init                                 FF839D      23      35       1   .text       
      _ResetVectorTable                       FFE7FC       4       4       0   .__absdata__ResetVectorTable__
 
 *********************************************************************************************
 UNUSED-OBJECTS SECTION
 ---------------------------------------------------------------------------------------------
 NOT USED PROCEDURES
+Events_c.obj:
+  Cpu_OnIllegalOpcode 
 Cpu_c.obj:
   Cpu_Delay100US 
 NOT USED VARIABLES
 Events_c.obj:
-  .dwarf_type.void .dwarf.Cpu_OnIllegalOpcode .dwarf_line.Cpu_OnIllegalOpcode 
-  .dwarf_frame.Cpu_OnIllegalOpcode .dwarf_pubnames.Cpu_OnIllegalOpcode 
+  .dwarf_type.void .dwarf.MC_ISR .dwarf.Cpu_OnIllegalOpcode .dwarf_line.MC_ISR 
+  .dwarf_line.Cpu_OnIllegalOpcode .dwarf_frame.MC_ISR 
+  .dwarf_frame.Cpu_OnIllegalOpcode .dwarf_pubnames.MC_ISR 
+  .dwarf_pubnames.Cpu_OnIllegalOpcode .dwarf_aranges.MC_ISR 
   .dwarf_aranges.Cpu_OnIllegalOpcode 
 main_c.obj:
   .dwarf_type.void .dwarf.main .dwarf_line.main .dwarf_frame.main 
@@ -2451,19 +2455,17 @@ starts12z_c.obj:
   .dwarf_aranges.DoCopyDown .dwarf_aranges._Startup 
 Cpu_c.obj:
   .dwarf.CCR_reg .dwarf_type.void .dwarf_type.unsigned char 
-  .dwarf.Cpu_Interrupt .dwarf.Cpu_IllegalOpcode .dwarf.Cpu_Delay100US 
-  .dwarf._EntryPoint .dwarf.PE_low_level_init .dwarf_loc.PE_low_level_init 
-  .dwarf_line.Cpu_Interrupt .dwarf_line.Cpu_IllegalOpcode 
-  .dwarf_line.Cpu_Delay100US .dwarf_line._EntryPoint 
+  .dwarf.Cpu_Interrupt .dwarf.Cpu_Delay100US .dwarf._EntryPoint 
+  .dwarf.PE_low_level_init .dwarf_loc.PE_low_level_init 
+  .dwarf_line.Cpu_Interrupt .dwarf_line.Cpu_Delay100US .dwarf_line._EntryPoint 
   .dwarf_line.PE_low_level_init .dwarf_frame.Cpu_Interrupt 
-  .dwarf_frame.Cpu_IllegalOpcode .dwarf_frame.Cpu_Delay100US 
-  .dwarf_frame._EntryPoint .dwarf_frame.PE_low_level_init 
-  .dwarf_pubnames.CCR_reg .dwarf_pubnames.Cpu_Interrupt 
-  .dwarf_pubnames.Cpu_IllegalOpcode .dwarf_pubnames.Cpu_Delay100US 
+  .dwarf_frame.Cpu_Delay100US .dwarf_frame._EntryPoint 
+  .dwarf_frame.PE_low_level_init .dwarf_pubnames.CCR_reg 
+  .dwarf_pubnames.Cpu_Interrupt .dwarf_pubnames.Cpu_Delay100US 
   .dwarf_pubnames._EntryPoint .dwarf_pubnames.PE_low_level_init 
   .dwarf_aranges.CCR_reg .dwarf_aranges.Cpu_Interrupt 
-  .dwarf_aranges.Cpu_IllegalOpcode .dwarf_aranges.Cpu_Delay100US 
-  .dwarf_aranges._EntryPoint .dwarf_aranges.PE_low_level_init CCR_reg 
+  .dwarf_aranges.Cpu_Delay100US .dwarf_aranges._EntryPoint 
+  .dwarf_aranges.PE_low_level_init CCR_reg 
 IO_Map_c.obj:
   .dwarf.ADC0RBP .dwarf.ADC0CBP .dwarf.ECCDPTR .dwarf.DBGDA .dwarf.DBGCA 
   .dwarf.DBGBA .dwarf.DBGAA .dwarf.MMCPC .dwarf._ADC0CMD .dwarf._PARTID 
@@ -3430,15 +3432,14 @@ Vectors_c.obj:
 *********************************************************************************************
 COPYDOWN SECTION
 ---------------------------------------------------------------------------------------------
-------- ROM-ADDRESS: 0xFF83B7 ---- SIZE       4 ---
+------- ROM-ADDRESS: 0xFF83C0 ---- SIZE       4 ---
 Filling bytes inserted
  00000000
 
 *********************************************************************************************
 OBJECT-DEPENDENCIES SECTION
 ---------------------------------------------------------------------------------------------
-_InterruptVectorTable     USES Cpu_Interrupt Cpu_IllegalOpcode 
-Cpu_IllegalOpcode         USES Cpu_OnIllegalOpcode 
+_InterruptVectorTable     USES Cpu_Interrupt MC_ISR 
 _EntryPoint               USES _Startup 
 main                      USES PE_low_level_init 
 DoZeroOut                 USES _startupData 
@@ -3472,10 +3473,8 @@ DEPENDENCY TREE
  | 
  +- Cpu_Interrupt       
  |    
- +- Cpu_IllegalOpcode   
-    | 
-    +- Cpu_OnIllegalOpcode 
-         
+ +- MC_ISR              
+      
  _ResetVectorTable   
  | 
  +- _EntryPoint          (see above)
@@ -3486,6 +3485,6 @@ STATISTIC SECTION
 
 ExeFile:
 --------
-Number of blocks to be downloaded: 6
-Total size of all blocks to be downloaded: 939
+Number of blocks to be downloaded: 7
+Total size of all blocks to be downloaded: 948
 

@@ -127,3 +127,22 @@ uint16 IIc_Get_KBI_Kompass_Peilung_MM(void)
    return (IIc_KBI_Kompass_Peilung_MM_ui16);
 }
 
+/**
+* \brief Getter Function for Signal _KBI_Kompass_Peilung
+*
+* \return Value of Signal _KBI_Kompass_Peilung
+*/
+void IIc_Set_KBI_Kompass_Peilung_HHSS(void)
+{
+   IIc_KBI_Kompass_Peilung_HHSS_ui16 += 500;
+}
+
+/**
+* \brief Getter Function for Signal _KBI_Kompass_Peilung
+*
+* \return Value of Signal _KBI_Kompass_Peilung
+*/
+void IIc_Set_KBI_Kompass_Peilung_MM(void)
+{
+   IIc_KBI_Kompass_Peilung_MM_ui16 += 500;
+}

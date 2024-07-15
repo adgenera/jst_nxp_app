@@ -6,7 +6,7 @@
 **     Component   : Init_MC
 **     Version     : Component 01.038, Driver 01.03, CPU db: 3.00.000
 **     Compiler    : CodeWarrior HCS12Z C Compiler
-**     Date/Time   : 2024-07-15, 13:32, # CodeGen: 1
+**     Date/Time   : 2024-07-15, 14:37, # CodeGen: 17
 **     Abstract    :
 **          This file implements the Motor Controller (MC) module initialization
 **          according to the Peripheral Initialization Component settings, and defines
@@ -15,20 +15,20 @@
 **          Component name                                 : MC
 **          Device                                         : MC
 **          Settings                                       : 
-**            Recirculation mode                           : High side transistors
+**            Recirculation mode                           : Low side transistors
 **            Fast mode                                    : no
 **            Dither Feature Enable                        : no
 **            Clock settings                               : 
-**              Prescaler                                  : 1
+**              Prescaler                                  : 8
 **              Period counter                             : 1000
-**              Period time                                : 31.25 us
+**              Period time                                : 250 us
 **          Motors                                         : 1
 **          Stop in wait mode                              : no
 **          Interrupts                                     : 
 **            Interrupt                                    : Vmctimovf
-**            MC Interrupt overflow enable                 : Disabled
+**            MC Interrupt overflow enable                 : Enabled
 **            Priority interrupt                           : 1
-**            ISR name                                     : 
+**            ISR name                                     : MC_ISR
 **          Initialization                                 : 
 **            Call Init method                             : yes
 **     Contents    :
@@ -110,6 +110,15 @@ void MC_Init(void);
 ** ===================================================================
 */
 
+/*
+** ===================================================================
+** The interrupt service routine must be implemented by user in one
+** of the user modules (see MC.c file for more information).
+** ===================================================================
+*/
+#pragma CODE_SEG __NEAR_SEG NON_BANKED
+__interrupt void MC_ISR(void);
+#pragma CODE_SEG DEFAULT
 /* END MC. */
 
 #endif

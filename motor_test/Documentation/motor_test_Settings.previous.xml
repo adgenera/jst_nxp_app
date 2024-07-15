@@ -2,12 +2,12 @@
 <PE_PROJECT_SETTINGS_DOCUMENTATION>
   <PE_product_version v="version 10.3 for Freescale Microcontrollers" />
   <PE_core_version v="Processor Expert Version 0509" />
-  <CPU_Bean name="Cpu" type="MC9S12ZVHL64_144">
+  <CPU_Bean name="Cpu" type="MC9S12ZVHL64_100">
     <Enabled v="Y" />
     <Properties>
       <Component_name v="Cpu" />
       <Clock_generator v="CPMU" />
-      <CPU_type v="MC9S12ZVHL32CLQ" />
+      <CPU_type v="MC9S12ZVHL32CLL" />
       <list name="Shared clock settings" v="1">
         <group name="Clock settings">
           <group name="Internal clock">
@@ -27,11 +27,11 @@
         <group name="Internal resource mapping">
           <group name="Interrupt/Reset vector table">
             <group name="Reset vector table">
-              <Address v="16777212" />
+              <Address v="16771068" />
               <Size v="4" />
             </group>
             <group name="Interrupt vector table">
-              <Address v="16776720" />
+              <Address v="16744464" />
               <Size v="492" />
               <Init_IVBR_register v="yes" />
             </group>
@@ -47,7 +47,7 @@
       <group name="Internal peripherals">
         <list name="Shared BDM Module Settings" v="1">
           <group name="BDM Debug support">
-            <Stop_COP_and_RTI_in_Active_BDM_mode v="no" />
+            <Stop_COP_and_RTI_in_Active_BDM_mode v="yes" />
           </group>
         </list>
         <list name="Internal Peripherals IO" v="1">
@@ -55,6 +55,12 @@
             <list name="Shared Unused I/O" v="1">
               <enumgroup name="Initialize unused I/O pins" v="No initialization">
                 <EmptySection_DummyValue />
+              </enumgroup>
+            </list>
+            <list name="Shared Unbonded I/O" v="1">
+              <enumgroup name="Initialize not-bonded I/O pins" v="Output">
+                <Pull_resistor v="no initialization" />
+                <Output_value v="no initialization" />
               </enumgroup>
             </list>
             <group name="PORT U">
@@ -138,12 +144,12 @@
         <group name="Enabled speed modes">
           <boolgroup name="High speed mode" v="Enabled">
             <High_speed_clock v="Internal Clock" />
-            <Internal_bus_clock v="6.250000000000" />
+            <Internal_bus_clock v="32" />
             <boolgroup name="PLL clock" v="Enabled">
               <Reference_divider v="Auto select" />
               <PLL_multiplication_factor v="Auto select" />
               <PLL_post_divider v="Auto select" />
-              <VCO_clock_frequency__MHz_ v="50" />
+              <VCO_clock_frequency__MHz_ v="64" />
               <Frequency_Modulation v="FM off" />
             </boolgroup>
           </boolgroup>
@@ -162,7 +168,7 @@
         <DisableInt v="generate code" />
         <SetWaitMode v="generate code" />
         <SetStopMode v="generate code" />
-        <Delay100US v="don&amp;apos;t generate code" />
+        <Delay100US v="generate code" />
         <SetIPL v="don&amp;apos;t generate code" />
         <GetLowVoltageFlag v="don&amp;apos;t generate code" />
         <GetPllLockStatusFlag v="don&amp;apos;t generate code" />
@@ -216,7 +222,7 @@ asm(BGND);
         </enumgroup>
         <group name="Memory segments">
           <Set_default_memory_segments v="Click to set default &amp;gt;" />
-          <list name="ROM/RAM segments" v="3">
+          <list name="ROM/RAM segments" v="5">
             <boolgroup name="Segment0" v="Enabled">
               <Name v="RAM" />
               <Qualifier v="READ_WRITE" />
@@ -229,11 +235,13 @@ asm(BGND);
               <Const_data_overlapping v="overlapping not specified" />
             </boolgroup>
             <boolgroup name="Segment1" v="Disabled" />
-            <boolgroup name="Segment2" v="Enabled">
-              <Name v="ROM" />
+            <boolgroup name="Segment2" v="Disabled" />
+            <boolgroup name="Segment3" v="Disabled" />
+            <boolgroup name="Segment4" v="Enabled">
+              <Name v="APP" />
               <Qualifier v="READ_ONLY" />
-              <Address v="16744448" />
-              <Size v="32256" />
+              <Address v="16744960" />
+              <Size v="26107" />
               <boolgroup name="Relocation" v="Disabled" />
               <boolgroup name="Align" v="Disabled" />
               <boolgroup name="Fill pattern" v="Disabled" />
@@ -248,5 +256,81 @@ asm(BGND);
       </boolgroup>
     </CompilerProperties>
   </CPU_Bean>
+  <Bean name="MC" type="Init_MC">
+    <Enabled v="Y" />
+    <Properties>
+      <Component_name v="MC" />
+      <Device v="MC" />
+      <group name="Settings">
+        <group name="Clock settings">
+          <Prescaler v="8" />
+          <Period_counter v="1000" />
+          <Dither_Feature_Enable v="no" />
+          <Period_time v="250 us" />
+        </group>
+        <Recirculation_mode v="High side transistors" />
+        <Fast_mode v="no" />
+        <Stop_in_wait_mode v="no" />
+      </group>
+      <list name="Motors" v="1">
+        <group name="Motor0">
+          <PWM_channel_pair v="MC_motor0" />
+          <boolgroup name="Coil 0" v="Enabled">
+            <Channel_mode v="Left aligned" />
+            <Output_mode v="Dual full H-Bridge" />
+            <PWM_conected v="PWM conected to minus pin" />
+            <Channel_delay v="0" />
+            <Channel_duty v="900" />
+            <Motor_channel_period v="250 us" />
+            <Duty v="90 %" />
+            <Active_state_of_the_PWM_signal v="Low" />
+            <boolgroup name="Plus Pin" v="Enabled">
+              <Pin v="PU1_M0C0P_M0COSP" />
+              <Slew_rate_control_for_PU1 v="no" />
+            </boolgroup>
+            <boolgroup name="Minus Pin" v="Enabled">
+              <Pin v="PU0_IOC0_0_M0C0M_M0COSM" />
+              <Slew_rate_control_for_PU0 v="no" />
+            </boolgroup>
+          </boolgroup>
+          <boolgroup name="Coil 1" v="Enabled">
+            <Channel_mode v="Left aligned" />
+            <Output_mode v="Dual full H-Bridge" />
+            <PWM_conected v="PWM conected to minus pin" />
+            <Channel_delay v="0" />
+            <Channel_duty v="50" />
+            <Motor_channel_period v="250 us" />
+            <Duty v="5 %" />
+            <Active_state_of_the_PWM_signal v="Low" />
+            <boolgroup name="Plus Pin" v="Enabled">
+              <Pin v="PU3_M0C1P_M0SINP" />
+              <Slew_rate_control_for_PU3 v="no" />
+            </boolgroup>
+            <boolgroup name="Minus Pin" v="Enabled">
+              <Pin v="PU2_IOC0_1_M0C1M_M0SINM" />
+              <Slew_rate_control_for_PU2 v="no" />
+            </boolgroup>
+          </boolgroup>
+        </group>
+      </list>
+      <group name="Interrupts">
+        <group name="MC interrupt">
+          <Interrupt v="Vmctimovf" />
+          <MC_Interrupt_overflow v="Enabled" />
+          <Priority_interrupt v="1" />
+          <ISR_name v="MC_ISR" />
+        </group>
+      </group>
+      <group name="Initialization">
+        <Call_Init_method v="yes" />
+      </group>
+    </Properties>
+    <Methods>
+      <Init v="generate code" />
+    </Methods>
+    <Events>
+      <EmptySection_DummyValue />
+    </Events>
+  </Bean>
 </PE_PROJECT_SETTINGS_DOCUMENTATION>
 

@@ -1,19 +1,18 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_MCAL.lib'
 Unit name            size     from       to
 API_c.obj            3064      101     3165
-Dio_PBcfg_c.obj      1864    86725    88589
-Dio_c.obj            8216    78509    86725
+Dio_PBcfg_c.obj      1864    82293    84157
+Dio_c.obj            8216    74077    82293
 Events_c.obj        12432     3165    15597
-Gpt_PBcfg_c.obj      3400    54573    57973
-Gpt_c.obj           12368    42205    54573
-IIC0_c.obj          19168    88589   107757
-Mcu_c.obj            5848    36357    42205
-Mtr_c.obj           16432    62077    78509
-Port_c.obj           4104    57973    62077
-Reg_Map_c.obj        4432    15597    20029
-Timer_c.obj          7120    20029    27149
-Wdg_c.obj            3848    32509    36357
-starts12z_c.obj      5360    27149    32509
+Gpt_PBcfg_c.obj      3400    50141    53541
+Gpt_c.obj           12368    37773    50141
+IIC0_c.obj          19168    84157   103325
+Mcu_c.obj            5848    31925    37773
+Mtr_c.obj           16432    57645    74077
+Port_c.obj           4104    53541    57645
+Timer_c.obj          7120    15597    22717
+Wdg_c.obj            3848    28077    31925
+starts12z_c.obj      5360    22717    28077
 
 EXPORTED OBJECTS
 API_Init                                      F   (API_c.obj)
@@ -87,9 +86,6 @@ Wdg_Clear                                     F   (Wdg_c.obj)
 Wdg_Init                                      F   (Wdg_c.obj)
 Wdg_Trigger                                   I   (Events_c.obj)
 Wdg_Trigger                                   F   (Wdg_c.obj)
-_CPMUARMCOP                                   O   (Reg_Map_c.obj)
-_CPMUCLKS                                     O   (Reg_Map_c.obj)
-_CPMUCOP                                      O   (Reg_Map_c.obj)
 _Startup                                      F   (starts12z_c.obj)
 __SEG_END_SSTACK                              I   (starts12z_c.obj)
 _startupData                                  O   (starts12z_c.obj)

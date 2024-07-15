@@ -7,7 +7,7 @@
 **     Version     : Component 01.066, Driver 02.08, CPU db: 3.00.000
 **     Datasheet   : Rev. 1.02 01/2014
 **     Compiler    : CodeWarrior HCS12Z C Compiler
-**     Date/Time   : 2024-07-15, 13:32, # CodeGen: 1
+**     Date/Time   : 2024-07-15, 14:27, # CodeGen: 15
 **     Abstract    :
 **         This component "MC9S12ZVHL64_100" implements properties, methods,
 **         and events of the CPU.
@@ -96,21 +96,6 @@ ISR(Cpu_Interrupt)
   /*lint -restore Enable MISRA rule (1.1) checking. */
 }
 
-
-/*
-** ===================================================================
-**     Method      :  Cpu_IllegalOpcode (component MC9S12ZVHL64_100)
-**
-**     Description :
-**         This interrupt is called after unimplemented instruction 
-**         execution.
-**         This method is internal. It is used by Processor Expert only.
-** ===================================================================
-*/
-ISR(Cpu_IllegalOpcode)
-{
-  Cpu_OnIllegalOpcode();               /* invoke an user interrupt */
-}
 
 /*
 ** ===================================================================
@@ -284,8 +269,8 @@ void _EntryPoint(void)
   }
   /* CPMUPROT: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,PROT=0 */
   setReg8(CPMUPROT, 0x00U);            /* Enable protection of clock configuration registers */ 
-  /* CPMUCOP: RSBCK=0,WRTMASK=1 */
-  clrSetReg8Bits(CPMUCOP, 0x40U, 0x20U); 
+  /* CPMUCOP: RSBCK=1,WRTMASK=1 */
+  setReg8Bits(CPMUCOP, 0x60U);          
   /* CPMUHTCTL: ??=0,??=0,VSEL=0,??=0,HTE=0,HTDS=0,HTIE=0,HTIF=0 */
   setReg8(CPMUHTCTL, 0x00U);            
   /* CPMUVREGCTL: ??=0,??=0,??=0,??=0,??=0,??=0,EXTXON=0,INTXON=1 */
@@ -316,6 +301,10 @@ void PE_low_level_init(void)
   #ifdef PEX_RTOS_INIT
     PEX_RTOS_INIT();                   /* Initialization of the selected RTOS. Macro is defined by the RTOS component. */
   #endif
+  /* Int. priority initialization */
+  /*                                        No. Address Pri XGATE Name                 Description */
+  setReg8(INT_CFADDR, 0x18U);           
+  setReg8(INT_CFDATA6, 0x01U);         /*  0x1E  0x00FF8078   1   no   ivVmctimovf          used by PE */ 
   /* Common initialization of the CPU registers */
   /* CPMUINT: LOCKIE=0,OSCIE=0 */
   clrReg8Bits(CPMUINT, 0x12U);          
