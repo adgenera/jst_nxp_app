@@ -1,6 +1,6 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib'
 Unit name                                       size     from       to
-./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     80256      122    80378
+./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     81392      122    81514
 
 EXPORTED OBJECTS
 Cdd_Motor_Cfg_as                                         I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
@@ -23,6 +23,7 @@ Cdd_Motor_Init                                           F   (./COMMON_BSW/HAL/C
 Cdd_Motor_ReachedFinalPosition                           F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_RunDistance                                    F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_RunDistanceFullSteps                           F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
+Cdd_Motor_RunMotorISR                                    F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_RunMotorISR_HHSS                               F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_RunMotorISR_MM                                 F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_RunToFullStepPosition                          F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)

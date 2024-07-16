@@ -134,7 +134,11 @@ uint16 IIc_Get_KBI_Kompass_Peilung_MM(void)
 */
 void IIc_Set_KBI_Kompass_Peilung_HHSS(void)
 {
-   IIc_KBI_Kompass_Peilung_HHSS_ui16 += 60;
+   IIc_KBI_Kompass_Peilung_HHSS_ui16 += 900;
+   
+   if (IIc_KBI_Kompass_Peilung_HHSS_ui16 > 3600) {
+	   IIc_KBI_Kompass_Peilung_HHSS_ui16 -= 3600;
+         }
 }
 
 /**
@@ -144,7 +148,7 @@ void IIc_Set_KBI_Kompass_Peilung_HHSS(void)
 */
 void IIc_Set_KBI_Kompass_Peilung_MM(void)
 {
-   IIc_KBI_Kompass_Peilung_MM_ui16 += 60;
+   IIc_KBI_Kompass_Peilung_MM_ui16 += 900;
    
    if (IIc_KBI_Kompass_Peilung_MM_ui16 > 3600) {
 	   IIc_KBI_Kompass_Peilung_MM_ui16 -= 3600;
