@@ -78,29 +78,31 @@ void main (void)
 	/* Initialize external Peripherals */
 	    /* WDG is initialized separately **************************************** */
 	//#if ! ((defined DEBUG_WATCHDOG_DISABLE) && (DEBUG_WATCHDOG_DISABLE == 1))
-	    Wdg_Init((uint8)DEVICE_TYPE);
+		//Wdg_Init((uint8)DEVICE_TYPE);
 	//#endif
 	API_Init();
 	/* Enable all interrupts */
 	ENABLE_ALL_INTERRUPTS(); /*lint !e960 */	
-	
+		
 	/* infinite loop */
 	for (;;)
 	{			
+		Ecum_MainFunction();
   		if (ms) {
-  			if(1000 % ms_counter) {
+  			//if((ms_counter % 17) == 0) {
+  			if((ms_counter % 1000) == 0) {
   				IIc_Set_KBI_Kompass_Peilung_HHSS();
+  				//IIc_Set_KBI_Kompass_Peilung_MM();
   			}
-  			if(2000 % ms_counter) {
-  				IIc_Set_KBI_Kompass_Peilung_HHSS();
-  				IIc_Set_KBI_Kompass_Peilung_MM();
-  				ms_counter = 0;
+  			if((ms_counter % 2000) == 0) {
+  			  //IIc_Set_KBI_Kompass_Peilung_HHSS();
+  			  IIc_Set_KBI_Kompass_Peilung_MM();
+  			  ms_counter = 0;
   			}
   			//WDog1_Clear();
-  			Wdg_Clear();
+  			//Wdg_Clear();
   			//APP_FSM();
   			/* Call ECUM MainFunction */
-  			Ecum_MainFunction();
   			ms = FALSE;	
   			ms_counter++;
   		}

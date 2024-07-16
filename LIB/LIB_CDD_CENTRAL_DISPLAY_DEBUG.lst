@@ -1,6 +1,6 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib'
 Unit name                                       size     from       to
-./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     80304      122    80426
+./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     80256      122    80378
 
 EXPORTED OBJECTS
 Cdd_Motor_Cfg_as                                         I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)

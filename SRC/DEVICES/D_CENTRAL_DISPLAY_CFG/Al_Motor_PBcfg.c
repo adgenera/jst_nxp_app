@@ -33,12 +33,11 @@
 boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Motor_DirectionEnum * destDir_e, uint32 * destUSteps_ui32)
 {
 	uint32 targetPos_ui32;
-	static uint32 oldTargetPos_ui32 = 0uL;
+	static uint32 oldTargetPos_ui32[CDD_MOTOR_MTR_NR_SIZE] = {0uL};
 	uint32 difference_ui32;
 
 	uint16 KBI_Kompass_Peilung_ui16;
 	
-	static uint8 secLast_ui8 = (uint8) 0u;
 	uint32 inputPos_ui32;
 	uint32 posCurrent_ui32;
 	boolean newPosition_b = FALSE;
@@ -70,13 +69,13 @@ boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Moto
 //   #endif
 
    /* Determine the difference to the old target position */
-   if (targetPos_ui32 > oldTargetPos_ui32)
+   if (targetPos_ui32 > oldTargetPos_ui32[motor_e])
    {
-      difference_ui32 = targetPos_ui32 - oldTargetPos_ui32;
+      difference_ui32 = targetPos_ui32 - oldTargetPos_ui32[motor_e];
    }
-   else if (targetPos_ui32 < oldTargetPos_ui32)
+   else if (targetPos_ui32 < oldTargetPos_ui32[motor_e])
    {
-      difference_ui32 = oldTargetPos_ui32 - targetPos_ui32;
+      difference_ui32 = oldTargetPos_ui32[motor_e] - targetPos_ui32;
    }
    else
    {
@@ -94,12 +93,12 @@ boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Moto
    if (difference_ui32 > AL_MOTORPOS_EPSILON)
    {
       /* Store target position */
-      oldTargetPos_ui32 = targetPos_ui32;
+      oldTargetPos_ui32[motor_e] = targetPos_ui32;
    }
    else
    {
       /* Restore target position */
-      targetPos_ui32 = oldTargetPos_ui32;
+      targetPos_ui32 = oldTargetPos_ui32[motor_e];
    }
 
    /* Apply zero offset to target position */

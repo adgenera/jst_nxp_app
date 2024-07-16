@@ -44,8 +44,8 @@ static uint8 IICBuffer[9];             /* Input buffer I2C commmunication */
 /* ------------------------------------------------------------------- config internal data (const) --------------------------------------------------------- */
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-static volatile uint16 IIc_KBI_Kompass_Peilung_HHSS_ui16;
-static volatile uint16 IIc_KBI_Kompass_Peilung_MM_ui16;
+static volatile uint16 IIc_KBI_Kompass_Peilung_HHSS_ui16 = 0;
+static volatile uint16 IIc_KBI_Kompass_Peilung_MM_ui16 = 0;
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /* ------------------------------------------------------------------- global data (Userdata) (const) ------------------------------------------------------- */
@@ -134,7 +134,7 @@ uint16 IIc_Get_KBI_Kompass_Peilung_MM(void)
 */
 void IIc_Set_KBI_Kompass_Peilung_HHSS(void)
 {
-   IIc_KBI_Kompass_Peilung_HHSS_ui16 += 500;
+   IIc_KBI_Kompass_Peilung_HHSS_ui16 += 60;
 }
 
 /**
@@ -144,5 +144,9 @@ void IIc_Set_KBI_Kompass_Peilung_HHSS(void)
 */
 void IIc_Set_KBI_Kompass_Peilung_MM(void)
 {
-   IIc_KBI_Kompass_Peilung_MM_ui16 += 500;
+   IIc_KBI_Kompass_Peilung_MM_ui16 += 60;
+   
+   if (IIc_KBI_Kompass_Peilung_MM_ui16 > 3600) {
+	   IIc_KBI_Kompass_Peilung_MM_ui16 -= 3600;
+      }
 }

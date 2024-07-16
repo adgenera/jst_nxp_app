@@ -13,7 +13,7 @@
 /* ***************************** # defines ********************************** */
 
 #define AL_MOTORPOS_GEAR_FACTOR                       1u //CENTRAL DISPLAY
-#define AL_MOTORPOS_GEAR_DIVISOR                      2u //CENTRAL DISPLAY
+#define AL_MOTORPOS_GEAR_DIVISOR                      20u //CENTRAL DISPLAY
 
 #define AL_MOTORPOS_MICROSTEPS_PER_ROUND_UI16         ((uint16)(CDD_MOTOR_RNDS_THRSH_UI16 * CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE))
 #define AL_MOTORPOS_HALF_FULLROUND_MICROSTEPS_UI16    (AL_MOTORPOS_MICROSTEPS_PER_ROUND_UI16 >> (uint16)1u) /*AL_MOTORPOS_MICROSTEPS_PER_ROUND_UI16 / 2 */

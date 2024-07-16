@@ -168,7 +168,7 @@ static void Cdd_Motor_TriggerMotorStart (const Cdd_Motor_MotorNumberEnum motor_e
    /* ****************************************************************************************** *
     * ****************************************************************************************** */
    /* Trigger Motor once to initiate Isr Controlling */
-   if ((Cdd_Motor_ReachedFinalPosition (motor_e) != (uint8) TRUE) && (cdd_motor_Data_as[motor_e].isrIsRunning_ui8 != (uint8) TRUE))
+   if ((Cdd_Motor_ReachedFinalPosition (motor_e) != (uint8) TRUE))// && (cdd_motor_Data_as[motor_e].isrIsRunning_ui8 != (uint8) TRUE))
    {      
       if(motor_e == CDD_MOTOR_MTR_HHSS){    	  
     	  update_Mtr_TimerCounterOverflowInterruptFp(&Cdd_Motor_RunMotorISR_HHSS);
