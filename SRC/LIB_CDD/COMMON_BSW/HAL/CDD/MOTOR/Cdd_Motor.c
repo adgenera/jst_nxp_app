@@ -2501,13 +2501,16 @@ uint8 Cdd_Motor_ZD_GetDistanceZeroPositionAndLeftWindowEdge(const Cdd_Motor_Moto
 
 void Cdd_Motor_RunMotorISR(void)
 {
-	if (TRUE == cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8)
-	{
-		bool disable_HHSS_b = Cdd_Motor_RunMotorISR_HHSS();
+    bool disable_HHSS_b = FALSE;
+    bool disable_MM_b = FALSE;
+
+    if (TRUE == cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8)
+    {
+		disable_HHSS_b = Cdd_Motor_RunMotorISR_HHSS();
 	}
 	if (TRUE == cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrIsRunning_ui8)
 	{
-        bool disable_MM_b = Cdd_Motor_RunMotorISR_MM();
+        disable_MM_b = Cdd_Motor_RunMotorISR_MM();
     }
     if (disable_MM_b && disable_HHSS_b)
     {
