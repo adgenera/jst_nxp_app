@@ -163,7 +163,10 @@ static void Cdd_Motor_TriggerMotorStart(const Cdd_Motor_MotorNumberEnum motor_e)
 	/* ****************************************************************************************** *
 	 * ****************************************************************************************** */
 	/* Trigger Motor once to initiate Isr Controlling */
-	if ((Cdd_Motor_ReachedFinalPosition(motor_e) != (uint8)TRUE)) // && (cdd_motor_Data_as[motor_e].isrIsRunning_ui8 != (uint8) TRUE))
+    // TODO allora capisco che questo serve ad inizializzare i motori e deve essere chiamata all'avvio o dopo uno stop PWM.
+    // Ma non deve essere fatta due volte vista che setta una callback comune. 
+    
+	if ((Cdd_Motor_ReachedFinalPosition(motor_e) != (uint8)TRUE)) && (cdd_motor_Data_as[motor_e].isrIsRunning_ui8 != (uint8) TRUE)
 	{
 		update_Mtr_TimerCounterOverflowInterruptFp(&Cdd_Motor_RunMotorISR);
 		if (motor_e == CDD_MOTOR_MTR_HHSS)
@@ -176,8 +179,10 @@ static void Cdd_Motor_TriggerMotorStart(const Cdd_Motor_MotorNumberEnum motor_e)
 			CDD_MOTOR_ENABLE_COIL0_MTR2();
 			CDD_MOTOR_ENABLE_COIL1_MTR2();
 		}
+        // TODO questo potrebbe essere scritto una volta sola inizialmente e poi abilitato o disabilitato
+        update_Mtr_TimerCounterOverflowInterruptFp(&Cdd_Motor_RunMotorISR);
 
-		cdd_motor_Data_as[motor_e].isrIsRunning_ui8 = (uint8)TRUE;
+        cdd_motor_Data_as[motor_e].isrIsRunning_ui8 = (uint8)TRUE;
 		(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_ENABLE);
 	}
 	else
@@ -2498,397 +2503,24 @@ void Cdd_Motor_RunMotorISR(void)
 {
 	if (TRUE == cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8)
 	{
-		Cdd_Motor_RunMotorISR_HHSS();
+		bool disable_HHSS_b = Cdd_Motor_RunMotorISR_HHSS();
 	}
 	if (TRUE == cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrIsRunning_ui8)
 	{
-		Cdd_Motor_RunMotorISR_MM();
-	}
+        bool disable_MM_b = Cdd_Motor_RunMotorISR_MM();
+    }
+    if (disable_MM_b && disable_HHSS_b)
+    {
+        (void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
+    }
 }
 
 void Cdd_Motor_RunMotorISR_HHSS(void)
 {
-#if defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 1)
-	/* ISR MTR HHSS */
-	static uint16 isrUsedNbrOfPeriodes_ui16_HHSS;
-
-	/* isrPeriodeCounter_ui16 is used to count each expired period.
-	 * If the nbr of needed periods is reached a new pwm duty cycle/pwm pattern is set
-	 */
-	if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
-	{
-		cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16--; /* c:5,5 */
-	}
-	else if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 == (uint16)1u) /* c:7,5 */
-	{
-		cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16--; /* c:5,5 */
-
-		/* change step mode if necessary */
-		// TODO: Be aware of speed ramp
-		if ((cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u))
-		{
-			Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_HHSS);
-		}
-		else
-		{
-			; /* do nothing */
-		}
-
-		if (cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].enabled_ui8 == (uint8)TRUE)
-		{
-			uint8 bitpos_ui8;
-
-			/* Set POS_CHECK_M1 pin as output */
-			bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO1_BITPOS_UI8); /*lint !e923 */
-
-			/* DEBOUNCING FOR ZERO DETECTION */
-			/* Detect rising edge / active zero window */
-			if (bitpos_ui8 != (uint8)0U)
-			{
-				if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-				{
-					if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 == (uint8)0U)
-					{
-						/* store second detection point */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].dir_e;
-					}
-
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8++;
-				}
-				else
-				{
-					/* Reset falling counter if threshold reached */
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 = (uint8)0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e)
-					{
-						/* store first detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.pos_ui32 = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.dir_e = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.valid_ui8 = (uint8)TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
-					}
-					else
-					{
-						; /* do nothing */
-					}
-				}
-			}
-			/* Detect failing edge / NO zero window */
-			else
-			{
-				if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-				{
-					if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 == (uint8)0U)
-					{
-						/* store second detection point */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-					}
-
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8++;
-				}
-				else
-				{
-					/* Reset rising counter if threshold reached */
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 = (uint8)0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e)
-					{
-						/* store second detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.pos_ui32 = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.dir_e = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.valid_ui8 = (uint8)TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
-					}
-					else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e)
-					{
-						/* Leave initial state ONLY if zero window is INactive */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
-					}
-					else
-					{
-						; /* do nothing */
-					}
-				}
-			}
-		}
-	}
-	else /* c:7,5 */
-	{
-		/* Nbr of periods is reached. Reset counter and apply new speed/period threshold */
-		isrUsedNbrOfPeriodes_ui16_HHSS = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrTargetNbrOfPeriodes_ui16;						/* c:5,5 */
-		cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 = (uint16)isrUsedNbrOfPeriodes_ui16_HHSS;					/* c:4 */
-		if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 == cdd_motor_Data_as[CDD_MOTOR_MTR_MM].trgtPosLevel1_ui32) /* c:8,5 */
-		{
-			cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8 = (uint8)FALSE;
-			/* Disable Motor Interrupt, function will not be called again */
-			(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
-
-			/* change step mode if necessary */
-			if ((cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u))
-			{
-				Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_HHSS);
-			}
-			else
-			{
-				; /* do nothing */
-			}
-		}
-		else
-		{
-			if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].dir_e == CDD_MOTOR_DIR_FORWARD) /* c:5,5 */
-			{
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 >= (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_HHSS].uStepMaximumAbsolute_ui32 - (uint32)1uL)) /* c:6 */
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 = 0; /* c:4 */
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32++; /* c:5,5 */
-				}
-
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 >= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u))
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 = (uint8)0u;
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8++;
-				}
-			}
-			else
-			{
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 == (uint32)0uL)
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 = (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_HHSS].uStepMaximumAbsolute_ui32 - (uint32)1uL);
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32--;
-				}
-
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u)
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 = (uint8)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u;
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8--;
-				}
-			}
-#if 0
-		  coilIndex_ui16 = (uint16) (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 % (uint32) CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE); /* c:13 */
-#endif
-			/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
-			DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-			/* Set duty cycle ********************************************************************* */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_0_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8]); /* c:8 */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_1_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8]); /* c:8 */
-			ENABLE_ALL_INTERRUPTS();																																   /*lint !e960 */
-																																									   /* END OF UNINTERRUPTABLE SEQUENCE *************************************** */
-		} /* 4 */
-	}
-
-#elif defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 2)
-
-	/* isrPeriodeCounter_ui16 is used to count each expired period.
-	 * If the nbr of needed periods is reached a new pwm duty cycle/pwm pattern is set
-	 */
-
-	/* ISR MTR MM */
-	if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
-	{
-		cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16--; /* c:5,5 */
-	}
-	else if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 == (uint16)1u) /* c:7,5 */
-	{
-		cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16--; /* c:5,5 */
-
-		/* change step mode if necessary */
-		// TODO: Be aware of speed ramp
-		if ((cdd_motor_Data_as[CDD_MOTOR_MTR_MM].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u))
-		{
-			Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_MM);
-		}
-		else
-		{
-			; /* do nothing */
-		}
-
-		if (cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].enabled_ui8 == (uint8)TRUE)
-		{
-			uint8 bitpos_ui8;
-
-			/* Set POS_CHECK_M1 pin as output */
-			bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO2_BITPOS_UI8); /*lint !e923 */
-
-			/* DEBOUNCING FOR ZERO DETECTION */
-			/* Detect rising edge / active zero window */
-			if (bitpos_ui8 != (uint8)0U)
-			{
-				if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-				{
-					if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 == (uint8)0U)
-					{
-						/* store second detection point */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-					}
-
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8++;
-				}
-				else
-				{
-					/* Reset falling counter if threshold reached */
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 = (uint8)0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e)
-					{
-						/* store first detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.pos_ui32 = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.dir_e = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.valid_ui8 = (uint8)TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
-					}
-					else
-					{
-						; /* do nothing */
-					}
-				}
-			}
-			/* Detect failing edge / NO zero window */
-			else
-			{
-				if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-				{
-					if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 == (uint8)0U)
-					{
-						/* store second detection point */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-					}
-
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8++;
-				}
-				else
-				{
-					/* Reset rising counter if threshold reached */
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 = (uint8)0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e)
-					{
-						/* store second detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.pos_ui32 = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.dir_e = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.valid_ui8 = (uint8)TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
-					}
-					else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e)
-					{
-						/* Leave initial state ONLY if zero window is INactive */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
-					}
-					else
-					{
-						; /* do nothing */
-					}
-				}
-			}
-		}
-	}
-	else /* c:7,5 */
-	{
-		static uint16 isrUsedNbrOfPeriodes_ui16_HHSS; // TODO CHANGE POSITION AFTER UPPER ENDIF
-
-		/* Nbr of periods is reached. Reset counter and apply new speed/period threshold */
-		isrUsedNbrOfPeriodes_ui16_HHSS = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrTargetNbrOfPeriodes_ui16; /* c:5,5 */
-
-		cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 = (uint16)isrUsedNbrOfPeriodes_ui16_HHSS; /* c:4 */
-
-		if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 == cdd_motor_Data_as[CDD_MOTOR_MTR_MM].trgtPosLevel1_ui32) /* c:8,5 */
-		{
-			cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrIsRunning_ui8 = (uint8)FALSE;
-			/* Disable Motor Interrupt, function will not be called again */
-			(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
-
-			/* change step mode if necessary */
-			if ((cdd_motor_Data_as[CDD_MOTOR_MTR_MM].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u))
-			{
-				Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_MM);
-			}
-			else
-			{
-				; /* do nothing */
-			}
-		}
-		else
-		{
-			if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e == CDD_MOTOR_DIR_FORWARD) /* c:5,5 */
-			{
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 >= (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_MM].uStepMaximumAbsolute_ui32 - (uint32)1uL)) /* c:6 */
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 = 0; /* c:4 */
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32++; /* c:5,5 */
-				}
-
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 >= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u))
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 = (uint8)0u;
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8++;
-				}
-			}
-			else
-			{
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 == (uint32)0uL)
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 = (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_MM].uStepMaximumAbsolute_ui32 - (uint32)1uL);
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32--;
-				}
-
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u)
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 = (uint8)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u;
-				}
-				else
-				{
-					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8--;
-				}
-			}
-#if 0
-		  coilIndex_ui16 = (uint16) (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 % (uint32) CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE); /* c:13 */
-#endif
-			/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
-			DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-			/* Set duty cycle ********************************************************************* */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_0_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]); /* c:8 */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_1_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]); /* c:8 */
-			ENABLE_ALL_INTERRUPTS();																															   /*lint !e960 */
-																																								   /* END OF UNINTERRUPTABLE SEQUENCE *************************************** */
-		} /* 4 */
-	}
-
-#else
-	/* ISR MTR HHSS */
-	if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
+    static uint16 isrUsedNbrOfPeriodes_ui16_HHSS; // TODO viene sempre scritta perchè è statica
+    bool disableMotorInterrupt_b = FALSE;    
+    /* ISR MTR HHSS */
+    if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
 	{
 		cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16--; /* c:5,5 */
 	}
@@ -2994,7 +2626,7 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 	}
 	else /* c:7,5 */
 	{
-		static uint16 isrUsedNbrOfPeriodes_ui16_HHSS; // TODO CHANGE POSITION AFTER UPPER ENDIF
+	
 
 		/* Nbr of periods is reached. Reset counter and apply new speed/period threshold */
 		isrUsedNbrOfPeriodes_ui16_HHSS = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrTargetNbrOfPeriodes_ui16; /* c:5,5 */
@@ -3005,11 +2637,11 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 		{
 			cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8 = (uint8)FALSE;
 			/* Disable Motor Interrupt, function will not be called again */
-			(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
+            disableMotorInterrupt_b = TRUE;
 
-			/* change step mode if necessary */
-			if ((cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u))
-			{
+                /* change step mode if necessary */
+                if ((cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u))
+            {
 				Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_HHSS);
 			}
 			else
@@ -3059,412 +2691,34 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 					cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8--;
 				}
 			}
-#if 0
-		  coilIndex_ui16 = (uint16) (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 % (uint32) CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE); /* c:13 */
-#endif
 			/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
 			DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
 			/* Set duty cycle ********************************************************************* */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_0_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8]); /* c:8 */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_1_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8]); /* c:8 */
+            uint8 index = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8;
+			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_0_ui16[index]); /* c:8 */
+			CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_1_ui16[index]); /* c:8 */
 			ENABLE_ALL_INTERRUPTS();																																   /*lint !e960 */
 																																									   /* END OF UNINTERRUPTABLE SEQUENCE *************************************** */
 		} /* 4 */
 	}
+    return disableMotorInterrupt_b;
 }
 
-#endif
+
 
 #pragma opt_lifetimes off
 #pragma optimize_for_size on
 
-	void Cdd_Motor_RunMotorISR_MM(void)
+bool Cdd_Motor_RunMotorISR_MM(void)
 	{
-#if defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 1)
-		/* ISR MTR HHSS */
-		static uint16 isrUsedNbrOfPeriodes_ui16_MM;
-
-		/* isrPeriodeCounter_ui16 is used to count each expired period.
-		 * If the nbr of needed periods is reached a new pwm duty cycle/pwm pattern is set
-		 */
-		if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
-		{
-			cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16--; /* c:5,5 */
-		}
-		else if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 == (uint16)1u) /* c:7,5 */
-		{
-			cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16--; /* c:5,5 */
-
-			/* change step mode if necessary */
-			// TODO: Be aware of speed ramp
-			if ((cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u))
-			{
-				Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_HHSS);
-			}
-			else
-			{
-				; /* do nothing */
-			}
-
-			if (cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].enabled_ui8 == (uint8)TRUE)
-			{
-				uint8 bitpos_ui8;
-
-				/* Set POS_CHECK_M1 pin as output */
-				bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO1_BITPOS_UI8); /*lint !e923 */
-
-				/* DEBOUNCING FOR ZERO DETECTION */
-				/* Detect rising edge / active zero window */
-				if (bitpos_ui8 != (uint8)0U)
-				{
-					if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-					{
-						if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 == (uint8)0U)
-						{
-							/* store second detection point */
-							cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32;
-							/* store direction */
-							cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].dir_e;
-						}
-
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8++;
-					}
-					else
-					{
-						/* Reset falling counter if threshold reached */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 = (uint8)0U;
-
-						if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e)
-						{
-							/* store first detection information */
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.pos_ui32 = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.dir_e = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].dir_e;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.valid_ui8 = (uint8)TRUE;
-
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
-						}
-						else
-						{
-							; /* do nothing */
-						}
-					}
-				}
-				/* Detect failing edge / NO zero window */
-				else
-				{
-					if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-					{
-						if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 == (uint8)0U)
-						{
-							/* store second detection point */
-							cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-							/* store direction */
-							cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-						}
-
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8++;
-					}
-					else
-					{
-						/* Reset rising counter if threshold reached */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 = (uint8)0U;
-
-						if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e)
-						{
-							/* store second detection information */
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.pos_ui32 = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.dir_e = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].dir_e;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.valid_ui8 = (uint8)TRUE;
-
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
-						}
-						else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e)
-						{
-							/* Leave initial state ONLY if zero window is INactive */
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
-						}
-						else
-						{
-							; /* do nothing */
-						}
-					}
-				}
-			}
-		}
-		else /* c:7,5 */
-		{
-			/* Nbr of periods is reached. Reset counter and apply new speed/period threshold */
-			isrUsedNbrOfPeriodes_ui16_HHSS = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrTargetNbrOfPeriodes_ui16;						/* c:5,5 */
-			cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 = (uint16)isrUsedNbrOfPeriodes_ui16_HHSS;					/* c:4 */
-			if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 == cdd_motor_Data_as[CDD_MOTOR_MTR_MM].trgtPosLevel1_ui32) /* c:8,5 */
-			{
-				cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8 = (uint8)FALSE;
-				/* Disable Motor Interrupt, function will not be called again */
-				(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
-
-				/* change step mode if necessary */
-				if ((cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u))
-				{
-					Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_HHSS);
-				}
-				else
-				{
-					; /* do nothing */
-				}
-			}
-			else
-			{
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].dir_e == CDD_MOTOR_DIR_FORWARD) /* c:5,5 */
-				{
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 >= (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_HHSS].uStepMaximumAbsolute_ui32 - (uint32)1uL)) /* c:6 */
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 = 0; /* c:4 */
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32++; /* c:5,5 */
-					}
-
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 >= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u))
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 = (uint8)0u;
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8++;
-					}
-				}
-				else
-				{
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 == (uint32)0uL)
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32 = (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_HHSS].uStepMaximumAbsolute_ui32 - (uint32)1uL);
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32--;
-					}
-
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 == (uint8)0u)
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8 = (uint8)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u;
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8--;
-					}
-				}
-#if 0
-		  coilIndex_ui16 = (uint16) (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 % (uint32) CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE); /* c:13 */
-#endif
-				/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
-				DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-				/* Set duty cycle ********************************************************************* */
-				CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_0_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8]); /* c:8 */
-				CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_1_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8]); /* c:8 */
-				ENABLE_ALL_INTERRUPTS();																																   /*lint !e960 */
-																																										   /* END OF UNINTERRUPTABLE SEQUENCE *************************************** */
-			} /* 4 */
-		}
-
-#elif defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 2)
-
-		/* isrPeriodeCounter_ui16 is used to count each expired period.
-		 * If the nbr of needed periods is reached a new pwm duty cycle/pwm pattern is set
-		 */
-
-		/* ISR MTR MM */
-		if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
-		{
-			cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16--; /* c:5,5 */
-		}
-		else if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 == (uint16)1u) /* c:7,5 */
-		{
-			cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16--; /* c:5,5 */
-
-			/* change step mode if necessary */
-			// TODO: Be aware of speed ramp
-			if ((cdd_motor_Data_as[CDD_MOTOR_MTR_MM].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u))
-			{
-				Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_MM);
-			}
-			else
-			{
-				; /* do nothing */
-			}
-
-			if (cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].enabled_ui8 == (uint8)TRUE)
-			{
-				uint8 bitpos_ui8;
-
-				/* Set POS_CHECK_M1 pin as output */
-				bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO2_BITPOS_UI8); /*lint !e923 */
-
-				/* DEBOUNCING FOR ZERO DETECTION */
-				/* Detect rising edge / active zero window */
-				if (bitpos_ui8 != (uint8)0U)
-				{
-					if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-					{
-						if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 == (uint8)0U)
-						{
-							/* store second detection point */
-							cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-							/* store direction */
-							cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-						}
-
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8++;
-					}
-					else
-					{
-						/* Reset falling counter if threshold reached */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 = (uint8)0U;
-
-						if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e)
-						{
-							/* store first detection information */
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.pos_ui32 = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.dir_e = cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].dir_e;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.valid_ui8 = (uint8)TRUE;
-
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
-						}
-						else
-						{
-							; /* do nothing */
-						}
-					}
-				}
-				/* Detect failing edge / NO zero window */
-				else
-				{
-					if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 <= cdd_motor_debouncingThresh_ui8)
-					{
-						if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 == (uint8)0U)
-						{
-							/* store second detection point */
-							cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32 = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-							/* store direction */
-							cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].dir_e = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-						}
-
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8++;
-					}
-					else
-					{
-						/* Reset rising counter if threshold reached */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 = (uint8)0U;
-
-						if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e)
-						{
-							/* store second detection information */
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.pos_ui32 = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.dir_e = cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].dir_e;
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.valid_ui8 = (uint8)TRUE;
-
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
-						}
-						else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL == cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e)
-						{
-							/* Leave initial state ONLY if zero window is INactive */
-							cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e = CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
-						}
-						else
-						{
-							; /* do nothing */
-						}
-					}
-				}
-			}
-		}
-		else /* c:7,5 */
-		{
-			static uint16 isrUsedNbrOfPeriodes_ui16_HHSS; // TODO CHANGE POSITION AFTER UPPER ENDIF
-
-			/* Nbr of periods is reached. Reset counter and apply new speed/period threshold */
-			isrUsedNbrOfPeriodes_ui16_HHSS = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrTargetNbrOfPeriodes_ui16; /* c:5,5 */
-
-			cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 = (uint16)isrUsedNbrOfPeriodes_ui16_HHSS; /* c:4 */
-
-			if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 == cdd_motor_Data_as[CDD_MOTOR_MTR_MM].trgtPosLevel1_ui32) /* c:8,5 */
-			{
-				cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrIsRunning_ui8 = (uint8)FALSE;
-				/* Disable Motor Interrupt, function will not be called again */
-				(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
-
-				/* change step mode if necessary */
-				if ((cdd_motor_Data_as[CDD_MOTOR_MTR_MM].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u))
-				{
-					Cdd_Motor_ChangeStepModeConfig(CDD_MOTOR_MTR_MM);
-				}
-				else
-				{
-					; /* do nothing */
-				}
-			}
-			else
-			{
-				if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e == CDD_MOTOR_DIR_FORWARD) /* c:5,5 */
-				{
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 >= (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_MM].uStepMaximumAbsolute_ui32 - (uint32)1uL)) /* c:6 */
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 = 0; /* c:4 */
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32++; /* c:5,5 */
-					}
-
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 >= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u))
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 = (uint8)0u;
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8++;
-					}
-				}
-				else
-				{
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 == (uint32)0uL)
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 = (Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_MM].uStepMaximumAbsolute_ui32 - (uint32)1uL);
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32--;
-					}
-
-					if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u)
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 = (uint8)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE - (uint8)1u;
-					}
-					else
-					{
-						cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8--;
-					}
-				}
-#if 0
-		  coilIndex_ui16 = (uint16) (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 % (uint32) CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE); /* c:13 */
-#endif
-				/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
-				DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-				/* Set duty cycle ********************************************************************* */
-				CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_0_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]); /* c:8 */
-				CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_1_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]); /* c:8 */
-				ENABLE_ALL_INTERRUPTS();																															   /*lint !e960 */
-																																									   /* END OF UNINTERRUPTABLE SEQUENCE *************************************** */
-			} /* 4 */
-		}
-
-#else
+    bool disableMotorInterrupt_b = FALSE;    
 	/* isrPeriodeCounter_ui16 is used to count each expired period.
 	 * If the nbr of needed periods is reached a new pwm duty cycle/pwm pattern is set
 	 */
 	/* ISR MTR MM */
+    static uint16 isrUsedNbrOfPeriodes_ui16_MM;                                 
 
-	if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
+    if (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
 	{
 		cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrPeriodeCounter_ui16--; /* c:5,5 */
 	}
@@ -3570,7 +2824,6 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 	}
 	else /* c:7,5 */
 	{
-		static uint16 isrUsedNbrOfPeriodes_ui16_MM; // TODO CHANGE POSITION AFTER UPPER ENDIF
 
 		/* Nbr of periods is reached. Reset counter and apply new speed/period threshold */
 		isrUsedNbrOfPeriodes_ui16_MM = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrTargetNbrOfPeriodes_ui16; /* c:5,5 */
@@ -3581,7 +2834,8 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 		{
 			cdd_motor_Data_as[CDD_MOTOR_MTR_MM].isrIsRunning_ui8 = (uint8)FALSE;
 			/* Disable Motor Interrupt, function will not be called again */
-			(void)Mtr_SetMotorInterrupt(MTR_CTRL_MCTOIE_DISABLE);
+			// TODO non può essere diabilitata da un motore altrimenti non funziona più per l'altro !!!
+            disableMotorInterrupt_b = TRUE;
 
 			/* change step mode if necessary */
 			if ((cdd_motor_Data_as[CDD_MOTOR_MTR_MM].stepModeChangeReq_e != CDD_MOTOR_STEPMODE_UNDEF) && (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8 == (uint8)0u))
@@ -3635,21 +2889,20 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 					cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8--;
 				}
 			}
-#if 0
-          coilIndex_ui16 = (uint16) (cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32 % (uint32) CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE); /* c:13 */
-#endif
 			/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
 			DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
 			/* Set duty cycle ********************************************************************* */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_0_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]); /* c:8 */
-			CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_1_ui16[cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]); /* c:8 */
+            unt8 index = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]
+			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_0_ui16[index]); /* c:8 */
+            CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_1_ui16[index]); /* c:8 */
 			ENABLE_ALL_INTERRUPTS();																															   /*lint !e960 */
 																																								   /* END OF UNINTERRUPTABLE SEQUENCE *************************************** */
 		} /* 4 */
 	}
+    return disableMotorInterrupt_b;
 }
 
-#endif
+
 
 #pragma opt_lifetimes off
 #pragma optimize_for_size on
