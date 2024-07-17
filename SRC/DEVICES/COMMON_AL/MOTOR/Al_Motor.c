@@ -539,7 +539,7 @@ static void Al_Motor_SleepStateMgmt (Cdd_Motor_MotorNumberEnum motor_e)
 {
 #if (DEVICE_TYPE == DEVICE_CENTRAL_DISPLAY)
    uint32 targetPos_ui32 = (uint32) 0uL;
-   boolean newPosition_b;
+   boolean newPosition_b = FALSE;
    Cdd_Motor_DirectionEnum dir_e = CDD_MOTOR_DIR_FORWARD;
 
    /* Calculate direction and new target position */
