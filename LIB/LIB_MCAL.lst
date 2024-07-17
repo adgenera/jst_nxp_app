@@ -1,18 +1,18 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_MCAL.lib'
 Unit name            size     from       to
 API_c.obj            3064      101     3165
-Dio_PBcfg_c.obj      1864    82293    84157
-Dio_c.obj            8216    74077    82293
-Events_c.obj        12432     3165    15597
-Gpt_PBcfg_c.obj      3400    50141    53541
-Gpt_c.obj           12368    37773    50141
-IIC0_c.obj          19168    84157   103325
-Mcu_c.obj            5848    31925    37773
-Mtr_c.obj           16432    57645    74077
-Port_c.obj           4104    53541    57645
-Timer_c.obj          7120    15597    22717
-Wdg_c.obj            3848    28077    31925
-starts12z_c.obj      5360    22717    28077
+Dio_PBcfg_c.obj      1864    82869    84733
+Dio_c.obj            8216    74653    82869
+Events_c.obj        13008     3165    16173
+Gpt_PBcfg_c.obj      3400    50717    54117
+Gpt_c.obj           12368    38349    50717
+IIC0_c.obj          19168    84733   103901
+Mcu_c.obj            5848    32501    38349
+Mtr_c.obj           16432    58221    74653
+Port_c.obj           4104    54117    58221
+Timer_c.obj          7120    16173    23293
+Wdg_c.obj            3848    28653    32501
+starts12z_c.obj      5360    23293    28653
 
 EXPORTED OBJECTS
 API_Init                                      F   (API_c.obj)
@@ -67,6 +67,8 @@ IIC0_SendBlock                                F   (IIC0_c.obj)
 IIC0_SendChar                                 F   (IIC0_c.obj)
 IIC0_SndRcvTemp                               I   (Events_c.obj)
 IIC0_SndRcvTemp                               O   (IIC0_c.obj)
+IIc_Set_KBI_Kompass_Peilung_HHSS              I   (Events_c.obj)
+IIc_Set_KBI_Kompass_Peilung_MM                I   (Events_c.obj)
 ISR_Periodic_IRQ_TIM0_1                       F   (Gpt_c.obj)
 InpBufferS                                    I   (Events_c.obj)
 InpBufferS                                    O   (IIC0_c.obj)

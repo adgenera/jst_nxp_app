@@ -105,7 +105,7 @@ void main (void)
 	{			
 		Ecum_MainFunction();
   		if (ms) 
-        {
+        {/*
                 if((ms_counter % 1000) == 0) 
                 {
                     IIc_Set_KBI_Kompass_Peilung_HHSS(MOVING_PATTERN[motor_index[0]]);                
@@ -118,7 +118,7 @@ void main (void)
                 }
 
   			  //ms_counter = 0;
-        
+        */
   			Wdg_Clear();
    			//APP_FSM();
   			/* Call ECUM MainFunction */

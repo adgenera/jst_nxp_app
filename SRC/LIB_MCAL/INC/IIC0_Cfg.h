@@ -14,21 +14,21 @@
  *+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 typedef union {
-  uint8 Byte;
-  struct {
-    uint8             :1;
-    uint8 ADR1        :1;                                       /* Slave Address Bit 1 */
-    uint8 ADR2        :1;                                       /* Slave Address Bit 2 */
-    uint8 ADR3        :1;                                       /* Slave Address Bit 3 */
-    uint8 ADR4        :1;                                       /* Slave Address Bit 4 */
-    uint8 ADR5        :1;                                       /* Slave Address Bit 5 */
-    uint8 ADR6        :1;                                       /* Slave Address Bit 6 */
-    uint8 ADR7        :1;                                       /* Slave Address Bit 7 */
-  } Bits;
-  struct {
-    uint8         :1;
-    uint8 grpADR_1 :7;
-  } MergedBits;
+	uint8 Byte;
+	struct {
+		uint8 :1;
+		uint8 ADR1 :1; /* Slave Address Bit 1 */
+		uint8 ADR2 :1; /* Slave Address Bit 2 */
+		uint8 ADR3 :1; /* Slave Address Bit 3 */
+		uint8 ADR4 :1; /* Slave Address Bit 4 */
+		uint8 ADR5 :1; /* Slave Address Bit 5 */
+		uint8 ADR6 :1; /* Slave Address Bit 6 */
+		uint8 ADR7 :1; /* Slave Address Bit 7 */
+	} Bits;
+	struct {
+		uint8 :1;
+		uint8 grpADR_1 :7;
+	} MergedBits;
 } IIC0IBADSTR;
 extern volatile IIC0IBADSTR _IIC0IBAD @0x000007C0;
 #define IIC0IBAD                        _IIC0IBAD.Byte
@@ -52,20 +52,19 @@ extern volatile IIC0IBADSTR _IIC0IBAD @0x000007C0;
 #define IIC0IBAD_ADR_1_MASK             0xFEU
 #define IIC0IBAD_ADR_1_BITNUM           0x01U
 
-
 /*** IIC0IBFD - IIC Frequency Divider Register; 0x000007C1 ***/
 typedef union {
-  uint8 Byte;
-  struct {
-    uint8 IBC0        :1;                                       /* I-Bus Clock Rate 0 */
-    uint8 IBC1        :1;                                       /* I-Bus Clock Rate 1 */
-    uint8 IBC2        :1;                                       /* I-Bus Clock Rate 2 */
-    uint8 IBC3        :1;                                       /* I-Bus Clock Rate 3 */
-    uint8 IBC4        :1;                                       /* I-Bus Clock Rate 4 */
-    uint8 IBC5        :1;                                       /* I-Bus Clock Rate 5 */
-    uint8 IBC6        :1;                                       /* I-Bus Clock Rate 6 */
-    uint8 IBC7        :1;                                       /* I-Bus Clock Rate 7 */
-  } Bits;
+	uint8 Byte;
+	struct {
+		uint8 IBC0 :1; /* I-Bus Clock Rate 0 */
+		uint8 IBC1 :1; /* I-Bus Clock Rate 1 */
+		uint8 IBC2 :1; /* I-Bus Clock Rate 2 */
+		uint8 IBC3 :1; /* I-Bus Clock Rate 3 */
+		uint8 IBC4 :1; /* I-Bus Clock Rate 4 */
+		uint8 IBC5 :1; /* I-Bus Clock Rate 5 */
+		uint8 IBC6 :1; /* I-Bus Clock Rate 6 */
+		uint8 IBC7 :1; /* I-Bus Clock Rate 7 */
+	} Bits;
 } IIC0IBFDSTR;
 extern volatile IIC0IBFDSTR _IIC0IBFD @0x000007C1;
 #define IIC0IBFD                        _IIC0IBFD.Byte
@@ -87,20 +86,19 @@ extern volatile IIC0IBFDSTR _IIC0IBFD @0x000007C1;
 #define IIC0IBFD_IBC6_MASK              0x40U
 #define IIC0IBFD_IBC7_MASK              0x80U
 
-
 /*** IIC0IBCR - IIC Control Register; 0x000007C2 ***/
 typedef union {
-  uint8 Byte;
-  struct {
-    uint8 IBSWAI      :1;                                       /* I-Bus Interface Stop in WAIT mode */
-    uint8             :1;
-    uint8 RSTA        :1;                                       /* Repeat Start */
-    uint8 TXAK        :1;                                       /* Transmit Acknowledge enable */
-    uint8 TX_RX       :1;                                       /* Transmit/Receive mode select bit */
-    uint8 MS_SL       :1;                                       /* Master/Slave mode select bit */
-    uint8 IBIE        :1;                                       /* I-Bus Interrupt Enable */
-    uint8 IBEN        :1;                                       /* I-Bus Enable */
-  } Bits;
+	uint8 Byte;
+	struct {
+		uint8 IBSWAI :1; /* I-Bus Interface Stop in WAIT mode */
+		uint8 :1;
+		uint8 RSTA :1; /* Repeat Start */
+		uint8 TXAK :1; /* Transmit Acknowledge enable */
+		uint8 TX_RX :1; /* Transmit/Receive mode select bit */
+		uint8 MS_SL :1; /* Master/Slave mode select bit */
+		uint8 IBIE :1; /* I-Bus Interrupt Enable */
+		uint8 IBEN :1; /* I-Bus Enable */
+	} Bits;
 } IIC0IBCRSTR;
 extern volatile IIC0IBCRSTR _IIC0IBCR @0x000007C2;
 #define IIC0IBCR                        _IIC0IBCR.Byte
@@ -120,20 +118,19 @@ extern volatile IIC0IBCRSTR _IIC0IBCR @0x000007C2;
 #define IIC0IBCR_IBIE_MASK              0x40U
 #define IIC0IBCR_IBEN_MASK              0x80U
 
-
 /*** IIC0IBSR - IIC Status Register; 0x000007C3 ***/
 typedef union {
-  uint8 Byte;
-  struct {
-    uint8 RXAK        :1;                                       /* Received Acknowledge */
-    uint8 IBIF        :1;                                       /* I-Bus Interrupt */
-    uint8 SRW         :1;                                       /* Slave Read/Write */
-    uint8             :1;
-    uint8 IBAL        :1;                                       /* Arbitration Lost */
-    uint8 IBB         :1;                                       /* Bus busy bit */
-    uint8 IAAS        :1;                                       /* Addressed as a slave bit */
-    uint8 TCF         :1;                                       /* Data transferring bit */
-  } Bits;
+	uint8 Byte;
+	struct {
+		uint8 RXAK :1; /* Received Acknowledge */
+		uint8 IBIF :1; /* I-Bus Interrupt */
+		uint8 SRW :1; /* Slave Read/Write */
+		uint8 :1;
+		uint8 IBAL :1; /* Arbitration Lost */
+		uint8 IBB :1; /* Bus busy bit */
+		uint8 IAAS :1; /* Addressed as a slave bit */
+		uint8 TCF :1; /* Data transferring bit */
+	} Bits;
 } IIC0IBSRSTR;
 extern volatile IIC0IBSRSTR _IIC0IBSR @0x000007C3;
 #define IIC0IBSR                        _IIC0IBSR.Byte
@@ -153,20 +150,19 @@ extern volatile IIC0IBSRSTR _IIC0IBSR @0x000007C3;
 #define IIC0IBSR_IAAS_MASK              0x40U
 #define IIC0IBSR_TCF_MASK               0x80U
 
-
 /*** IIC0IBDR - IIC Data I/O Register; 0x000007C4 ***/
 typedef union {
-  uint8 Byte;
-  struct {
-    uint8 D0          :1;                                       /* IIC Data Bit 0 */
-    uint8 D1          :1;                                       /* IIC Data Bit 1 */
-    uint8 D2          :1;                                       /* IIC Data Bit 2 */
-    uint8 D3          :1;                                       /* IIC Data Bit 3 */
-    uint8 D4          :1;                                       /* IIC Data Bit 4 */
-    uint8 D5          :1;                                       /* IIC Data Bit 5 */
-    uint8 D6          :1;                                       /* IIC Data Bit 6 */
-    uint8 D7          :1;                                       /* IIC Data Bit 7 */
-  } Bits;
+	uint8 Byte;
+	struct {
+		uint8 D0 :1; /* IIC Data Bit 0 */
+		uint8 D1 :1; /* IIC Data Bit 1 */
+		uint8 D2 :1; /* IIC Data Bit 2 */
+		uint8 D3 :1; /* IIC Data Bit 3 */
+		uint8 D4 :1; /* IIC Data Bit 4 */
+		uint8 D5 :1; /* IIC Data Bit 5 */
+		uint8 D6 :1; /* IIC Data Bit 6 */
+		uint8 D7 :1; /* IIC Data Bit 7 */
+	} Bits;
 } IIC0IBDRSTR;
 extern volatile IIC0IBDRSTR _IIC0IBDR @0x000007C4;
 #define IIC0IBDR                        _IIC0IBDR.Byte
@@ -188,28 +184,27 @@ extern volatile IIC0IBDRSTR _IIC0IBDR @0x000007C4;
 #define IIC0IBDR_D6_MASK                0x40U
 #define IIC0IBDR_D7_MASK                0x80U
 
-
 /*** IIC0IBCR2 - IIC Control Register 2; 0x000007C5 ***/
 typedef union {
-  uint8 Byte;
-  struct {
-    uint8 ADR8        :1;                                       /* Slave Address Bit 8 */
-    uint8 ADR9        :1;                                       /* Slave Address Bit 9 */
-    uint8 ADR10       :1;                                       /* Slave Address Bit 10 */
-    uint8             :1;
-    uint8             :1;
-    uint8             :1;
-    uint8 ADTYPE      :1;                                       /* Address Type */
-    uint8 GCEN        :1;                                       /* General Call Enable */
-  } Bits;
-  struct {
-    uint8 grpADR_8 :3;
-    uint8         :1;
-    uint8         :1;
-    uint8         :1;
-    uint8         :1;
-    uint8         :1;
-  } MergedBits;
+	uint8 Byte;
+	struct {
+		uint8 ADR8 :1; /* Slave Address Bit 8 */
+		uint8 ADR9 :1; /* Slave Address Bit 9 */
+		uint8 ADR10 :1; /* Slave Address Bit 10 */
+		uint8 :1;
+		uint8 :1;
+		uint8 :1;
+		uint8 ADTYPE :1; /* Address Type */
+		uint8 GCEN :1; /* General Call Enable */
+	} Bits;
+	struct {
+		uint8 grpADR_8 :3;
+		uint8 :1;
+		uint8 :1;
+		uint8 :1;
+		uint8 :1;
+		uint8 :1;
+	} MergedBits;
 } IIC0IBCR2STR;
 extern volatile IIC0IBCR2STR _IIC0IBCR2 @0x000007C5;
 #define IIC0IBCR2                       _IIC0IBCR2.Byte
@@ -274,248 +269,199 @@ extern volatile IIC0IBCR2STR _IIC0IBCR2 @0x000007C5;
  * Enums                                                                                                              *
  *+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-typedef enum
-{
-    NO_ERROR = 0x00,
-    MASTER_ERROR = 0x01,
-    SLAVE_ERROR = 0x02,
-    INCORRECT_PARAMS = 0xFE,
-    UNKNOWN_ERROR = 0xFF
+typedef enum {
+	NO_ERROR = 0x00,
+	MASTER_ERROR = 0x01,
+	SLAVE_ERROR = 0x02,
+	INCORRECT_PARAMS = 0xFE,
+	UNKNOWN_ERROR = 0xFF
 } STATES;
 
-typedef enum
-{
-    MOT1,
-    MOT2,
-    MOT3,
-    N_MOTORS
+typedef enum {
+	MOT1, MOT2, MOT3, N_MOTORS
 } MOTORS;
 
-typedef enum
-{
-    MCU2,
-    MCU3,
-    N_DRIVERS
+typedef enum {
+	MCU2, MCU3, N_DRIVERS
 } M_DRIVERS;
 
-typedef enum
-{
-    ERROR_REG = 0x00,
-    M1_TARGET_ALL = 0x1A,
-    M1_TARGET_POS_L = 0x1B,
-    M1_TARGET_POS_H = 0x1C,
-    M1_TARGET_SPEED_L = 0x1D,
-    M1_TARGET_SPEED_H = 0x1E,
-    M1_CTRL_REG = 0x1F,
-    M2_TARGET_ALL = 0x2A,
-    M2_TARGET_POS_L = 0x2B,
-    M2_TARGET_POS_H = 0x2C,
-    M2_TARGET_SPEED_L = 0x2D,
-    M2_TARGET_SPEED_H = 0x2E,
-    M2_CTRL_REG = 0x2F,
-    M3_TARGET_ALL = 0x3A,
-    M3_TARGET_POS_L = 0x3B,
-    M3_TARGET_POS_H = 0x3C,
-    M3_TARGET_SPEED_L = 0x3D,
-    M3_TARGET_SPEED_H = 0x3E,
-    M3_CTRL_REG = 0x3F,
-    M1_CUR_ALL = 0x4A,
-    M1_CUR_POS_L = 0x4B,
-    M1_CUR_POS_H = 0x4C,
-    M1_CUR_SPEED_L = 0x4D,
-    M1_CUR_SPEED_H = 0x4E,
-    M1_CUR_ACC_L = 0x4F,
-    M1_CUR_ACC_H = 0x50,
-    M2_CUR_ALL = 0x5A,
-    M2_CUR_POS_L = 0x5B,
-    M2_CUR_POS_H = 0x5C,
-    M2_CUR_SPEED_L = 0x5D,
-    M2_CUR_SPEED_H = 0x5E,
-    M2_CUR_ACC_L = 0x5F,
-    M2_CUR_ACC_H = 0x60,
-    M3_CUR_ALL = 0x6A,
-    M3_CUR_POS_L = 0x6B,
-    M3_CUR_POS_H = 0x6C,
-    M3_CUR_SPEED_L = 0x6D,
-    M3_CUR_SPEED_H = 0x6E,
-    M3_CUR_ACC_L = 0x6F,
-    M3_CUR_ACC_H = 0x70,
-    RESET = 0x7A
+typedef enum {
+	ERROR_REG = 0x00,
+	M1_TARGET_ALL = 0x1A,
+	M1_TARGET_POS_H = 0x1B,
+	M1_TARGET_POS_L = 0x1C,
+	M1_TARGET_SPEED_H = 0x1D,
+	M1_TARGET_SPEED_L = 0x1E,
+	M1_CTRL_REG = 0x1F,
+	M2_TARGET_ALL = 0x2A,
+	M2_TARGET_POS_H = 0x2B,
+	M2_TARGET_POS_L = 0x2C,
+	M2_TARGET_SPEED_H = 0x2D,
+	M2_TARGET_SPEED_L = 0x2E,
+	M2_CTRL_REG = 0x2F,
+	M1_CUR_ALL = 0x4A,
+	M1_CUR_POS_H = 0x4B,
+	M1_CUR_POS_L = 0x4C,
+	M1_CUR_SPEED_H = 0x4D,
+	M1_CUR_SPEED_L = 0x4E,
+	M1_CUR_ACC_H = 0x4F,
+	M1_CUR_ACC_L = 0x50,
+	M2_CUR_ALL = 0x5A,
+	M2_CUR_POS_H = 0x5B,
+	M2_CUR_POS_L = 0x5C,
+	M2_CUR_SPEED_H = 0x5D,
+	M2_CUR_SPEED_L = 0x5E,
+	M2_CUR_ACC_H = 0x5F,
+	M2_CUR_ACC_L = 0x60,
+
+	RESET = 0x7A
 } st_nxp_registers;
 
-typedef enum
-{
-    APP_SW_VERSION = 0x05,
-    APP_SW_NUMBER = 0x06,
-    MODULE_HW_VERSION = 0x07,
-    MODULE_HW_NUMBER = 0x08,
-    MODULE_BATCH_NUMBER = 0x09,
-    DIAG_KL30 = 0x10,
-    DIAG_TEMP = 0x11,
-    DIAG_RTC_HH = 0x12,
-    DIAG_RTC_MM = 0x13,
-    DIAG_RTC_SS = 0x14,
-    PARAM_I2C_ADDR = 0x70
+typedef enum {
+	APP_SW_VERSION = 0x05,
+	APP_SW_NUMBER = 0x06,
+	MODULE_HW_VERSION = 0x07,
+	MODULE_HW_NUMBER = 0x08,
+	MODULE_BATCH_NUMBER = 0x09,
+	DIAG_KL30 = 0x10,
+	DIAG_TEMP = 0x11,
+	DIAG_RTC_HH = 0x12,
+	DIAG_RTC_MM = 0x13,
+	DIAG_RTC_SS = 0x14,
+	PARAM_I2C_ADDR = 0x70
 } nxp_only_registers;
 
-typedef struct
-{
-    uint8 app_sw_version[2];
-    uint8 app_sw_number[11];
-    uint8 module_hw_version[1];
-    uint8 module_hw_number[11];
-    uint8 module_batch_number[15];
+typedef struct {
+	uint8 app_sw_version[2];
+	uint8 app_sw_number[11];
+	uint8 module_hw_version[1];
+	uint8 module_hw_number[11];
+	uint8 module_batch_number[15];
 } nxp_version;
 
-typedef struct
-{
-    uint8 diag_kl30;
-    uint8 diag_temp;
-    uint8 diag_rtc_hh;
-    uint8 diag_rtc_mm;
-    uint8 diag_rtc_sss;
+typedef struct {
+	uint8 diag_kl30;
+	uint8 diag_temp;
+	uint8 diag_rtc_hh;
+	uint8 diag_rtc_mm;
+	uint8 diag_rtc_sss;
 } nxp_diagnostic;
 
 // Define read request flags for MOT1
-typedef union
-{
-    struct
-    {
-        boolean current : 1;
-        boolean ctrl : 1;
-        boolean target : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean current :1;
+		boolean ctrl :1;
+		boolean target :1;
+	};
+	uint8 flags;
 } MOT1_ReadRequest;
 
 // Define write request flags for MOT1
-typedef union
-{
-    struct
-    {
-        boolean target : 1;
-        boolean ctrl : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean target :1;
+		boolean ctrl :1;
+	};
+	uint8 flags;
 } MOT1_WriteRequest;
 
 // Define read request flags for MOT2
-typedef union
-{
-    struct
-    {
-        boolean current : 1;
-        boolean ctrl : 1;
-        boolean target : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean current :1;
+		boolean ctrl :1;
+		boolean target :1;
+	};
+	uint8 flags;
 } MOT2_ReadRequest;
 
 // Define write request flags for MOT2
-typedef union
-{
-    struct
-    {
-        boolean target : 1;
-        boolean ctrl : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean target :1;
+		boolean ctrl :1;
+	};
+	uint8 flags;
 } MOT2_WriteRequest;
 
 // Define read request flags for MOT3
-typedef union
-{
-    struct
-    {
-        boolean current : 1;
-        boolean ctrl : 1;
-        boolean target : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean current :1;
+		boolean ctrl :1;
+		boolean target :1;
+	};
+	uint8 flags;
 } MOT3_ReadRequest;
 
 // Define write request flags for MOT3
-typedef union
-{
-    struct
-    {
-        boolean target : 1;
-        boolean ctrl : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean target :1;
+		boolean ctrl :1;
+	};
+	uint8 flags;
 } MOT3_WriteRequest;
 
 // Define read request flags for MOT4
-typedef union
-{
-    struct
-    {
-        boolean current : 1;
-        boolean ctrl : 1;
-        boolean target : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean current :1;
+		boolean ctrl :1;
+		boolean target :1;
+	};
+	uint8 flags;
 } MOT4_ReadRequest;
 
 // Define write request flags for MOT4
-typedef union
-{
-    struct
-    {
-        boolean target : 1;
-        boolean ctrl : 1;
-    };
-    uint8 flags;
+typedef union {
+	struct {
+		boolean target :1;
+		boolean ctrl :1;
+	};
+	uint8 flags;
 } MOT4_WriteRequest;
 
 // Define read request flags for MCU2
-typedef union
-{
-    struct
-    {
-        MOT1_ReadRequest mot1;
-        MOT2_ReadRequest mot2;
-    };
-    uint16 flags;
+typedef union {
+	struct {
+		MOT1_ReadRequest mot1;
+		MOT2_ReadRequest mot2;
+	};
+	uint16 flags;
 } MCU2_ReadRequest;
 
 // Define write request flags for MCU2
-typedef union
-{
-    struct
-    {
-        MOT1_WriteRequest mot1;
-        MOT2_WriteRequest mot2;
-    };
-    uint16 flags;
+typedef union {
+	struct {
+		MOT1_WriteRequest mot1;
+		MOT2_WriteRequest mot2;
+	};
+	uint16 flags;
 } MCU2_WriteRequest;
 
 // Define read request flags for MCU3
-typedef union
-{
-    struct
-    {
-        MOT3_ReadRequest mot3;
-        MOT4_ReadRequest mot4;
-    };
-    uint16 flags;
+typedef union {
+	struct {
+		MOT3_ReadRequest mot3;
+		MOT4_ReadRequest mot4;
+	};
+	uint16 flags;
 } MCU3_ReadRequest;
 
 // Define write request flags for MCU3
-typedef union
-{
-    struct
-    {
-        MOT3_WriteRequest mot3;
-        MOT4_WriteRequest mot4;
-    };
-    uint16 flags;
+typedef union {
+	struct {
+		MOT3_WriteRequest mot3;
+		MOT4_WriteRequest mot4;
+	};
+	uint16 flags;
 } MCU3_WriteRequest;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
  * Structs                                                                                                            *
  *+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
  * Function Prototypes                                                                                                *

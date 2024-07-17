@@ -1,18 +1,18 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_MCAL_DEBUG.lib'
 Unit name                                     size     from       to
 ./SRC/API_c.obj                               3064      107     3171
-./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj         19168    89219   108387
-./SRC/BSW_CS/MCAL/IO/DIO/Dio_PBcfg_c.obj      1864    87355    89219
-./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj            9136    78219    87355
-./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj           16784    61435    78219
-./SRC/BSW_CS/MCAL/IO/PORT/Port_c.obj          5088    56347    61435
-./SRC/BSW_CS/MCAL/MC/GPT/Gpt_PBcfg_c.obj      3400    52947    56347
-./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj           13376    39571    52947
-./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj            6816    32755    39571
-./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj            4256    28499    32755
-./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj        5776    22723    28499
-./SRC/Events_c.obj                           12432     3171    15603
-./SRC/Timer_c.obj                             7120    15603    22723
+./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj         19168    89875   109043
+./SRC/BSW_CS/MCAL/IO/DIO/Dio_PBcfg_c.obj      1864    88011    89875
+./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj            9136    78875    88011
+./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj           16784    62091    78875
+./SRC/BSW_CS/MCAL/IO/PORT/Port_c.obj          5088    57003    62091
+./SRC/BSW_CS/MCAL/MC/GPT/Gpt_PBcfg_c.obj      3400    53603    57003
+./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj           13376    40227    53603
+./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj            6816    33411    40227
+./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj            4256    29155    33411
+./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj        5776    23379    29155
+./SRC/Events_c.obj                           13088     3171    16259
+./SRC/Timer_c.obj                             7120    16259    23379
 
 EXPORTED OBJECTS
 API_Init                                      F   (./SRC/API_c.obj)
@@ -69,6 +69,8 @@ IIC0_SendBlock                                I   (./SRC/Events_c.obj)
 IIC0_SendChar                                 F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_SndRcvTemp                               O   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_SndRcvTemp                               I   (./SRC/Events_c.obj)
+IIc_Set_KBI_Kompass_Peilung_HHSS              I   (./SRC/Events_c.obj)
+IIc_Set_KBI_Kompass_Peilung_MM                I   (./SRC/Events_c.obj)
 ISR_Periodic_IRQ_TIM0_1                       F   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj)
 InpBufferS                                    O   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 InpBufferS                                    I   (./SRC/Events_c.obj)
