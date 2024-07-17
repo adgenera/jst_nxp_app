@@ -166,9 +166,8 @@ static void Cdd_Motor_TriggerMotorStart(const Cdd_Motor_MotorNumberEnum motor_e)
     // TODO allora capisco che questo serve ad inizializzare i motori e deve essere chiamata all'avvio o dopo uno stop PWM.
     // Ma non deve essere fatta due volte vista che setta una callback comune. 
     
-	if ((Cdd_Motor_ReachedFinalPosition(motor_e) != (uint8)TRUE)) && (cdd_motor_Data_as[motor_e].isrIsRunning_ui8 != (uint8) TRUE)
+	if ((Cdd_Motor_ReachedFinalPosition(motor_e) != (uint8)TRUE) && (cdd_motor_Data_as[motor_e].isrIsRunning_ui8 != (uint8) TRUE))
 	{
-		update_Mtr_TimerCounterOverflowInterruptFp(&Cdd_Motor_RunMotorISR);
 		if (motor_e == CDD_MOTOR_MTR_HHSS)
 		{
 			CDD_MOTOR_ENABLE_COIL0_MTR1();
@@ -2501,8 +2500,8 @@ uint8 Cdd_Motor_ZD_GetDistanceZeroPositionAndLeftWindowEdge(const Cdd_Motor_Moto
 
 void Cdd_Motor_RunMotorISR(void)
 {
-    bool disable_HHSS_b = FALSE;
-    bool disable_MM_b = FALSE;
+	boolean disable_HHSS_b = FALSE;
+	boolean disable_MM_b = FALSE;
 
     if (TRUE == cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrIsRunning_ui8)
     {
@@ -2518,10 +2517,11 @@ void Cdd_Motor_RunMotorISR(void)
     }
 }
 
-void Cdd_Motor_RunMotorISR_HHSS(void)
+boolean Cdd_Motor_RunMotorISR_HHSS(void)
 {
     static uint16 isrUsedNbrOfPeriodes_ui16_HHSS; // TODO viene sempre scritta perchè è statica
-    bool disableMotorInterrupt_b = FALSE;    
+    boolean disableMotorInterrupt_b = FALSE;   
+    uint8 index = 0;
     /* ISR MTR HHSS */
     if (cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].isrPeriodeCounter_ui16 > (uint16)1u) /* c:7,5 */
 	{
@@ -2697,7 +2697,7 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 			/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
 			DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
 			/* Set duty cycle ********************************************************************* */
-            uint8 index = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8;
+            index = cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel0_ui8;
 			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_0_ui16[index]); /* c:8 */
 			CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR1(cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].usedPatternCoil_1_ui16[index]); /* c:8 */
 			ENABLE_ALL_INTERRUPTS();																																   /*lint !e960 */
@@ -2712,9 +2712,10 @@ void Cdd_Motor_RunMotorISR_HHSS(void)
 #pragma opt_lifetimes off
 #pragma optimize_for_size on
 
-bool Cdd_Motor_RunMotorISR_MM(void)
+boolean Cdd_Motor_RunMotorISR_MM(void)
 	{
-    bool disableMotorInterrupt_b = FALSE;    
+	boolean disableMotorInterrupt_b = FALSE;  
+    uint8 index = 0;
 	/* isrPeriodeCounter_ui16 is used to count each expired period.
 	 * If the nbr of needed periods is reached a new pwm duty cycle/pwm pattern is set
 	 */
@@ -2895,7 +2896,7 @@ bool Cdd_Motor_RunMotorISR_MM(void)
 			/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
 			DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
 			/* Set duty cycle ********************************************************************* */
-            unt8 index = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8]
+            index = cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel0_ui8;
 			CDD_MOTOR_SET_DUTYCYCLE_COIL0_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_0_ui16[index]); /* c:8 */
             CDD_MOTOR_SET_DUTYCYCLE_COIL1_MTR2(cdd_motor_Data_as[CDD_MOTOR_MTR_MM].usedPatternCoil_1_ui16[index]); /* c:8 */
 			ENABLE_ALL_INTERRUPTS();																															   /*lint !e960 */

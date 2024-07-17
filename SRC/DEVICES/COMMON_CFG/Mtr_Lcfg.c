@@ -50,34 +50,8 @@ volatile Mtr_GeneralConfigType mtr_generalConfiguration_s =
     MTR_CTRL_RECIRC_LOW,                /* Mtr_CtrlRecircType        reciric_e */
     MTR_CTRL_MCTOIE_DISABLE,            /* Mtr_CtrlMCTOIEType        timerEn_e */
     (uint16)MTR_CTRL_MCPER,             /* Mtr_CtrlPeriodType        period_t */
-    &Cdd_Motor_RunMotorISR_HHSS         /* Mtr_TimerCounterOverflowInterruptFp   timerOverflow_fp */
+    &Cdd_Motor_RunMotorISR         		/* Mtr_TimerCounterOverflowInterruptFp   timerOverflow_fp */
 };
-
-//volatile const Mtr_GeneralConfigType mtr_generalConfiguration_HHSS =
-//{
-//    MTR_CTRL_MCPRE_FBUS_DIV_1,          /* Mtr_CtrlPrescalerType     prescaler_e */
-//    MTR_CTRL_WAIT_MODE_STAY_AWAKE,      /* Mtr_CtrlWaitModeType      waitMode_e */
-//    MTR_CTRL_PWM_RESOLUTION_NORMAL,     /* Mtr_CtrlPwmResModeType    resMode_e */
-//    MTR_CTRL_DITHER_FEATURE_DISABLED,   /* Mtr_CtrlDitherFeatType    dither_e */
-//    MTR_CTRL_MCTOIF_NOT_OCCURED,        /* Mtr_CtrlMCTOIFType        timerOVF_e */
-//    MTR_CTRL_RECIRC_LOW,                /* Mtr_CtrlRecircType        reciric_e */
-//    MTR_CTRL_MCTOIE_DISABLE,            /* Mtr_CtrlMCTOIEType        timerEn_e */
-//    (uint16)MTR_CTRL_MCPER,             /* Mtr_CtrlPeriodType        period_t */
-//    &Cdd_Motor_RunMotorISR_HHSS         /* Mtr_TimerCounterOverflowInterruptFp   timerOverflow_fp */
-//};
-//
-//volatile const Mtr_GeneralConfigType mtr_generalConfiguration_MM =
-//{
-//    MTR_CTRL_MCPRE_FBUS_DIV_1,          /* Mtr_CtrlPrescalerType     prescaler_e */
-//    MTR_CTRL_WAIT_MODE_STAY_AWAKE,      /* Mtr_CtrlWaitModeType      waitMode_e */
-//    MTR_CTRL_PWM_RESOLUTION_NORMAL,     /* Mtr_CtrlPwmResModeType    resMode_e */
-//    MTR_CTRL_DITHER_FEATURE_DISABLED,   /* Mtr_CtrlDitherFeatType    dither_e */
-//    MTR_CTRL_MCTOIF_NOT_OCCURED,        /* Mtr_CtrlMCTOIFType        timerOVF_e */
-//    MTR_CTRL_RECIRC_LOW,                /* Mtr_CtrlRecircType        reciric_e */
-//    MTR_CTRL_MCTOIE_DISABLE,            /* Mtr_CtrlMCTOIEType        timerEn_e */
-//    (uint16)MTR_CTRL_MCPER,             /* Mtr_CtrlPeriodType        period_t */
-//    &Cdd_Motor_RunMotorISR_MM           /* Mtr_TimerCounterOverflowInterruptFp   timerOverflow_fp */
-//};
 
 /** The Period-Value also defines the amount of minor time-quantas. To get
     a proper duty-cycle you have to make sure to have enough time-quantas per period.

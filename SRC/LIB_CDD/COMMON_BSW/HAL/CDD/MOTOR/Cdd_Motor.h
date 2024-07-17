@@ -251,13 +251,13 @@ void Cdd_Motor_RunMotorISR(void);
 
 #pragma optimize_for_size off
 #pragma opt_lifetimes on
-void Cdd_Motor_RunMotorISR_HHSS(void);
+boolean Cdd_Motor_RunMotorISR_HHSS(void);
 #pragma opt_lifetimes off
 #pragma optimize_for_size on
 
 #pragma optimize_for_size off
 #pragma opt_lifetimes on
-void Cdd_Motor_RunMotorISR_MM(void);
+boolean Cdd_Motor_RunMotorISR_MM(void);
 #pragma opt_lifetimes off
 #pragma optimize_for_size on
 

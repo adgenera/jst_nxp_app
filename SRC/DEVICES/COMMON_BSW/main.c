@@ -56,8 +56,9 @@ uint32 ms_counter = 0;
  * @return   none
  *
  ************************************************************************************************/
-int16 MOVING_PATTERN[8] = {
-    0. 900,
+uint16 MOVING_PATTERN[8] = {
+    0,
+    900,
     1800,
     2700,
     3600,
@@ -67,7 +68,7 @@ int16 MOVING_PATTERN[8] = {
 
 uint8 motor_index[2] = {0, 0};
 
-void bump_index(uint8 *index) {
+static void bump_index(uint8 *index) {
     *index = (*index + 1) % 8;
 }
 
@@ -107,24 +108,23 @@ void main (void)
         {
                 if((ms_counter % 1000) == 0) 
                 {
-                    IIc_Set_KBI_Kompass_Peilung_HHSS(MOVING_PATTERN[motor_index[0]);                
+                    IIc_Set_KBI_Kompass_Peilung_HHSS(MOVING_PATTERN[motor_index[0]]);                
                     bump_index(&motor_index[0]);
-                    Wdg_Clear();
                 }
-                if ((ms_counter + 500) % 1000) == 0)
+                if (((ms_counter + 500) % 1000) == 0)
                 {
-                    IIc_Set_KBI_Kompass_Peilung_MM(MOVING_PATTERN[motor_index[1]);
+                    IIc_Set_KBI_Kompass_Peilung_MM(MOVING_PATTERN[motor_index[1]]);
                     bump_index(&motor_index[1]);
                 }
 
   			  //ms_counter = 0;
-        }
-  			//WDog1_Clear();
+        
+  			Wdg_Clear();
    			//APP_FSM();
   			/* Call ECUM MainFunction */
   			ms = FALSE;	
   			ms_counter++;
-  		}
+        }
 	}
 }
 

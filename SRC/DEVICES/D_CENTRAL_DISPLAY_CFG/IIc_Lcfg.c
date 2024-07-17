@@ -132,7 +132,7 @@ uint16 IIc_Get_KBI_Kompass_Peilung_MM(void)
 *
 * \return Value of Signal _KBI_Kompass_Peilung
 */
-void IIc_Set_KBI_Kompass_Peilung_HHSS(int16 value)
+void IIc_Set_KBI_Kompass_Peilung_HHSS(uint16 value)
 {
    IIc_KBI_Kompass_Peilung_HHSS_ui16 = value;
 }
@@ -142,7 +142,7 @@ void IIc_Set_KBI_Kompass_Peilung_HHSS(int16 value)
 *
 * \return Value of Signal _KBI_Kompass_Peilung
 */
-void IIc_Set_KBI_Kompass_Peilung_MM(int16 value)
+void IIc_Set_KBI_Kompass_Peilung_MM(uint16 value)
 {
    IIc_KBI_Kompass_Peilung_MM_ui16 = value;
 }
