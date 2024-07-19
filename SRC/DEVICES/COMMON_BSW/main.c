@@ -103,6 +103,7 @@ void main (void)
 	/* infinite loop */
 	for (;;)
 	{			
+		/* Call ECUM MainFunction */
 		Ecum_MainFunction();
   		if (ms) 
         {/*
@@ -120,8 +121,6 @@ void main (void)
   			  //ms_counter = 0;
         */
   			Wdg_Clear();
-   			//APP_FSM();
-  			/* Call ECUM MainFunction */
   			ms = FALSE;	
   			ms_counter++;
         }

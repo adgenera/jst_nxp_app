@@ -137,6 +137,11 @@ LIB_CDD		</project>
 			<locationURI>PARENT-2-PROJECT_LOC/OUT/APP_CENTRAL_DISPLAY/JST_BY_DEBUG_CENTRAL_DISPLAY_S12Z_VHL32.elf</locationURI>
 		</link>
 		<link>
+			<name>_RELEASE_CENTRAL_DISPLAY/JST_BY_RELEASE_CENTRAL_DISPLAY_S12Z_VHL32.elf</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/OUT/APP_CENTRAL_DISPLAY/JST_BY_RELEASE_CENTRAL_DISPLAY_S12Z_VHL32.elf</locationURI>
+		</link>
+		<link>
 			<name>.external_binary/OUT/APP_OAT</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
