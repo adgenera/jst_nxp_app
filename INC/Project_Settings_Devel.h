@@ -59,12 +59,12 @@
 /*
 * Description: Switch for enable/disable time measurement in project.
 */
-#define PROJECT_TIME_MEASUREMENT_SWITCH                        (STD_ON)
+#define PROJECT_TIME_MEASUREMENT_SWITCH                        (STD_OFF)
 
 /*
 * Description: Switch for enable/disable load measurement in project.
 */
-#define PROJECT_SETTINGS_LOAD_MEASUREMENT_SWITCH              (STD_ON)
+#define PROJECT_SETTINGS_LOAD_MEASUREMENT_SWITCH              (STD_OFF)
 
 /*
 * Description: Some Modules are used in application and bootloader. But some functions need to be custumized by compiler switch for use in bootloader.

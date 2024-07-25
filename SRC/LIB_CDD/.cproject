@@ -51,6 +51,7 @@
 								</option>
 								<option id="com.freescale.s12z.toolchain.compiler.input.include.739733089" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.s12z.toolchain.compiler.input.include" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/HAL/CDD/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/HAL/CDD/IIC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../DEVICES/COMMON_CFG&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../DEVICES/D_CENTRAL_DISPLAY_CFG&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../DEVICES/COMMON_BSW/SL/SYS/ECUM&quot;"/>
@@ -175,6 +176,7 @@
 								</option>
 								<option id="com.freescale.s12z.toolchain.compiler.input.include.1468109599" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.s12z.toolchain.compiler.input.include" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/HAL/CDD/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/HAL/CDD/IIC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../DEVICES/COMMON_CFG&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../DEVICES/D_CENTRAL_DISPLAY_CFG&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../DEVICES/COMMON_BSW/SL/SYS/ECUM&quot;"/>

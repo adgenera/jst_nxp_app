@@ -118,6 +118,7 @@
 								<option id="com.freescale.s12z.toolchain.compiler.general.debug.437046495" name="Generate Debug Information" superClass="com.freescale.s12z.toolchain.compiler.general.debug" value="true" valueType="boolean"/>
 								<option id="com.freescale.s12z.toolchain.compiler.input.include.1922661894" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.s12z.toolchain.compiler.input.include" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_MCAL}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../LIB_CDD/COMMON_BSW/HAL/CDD/IIC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/LIB_CDD}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_AL/MOTOR&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ECUM&quot;"/>
@@ -439,6 +440,7 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ECUM&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_BSW/SL/SYS/ISR&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../LIB_CDD/COMMON_BSW/HAL/CDD/MOTOR&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/../LIB_CDD/COMMON_BSW/HAL/CDD/IIC&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/D_CENTRAL_DISPLAY_CFG&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/COMMON_CFG&quot;"/>
 								</option>
@@ -634,6 +636,8 @@
 								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1008234080.adjusted.1423133941" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1008234080" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1084589339.adjusted.2139344929" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1084589339" value="false" valueType="boolean"/>
 								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1886463549.adjusted.1391526829" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1886463549" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.768440785.adjusted.1137272128" name="(hidden) warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.768440785" value="false" valueType="boolean"/>
+								<option id="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.386290301.adjusted.2108623235" name="(hidden) toggle warnings flag" superClass="com.freescale.s12z.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.386290301" value="com.freescale.s12z.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<inputType id="com.freescale.s12z.toolchain.compiler.inputType2.c.1187717907" name="S12Z C Compiler Input" superClass="com.freescale.s12z.toolchain.compiler.inputType2.c"/>
 								<inputType id="com.freescale.s12z.toolchain.compiler.inputType2.cpp.832460442" name="S12Z C++ Compiler Input" superClass="com.freescale.s12z.toolchain.compiler.inputType2.cpp"/>
 							</tool>

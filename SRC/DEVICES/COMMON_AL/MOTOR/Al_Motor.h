@@ -8,6 +8,7 @@
 
 #include "Al_Motor_Cfg.h"
 #include "Cdd_Motor.h"
+#include "Cdd_IIC.h"
 
 /* ***************************** typedefs *********************************** */
 
@@ -137,7 +138,7 @@ typedef struct
 
 /* ***************************** global data ******************************** */
 
-/* ***************************** modul global prototypes ******************** */
+/* ***************************** module global prototypes ******************** */
 
 /* ***************************** global prototypes ************************** */
 void Al_Motor_Init (void);

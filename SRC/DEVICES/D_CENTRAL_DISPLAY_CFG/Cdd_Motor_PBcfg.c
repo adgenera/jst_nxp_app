@@ -116,35 +116,6 @@ static const Mtr_ChannelDutyCycleType cdd_motor_MtrCoil_1_Pattern_Fast_t [CDD_MO
 
 const Cdd_Motor_MotorConfigType Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_NR_SIZE] =
 {
-#if defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 1)
-   {
-	MTR_MTR1_COIL0_CHANNEL_0,                    /* channelCoil_0_ui8 */
-	MTR_MTR1_COIL1_CHANNEL_1,                    /* channelCoil_1_ui8 */
-
-	(uint32)CDD_MOTOR_RNDS_THRSH * (uint32)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE,                   /* miniFullRoundsThreshold_ui16 */
-	(uint32)CDD_MOTOR_RNDS_THRSH * (uint32)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE,                   /* fullRoundsThreshold_ui16 */
-	
-	cdd_motor_MtrCoil_0_Pattern_Fast_t,    /* coil PWM lookup table */
-	cdd_motor_MtrCoil_1_Pattern_Fast_t,    /* coil PWM lookup table */
-	
-	cdd_motor_MtrCoil_0_Pattern_Fast_t,    /* coil PWM lookup table */
-	cdd_motor_MtrCoil_1_Pattern_Fast_t,    /* coil PWM lookup table */
-   }
-#elif defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 2)
-   {
-	MTR_MTR2_COIL0_CHANNEL_2,                    /* channelCoil_0_ui8 */
-	MTR_MTR2_COIL1_CHANNEL_3,                    /* channelCoil_1_ui8 */
-
-	(uint32)CDD_MOTOR_RNDS_THRSH * (uint32)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE,                   /* miniFullRoundsThreshold_ui16 */
-	(uint32)CDD_MOTOR_RNDS_THRSH * (uint32)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE,                   /* fullRoundsThreshold_ui16 */
-	
-	cdd_motor_MtrCoil_0_Pattern_Fast_t,    /* coil PWM lookup table */
-	cdd_motor_MtrCoil_1_Pattern_Fast_t,    /* coil PWM lookup table */
-	
-	cdd_motor_MtrCoil_0_Pattern_Fast_t,    /* coil PWM lookup table */
-	cdd_motor_MtrCoil_1_Pattern_Fast_t,    /* coil PWM lookup table */
-	}
-#else
    {
 	MTR_MTR1_COIL0_CHANNEL_0,                    /* channelCoil_0_ui8 */
 	MTR_MTR1_COIL1_CHANNEL_1,                    /* channelCoil_1_ui8 */
@@ -171,7 +142,6 @@ const Cdd_Motor_MotorConfigType Cdd_Motor_Cfg_as[CDD_MOTOR_MTR_NR_SIZE] =
 	cdd_motor_MtrCoil_0_Pattern_Fast_t,    /* coil PWM lookup table */
 	cdd_motor_MtrCoil_1_Pattern_Fast_t,    /* coil PWM lookup table */
    }
-#endif
 };
 
 

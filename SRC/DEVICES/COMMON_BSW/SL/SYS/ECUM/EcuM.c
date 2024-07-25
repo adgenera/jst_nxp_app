@@ -581,19 +581,9 @@ void Ecum_MainFunction (void)
             /* reset fall asleep allowed flag */
             ecum_sleepFallASleepAllowed_b = (boolean)FALSE;
 
-            /* Enable LIN wakeup interrupt */
-            DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-            //Lin_EnableWakeupISR();
-            ENABLE_ALL_INTERRUPTS(); /*lint !e960 */
-
             /** \req CS_REQ_BY634_5_000011   The controller enters MCU stop-mode after a LIN communication timeout (LIN_TIMEOUT). */
             /** \req CS_REQ_BY634_5_000012   The controller enters to MCU stop-mode if a broadcast command goto-sleep is received by LIN. */
             Mcu_SetStopMode();
-
-            /* Disable LIN wakeup interrupt */
-            DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-            //Lin_DisableWakeupISR();
-            ENABLE_ALL_INTERRUPTS(); /*lint !e960 */
 
             /* Inform application control we are up and running again */
             //Al_App_Ctrl_EcumWakeupIndication();

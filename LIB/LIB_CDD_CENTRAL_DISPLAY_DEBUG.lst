@@ -1,8 +1,29 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib'
 Unit name                                       size     from       to
-./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     81360      122    81482
+./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj         25008    81898   106906
+./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     81776      122    81898
 
 EXPORTED OBJECTS
+Cdd_IIC_Get_Module_Speed_HHSS_ui16                       F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Module_Speed_MM_ui16                         F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Module_Speed_ui16                            F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Pos_HHSS                                     F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Pos_MM                                       F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Sign_Speed_HHSS_ui8                          F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Sign_Speed_MM_ui8                            F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Sign_Speed_ui8                               F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_HHSS_si16                              F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_HHSS_ui16                              F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_MM_si16                                F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_MM_ui16                                F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_si16                                   F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_ui16                                   F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Init                                             F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_MainFunction                                     F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Set_Pos_HHSS                                     F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Set_Pos_MM                                       F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Set_Speed_HHSS                                   F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
+Cdd_IIC_Set_Speed_MM                                     F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
 Cdd_Motor_Cfg_as                                         I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_ChangeDefaultFullStepCounter                   F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_GetDirection                                   F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
@@ -45,5 +66,6 @@ Cdd_Motor_ZD_IsCurrentPositionInZeroWindow               F   (./COMMON_BSW/HAL/C
 Cdd_Motor_ZD_IsDetectionCompleteAndValid                 F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_ZD_IsDetectionEnabled                          F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_ZD_PerformWindowCheck                          F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
+Dio_WriteChannel                                         I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Mtr_SetMotorInterrupt                                    I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 update_Mtr_TimerCounterOverflowInterruptFp               I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)

@@ -6,7 +6,8 @@
 #include "API.h"	
 #include "Wdg.h"
 
-#include "IIc_Lcfg.h"
+#include "Cdd_IIC.h"
+#include "Dio.h"
 /**********************************************************************************************
  * External objects
 // **********************************************************************************************/
@@ -21,11 +22,6 @@
  **********************************************************************************************/
 flags_t flags;
 boolean ms = FALSE;
-uint8 cnt = 0;
-uint16 sent = 0;
-
-uint16 rcv = 0;
-uint8 address = 0;
 
 const uint16 jst_code @0x00FFE600 = 0x2540;
 
@@ -56,21 +52,6 @@ uint32 ms_counter = 0;
  * @return   none
  *
  ************************************************************************************************/
-uint16 MOVING_PATTERN[8] = {
-    0,
-    900,
-    1800,
-    2700,
-    3600,
-    2700,
-    1800,
-    900};
-
-uint8 motor_index[2] = {0, 0};
-
-static void bump_index(uint8 *index) {
-    *index = (*index + 1) % 8;
-}
 
 void main (void)
 {
@@ -94,33 +75,20 @@ void main (void)
 	/* Initialize external Peripherals */
 	    /* WDG is initialized separately **************************************** */
 	//#if ! ((defined DEBUG_WATCHDOG_DISABLE) && (DEBUG_WATCHDOG_DISABLE == 1))
-		Wdg_Init((uint8)DEVICE_TYPE);
+		//Wdg_Init((uint8)DEVICE_TYPE);
 	//#endif
 	API_Init();
 	/* Enable all interrupts */
 	ENABLE_ALL_INTERRUPTS(); /*lint !e960 */	
-		
+
 	/* infinite loop */
 	for (;;)
 	{			
 		/* Call ECUM MainFunction */
 		Ecum_MainFunction();
   		if (ms) 
-        {/*
-                if((ms_counter % 1000) == 0) 
-                {
-                    IIc_Set_KBI_Kompass_Peilung_HHSS(MOVING_PATTERN[motor_index[0]]);                
-                    bump_index(&motor_index[0]);
-                }
-                if (((ms_counter + 500) % 1000) == 0)
-                {
-                    IIc_Set_KBI_Kompass_Peilung_MM(MOVING_PATTERN[motor_index[1]]);
-                    bump_index(&motor_index[1]);
-                }
-
-  			  //ms_counter = 0;
-        */
-  			Wdg_Clear();
+        {
+  			//Wdg_Clear();
   			ms = FALSE;	
   			ms_counter++;
         }

@@ -5,13 +5,13 @@
 #include "Al_Motor_PBcfg.h"
 
 #include "Wdg.h"
-#include "IIc_Lcfg.h"
+#include "Cdd_IIC.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
 extern flags_t flags;
 extern char *char_read;
-extern uint8 cnt;
-extern uint16 sent;
+static uint8 cnt = 0;
+static uint16 sent = 0;
 
 extern uint8 InpBufferS[9];
 extern uint8 OutBufferS[9];
@@ -19,6 +19,7 @@ uint8 pos_speed_acc[9];
 uint8 error[9] = "666777888";
 
 uint32 curPos_ui32;
+uint16 curSpeed_ui16;
 uint8 data;
 uint8 i2c_buf[8];
 
@@ -38,6 +39,8 @@ static uint8 command = 0;
  */
 void IIC0_OnRxChar(void) {
 	uint16 pos;
+	uint16 speed;
+
 	if (1 == flags.Bits.R_WRITE_REQ) {
 		IIC0_RecvChar(&command);
 		cnt = 0;
@@ -49,24 +52,38 @@ void IIC0_OnRxChar(void) {
 	} else {
 		uint8 data;
 		IIC0_RecvChar(&data);
-		//i2c_buf[cnt] = data + 0x10;
-		InpBufferS[cnt] = data + 0x10;
+		InpBufferS[cnt] = data;
 		cnt++;
 	}
 
 	if (8 == cnt) {
 		switch (command) {
 		case M1_TARGET_ALL:
+			// Set Pos
 			pos = InpBufferS[0];
 			pos = pos << 8;
 			pos |= InpBufferS[1];
-			IIc_Set_KBI_Kompass_Peilung_HHSS(pos);
+			Cdd_IIC_Set_Pos_HHSS(pos);
+
+			// Set Speed
+			speed = InpBufferS[2];
+			speed = speed << 8;
+			speed |= InpBufferS[3];
+			Cdd_IIC_Set_Speed_HHSS(speed);
 			break;
+
 		case M2_TARGET_ALL:
+			// Set Pos
 			pos = InpBufferS[0];
 			pos = pos << 8;
 			pos |= InpBufferS[1];
-			IIc_Set_KBI_Kompass_Peilung_MM(pos);
+			Cdd_IIC_Set_Pos_MM(pos);
+
+			// Set Speed
+			speed = InpBufferS[2];
+			speed = speed << 8;
+			speed |= InpBufferS[3];
+			Cdd_IIC_Set_Speed_MM(speed);
 			break;
 		default:
 			break;
@@ -131,11 +148,13 @@ void IIC0_OnReadReq(void) {
 		curPos_ui32 *= AL_MOTORPOS_GEAR_DIVISOR;
 		curPos_ui32 /= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE
 				* AL_MOTORPOS_GEAR_FACTOR);
+		
+		curSpeed_ui16 = Cdd_IIC_Get_Speed_ui16(CDD_MOTOR_MTR_HHSS);
 
 		pos_speed_acc[0] = (uint8) ((curPos_ui32 >> 8) & 0xFF);
 		pos_speed_acc[1] = (uint8) (curPos_ui32 & 0xFF);
-		pos_speed_acc[2] = 0xAA;
-		pos_speed_acc[3] = 0xAA;
+		pos_speed_acc[2] = (uint8) ((curSpeed_ui16 >> 8) & 0xFF);
+		pos_speed_acc[3] = (uint8) (curSpeed_ui16 & 0xFF);
 		pos_speed_acc[4] = 0xBB;
 		pos_speed_acc[5] = 0xBB;
 		pos_speed_acc[6] = 0xFF;
@@ -148,11 +167,13 @@ void IIC0_OnReadReq(void) {
 		curPos_ui32 *= AL_MOTORPOS_GEAR_DIVISOR;
 		curPos_ui32 /= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE
 				* AL_MOTORPOS_GEAR_FACTOR);
+		
+		curSpeed_ui16 = Cdd_IIC_Get_Speed_ui16(CDD_MOTOR_MTR_MM);
 
 		pos_speed_acc[0] = (uint8) ((curPos_ui32 >> 8) & 0xFF);
 		pos_speed_acc[1] = (uint8) (curPos_ui32 & 0xFF);
-		pos_speed_acc[2] = 0xCC;
-		pos_speed_acc[3] = 0xCC;
+		pos_speed_acc[2] = (uint8) ((curSpeed_ui16 >> 8) & 0xFF);
+		pos_speed_acc[3] = (uint8) (curSpeed_ui16 & 0xFF);
 		pos_speed_acc[4] = 0xDD;
 		pos_speed_acc[5] = 0xDD;
 		pos_speed_acc[6] = 0xFF;

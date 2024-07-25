@@ -2,7 +2,7 @@
 
 #include "Al_Motor_PBcfg.h"
 
-#include "IIc_Lcfg.h"
+#include "Cdd_IIC.h"
 
 
 /* ***************************** # defines ********************************** */
@@ -29,7 +29,7 @@
  * \retval TRUE Move pointer.
  * \retval FALSE Do not move pointer, already at destination.
  */
-
+#if 0
 boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Motor_DirectionEnum * destDir_e, uint32 * destUSteps_ui32)
 {
 	uint32 targetPos_ui32;
@@ -42,20 +42,12 @@ boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Moto
 	uint32 posCurrent_ui32;
 	boolean newPosition_b = FALSE;
 
-#if defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 1)
-   KBI_Kompass_Peilung_ui16 = IIc_Get_KBI_Kompass_Peilung_HHSS();
-
-#elif defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 2)
-   KBI_Kompass_Peilung_ui16 = IIc_Get_KBI_Kompass_Peilung_MM();
-
-#else
    if(motor_e == CDD_MOTOR_MTR_HHSS){
-	   KBI_Kompass_Peilung_ui16 = IIc_Get_KBI_Kompass_Peilung_HHSS();
+	   KBI_Kompass_Peilung_ui16 = Cdd_IIC_Get_Pointer_HHSS();
    }
    else{
-	   KBI_Kompass_Peilung_ui16 = IIc_Get_KBI_Kompass_Peilung_MM();
+	   KBI_Kompass_Peilung_ui16 = Cdd_IIC_Get_Pointer_MM();
    }
-#endif
    
    inputPos_ui32  = (uint32)KBI_Kompass_Peilung_ui16;
       
@@ -82,12 +74,6 @@ boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Moto
       difference_ui32 = 0uL;
    }
 
-   /* Check if we have a 180 degree overflow */
-   if (difference_ui32 > (AL_MOTORPOS_HALF_FULLROUND_MICROSTEPS_UI16))
-   {
-      difference_ui32 = (AL_MOTORPOS_MICROSTEPS_PER_ROUND_UI16) - difference_ui32;
-   }
-
    /* Check if the filtered target position changed more than epsilon (9 microsteps).
     * Smaller differences are assumed as filter noise and rejected. */
    if (difference_ui32 > AL_MOTORPOS_EPSILON)
@@ -103,7 +89,6 @@ boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Moto
 
    /* Apply zero offset to target position */
    //targetPos_ui32 += *al_motor_zeroPositionOffset_pui16;
-   targetPos_ui32 %= (AL_MOTORPOS_MICROSTEPS_PER_ROUND_UI16);
    
    DISABLE_ALL_INTERRUPTS();
       
@@ -164,5 +149,72 @@ boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Moto
       
 return newPosition_b;
 }
+#endif
 
+boolean Al_MotorPos_Calculate (const Cdd_Motor_MotorNumberEnum motor_e, Cdd_Motor_DirectionEnum * destDir_e, uint32 * destUSteps_ui32)
+{
+	uint32 targetPos_ui32;
+	static uint32 oldTargetPos_ui32[CDD_MOTOR_MTR_NR_SIZE] = {0uL};
+	uint32 difference_ui32;
+
+	uint16 Cdd_IIC_Pos_ui16;
+	
+	uint32 inputPos_ui32;
+	uint32 posCurrent_ui32;
+	boolean newPosition_b = FALSE;
+
+   if(motor_e == CDD_MOTOR_MTR_HHSS){
+	   Cdd_IIC_Pos_ui16 = Cdd_IIC_Get_Pos_HHSS();
+   }
+   else{
+	   Cdd_IIC_Pos_ui16 = Cdd_IIC_Get_Pos_MM();
+   }
+   
+   inputPos_ui32  = (uint32)Cdd_IIC_Pos_ui16;
+      
+   inputPos_ui32 *= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE * AL_MOTORPOS_GEAR_FACTOR);
+   inputPos_ui32 /= AL_MOTORPOS_GEAR_DIVISOR;
+   
+   targetPos_ui32 = inputPos_ui32; 
+
+   /* Determine the difference to the old target position */
+   if (targetPos_ui32 > oldTargetPos_ui32[motor_e])
+   {
+      difference_ui32 = targetPos_ui32 - oldTargetPos_ui32[motor_e];
+   }
+   else if (targetPos_ui32 < oldTargetPos_ui32[motor_e])
+   {
+      difference_ui32 = oldTargetPos_ui32[motor_e] - targetPos_ui32;
+   }
+   else
+   {
+      difference_ui32 = 0uL;
+   }
+
+   /* Check if the filtered target position changed more than epsilon (9 microsteps).
+    * Smaller differences are assumed as filter noise and rejected. */
+   if (difference_ui32 > AL_MOTORPOS_EPSILON)
+   {
+      /* Store target position */
+      oldTargetPos_ui32[motor_e] = targetPos_ui32;
+      newPosition_b = TRUE;
+   }
+   else
+   {
+      /* Restore target position */
+      targetPos_ui32 = oldTargetPos_ui32[motor_e];
+   }
+
+   DISABLE_ALL_INTERRUPTS();
+      
+   /* calculate target position */
+
+   *destUSteps_ui32  = (uint32)targetPos_ui32;
+   posCurrent_ui32 = Cdd_Motor_GetPositionCurrentAbsolute(motor_e);
+   
+
+   ENABLE_ALL_INTERRUPTS();
+      
+   return newPosition_b;
+}
 

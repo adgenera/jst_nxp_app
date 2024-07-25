@@ -1,24 +1,22 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_MCAL.lib'
 Unit name            size     from       to
 API_c.obj            3064      101     3165
-Dio_PBcfg_c.obj      1864    82869    84733
-Dio_c.obj            8216    74653    82869
-Events_c.obj        13008     3165    16173
-Gpt_PBcfg_c.obj      3400    50717    54117
-Gpt_c.obj           12368    38349    50717
-IIC0_c.obj          19168    84733   103901
-Mcu_c.obj            5848    32501    38349
-Mtr_c.obj           16432    58221    74653
-Port_c.obj           4104    54117    58221
-Timer_c.obj          7120    16173    23293
-Wdg_c.obj            3848    28653    32501
-starts12z_c.obj      5360    23293    28653
+Dio_PBcfg_c.obj      1864    69861    71725
+Dio_c.obj            8216    61645    69861
+Gpt_PBcfg_c.obj      3400    37709    41109
+Gpt_c.obj           12368    25341    37709
+IIC0_c.obj          19168    71725    90893
+Mcu_c.obj            5848    19493    25341
+Mtr_c.obj           16432    45213    61645
+Port_c.obj           4104    41109    45213
+Timer_c.obj          7120     3165    10285
+Wdg_c.obj            3848    15645    19493
+starts12z_c.obj      5360    10285    15645
 
 EXPORTED OBJECTS
 API_Init                                      F   (API_c.obj)
 API_interrupt                                 F   (Timer_c.obj)
 CCR_reg                                       O   (IIC0_c.obj)
-Cdd_Motor_GetPositionCurrentAbsolute          I   (Events_c.obj)
 Dio_Init                                      F   (Dio_c.obj)
 Dio_ReadChannel                               F   (Dio_c.obj)
 Dio_WriteChannel                              F   (Dio_c.obj)
@@ -31,7 +29,6 @@ Gpt_Init                                      F   (Gpt_c.obj)
 Gpt_SetPeriode                                F   (Gpt_c.obj)
 Gpt_StartTimer                                F   (Gpt_c.obj)
 Gpt_StopTimer                                 F   (Gpt_c.obj)
-IIC0_ClearRxBuf                               I   (Events_c.obj)
 IIC0_ClearRxBuf                               F   (IIC0_c.obj)
 IIC0_ClearTxBuf                               F   (IIC0_c.obj)
 IIC0_Disable                                  F   (IIC0_c.obj)
@@ -41,36 +38,21 @@ IIC0_GetCharsInRxBuf                          F   (IIC0_c.obj)
 IIC0_GetCharsInTxBuf                          F   (IIC0_c.obj)
 IIC0_ISR                                      F   (IIC0_c.obj)
 IIC0_Init                                     F   (IIC0_c.obj)
-IIC0_OnArbitLost                              F   (Events_c.obj)
 IIC0_OnArbitLost                              I   (IIC0_c.obj)
-IIC0_OnError                                  F   (Events_c.obj)
 IIC0_OnError                                  I   (IIC0_c.obj)
-IIC0_OnFreeTxBuf                              F   (Events_c.obj)
 IIC0_OnFreeTxBuf                              I   (IIC0_c.obj)
-IIC0_OnFullRxBuf                              F   (Events_c.obj)
 IIC0_OnFullRxBuf                              I   (IIC0_c.obj)
-IIC0_OnReadReq                                F   (Events_c.obj)
 IIC0_OnReadReq                                I   (IIC0_c.obj)
-IIC0_OnRxChar                                 F   (Events_c.obj)
 IIC0_OnRxChar                                 I   (IIC0_c.obj)
-IIC0_OnTxChar                                 F   (Events_c.obj)
 IIC0_OnTxChar                                 I   (IIC0_c.obj)
-IIC0_OnTxEmptyChar                            F   (Events_c.obj)
 IIC0_OnTxEmptyChar                            I   (IIC0_c.obj)
-IIC0_OnWriteReq                               F   (Events_c.obj)
 IIC0_OnWriteReq                               I   (IIC0_c.obj)
-IIC0_RecvBlock                                I   (Events_c.obj)
 IIC0_RecvBlock                                F   (IIC0_c.obj)
 IIC0_SelectSlave                              F   (IIC0_c.obj)
-IIC0_SendBlock                                I   (Events_c.obj)
 IIC0_SendBlock                                F   (IIC0_c.obj)
 IIC0_SendChar                                 F   (IIC0_c.obj)
-IIC0_SndRcvTemp                               I   (Events_c.obj)
 IIC0_SndRcvTemp                               O   (IIC0_c.obj)
-IIc_Set_KBI_Kompass_Peilung_HHSS              I   (Events_c.obj)
-IIc_Set_KBI_Kompass_Peilung_MM                I   (Events_c.obj)
 ISR_Periodic_IRQ_TIM0_1                       F   (Gpt_c.obj)
-InpBufferS                                    I   (Events_c.obj)
 InpBufferS                                    O   (IIC0_c.obj)
 Mcu_Init                                      F   (Mcu_c.obj)
 Mcu_PerformReset                              F   (Mcu_c.obj)
@@ -86,21 +68,14 @@ OutBufferS                                    O   (IIC0_c.obj)
 Port_Init                                     F   (Port_c.obj)
 Wdg_Clear                                     F   (Wdg_c.obj)
 Wdg_Init                                      F   (Wdg_c.obj)
-Wdg_Trigger                                   I   (Events_c.obj)
 Wdg_Trigger                                   F   (Wdg_c.obj)
 _Startup                                      F   (starts12z_c.obj)
 __SEG_END_SSTACK                              I   (starts12z_c.obj)
 _startupData                                  O   (starts12z_c.obj)
 busy_waiting_ms                               F   (Timer_c.obj)
-cnt                                           I   (Events_c.obj)
-curPos_ui32                                   O   (Events_c.obj)
-data                                          O   (Events_c.obj)
-error                                         O   (Events_c.obj)
-flags                                         I   (Events_c.obj)
 get_time                                      F   (Timer_c.obj)
 gpt_driverConfig_s                            O   (Gpt_PBcfg_c.obj)
 gpt_driverConfig_s                            I   (Gpt_c.obj)
-i2c_buf                                       O   (Events_c.obj)
 init_time                                     F   (Timer_c.obj)
 main                                          I   (starts12z_c.obj)
 mcu_initialConfiguration_s                    I   (Mcu_c.obj)
@@ -108,9 +83,7 @@ ms                                            I   (Timer_c.obj)
 mtr_channelConfigReg_apui8                    O   (Mtr_c.obj)
 mtr_channelDutyCycleReg_apui16                O   (Mtr_c.obj)
 mtr_register_s                                O   (Mtr_c.obj)
-pos_speed_acc                                 O   (Events_c.obj)
 rcv                                           I   (IIC0_c.obj)
-sent                                          I   (Events_c.obj)
 update_Mtr_TimerCounterOverflowInterruptFp    F   (Mtr_c.obj)
 wait_ms                                       F   (Timer_c.obj)
 wait_s                                        F   (Timer_c.obj)

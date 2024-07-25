@@ -1,24 +1,22 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_MCAL_DEBUG.lib'
 Unit name                                     size     from       to
 ./SRC/API_c.obj                               3064      107     3171
-./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj         19168    89651   108819
-./SRC/BSW_CS/MCAL/IO/DIO/Dio_PBcfg_c.obj      1864    87787    89651
-./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj            9136    78651    87787
-./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj           16784    61867    78651
-./SRC/BSW_CS/MCAL/IO/PORT/Port_c.obj          5088    56779    61867
-./SRC/BSW_CS/MCAL/MC/GPT/Gpt_PBcfg_c.obj      3400    53379    56779
-./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj           13376    40003    53379
-./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj            6816    33187    40003
-./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj            4256    28931    33187
-./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj        5776    23155    28931
-./SRC/Events_c.obj                           12864     3171    16035
-./SRC/Timer_c.obj                             7120    16035    23155
+./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj         19168    76787    95955
+./SRC/BSW_CS/MCAL/IO/DIO/Dio_PBcfg_c.obj      1864    74923    76787
+./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj            9136    65787    74923
+./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj           16784    49003    65787
+./SRC/BSW_CS/MCAL/IO/PORT/Port_c.obj          5088    43915    49003
+./SRC/BSW_CS/MCAL/MC/GPT/Gpt_PBcfg_c.obj      3400    40515    43915
+./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj           13376    27139    40515
+./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj            6816    20323    27139
+./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj            4256    16067    20323
+./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj        5776    10291    16067
+./SRC/Timer_c.obj                             7120     3171    10291
 
 EXPORTED OBJECTS
 API_Init                                      F   (./SRC/API_c.obj)
 API_interrupt                                 F   (./SRC/Timer_c.obj)
 CCR_reg                                       O   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-Cdd_Motor_GetPositionCurrentAbsolute          I   (./SRC/Events_c.obj)
 Dio_GetModuleStatus                           F   (./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj)
 Dio_Init                                      F   (./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj)
 Dio_ReadChannel                               F   (./SRC/BSW_CS/MCAL/IO/DIO/Dio_c.obj)
@@ -34,7 +32,6 @@ Gpt_SetPeriode                                F   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_
 Gpt_StartTimer                                F   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj)
 Gpt_StopTimer                                 F   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj)
 IIC0_ClearRxBuf                               F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_ClearRxBuf                               I   (./SRC/Events_c.obj)
 IIC0_ClearTxBuf                               F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_Disable                                  F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_Enable                                   F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
@@ -44,34 +41,21 @@ IIC0_GetCharsInTxBuf                          F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC
 IIC0_ISR                                      F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_Init                                     F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_OnArbitLost                              I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnArbitLost                              F   (./SRC/Events_c.obj)
 IIC0_OnError                                  I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnError                                  F   (./SRC/Events_c.obj)
 IIC0_OnFreeTxBuf                              I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnFreeTxBuf                              F   (./SRC/Events_c.obj)
 IIC0_OnFullRxBuf                              I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnFullRxBuf                              F   (./SRC/Events_c.obj)
 IIC0_OnReadReq                                I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnReadReq                                F   (./SRC/Events_c.obj)
 IIC0_OnRxChar                                 I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnRxChar                                 F   (./SRC/Events_c.obj)
 IIC0_OnTxChar                                 I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnTxChar                                 F   (./SRC/Events_c.obj)
 IIC0_OnTxEmptyChar                            I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnTxEmptyChar                            F   (./SRC/Events_c.obj)
 IIC0_OnWriteReq                               I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_OnWriteReq                               F   (./SRC/Events_c.obj)
 IIC0_RecvBlock                                F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_RecvBlock                                I   (./SRC/Events_c.obj)
 IIC0_SelectSlave                              F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_SendBlock                                F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_SendBlock                                I   (./SRC/Events_c.obj)
 IIC0_SendChar                                 F   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
 IIC0_SndRcvTemp                               O   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-IIC0_SndRcvTemp                               I   (./SRC/Events_c.obj)
 ISR_Periodic_IRQ_TIM0_1                       F   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj)
 InpBufferS                                    O   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-InpBufferS                                    I   (./SRC/Events_c.obj)
 Mcu_GetModuleStatus                           F   (./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj)
 Mcu_Init                                      F   (./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj)
 Mcu_PerformReset                              F   (./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj)
@@ -89,21 +73,14 @@ Port_Init                                     F   (./SRC/BSW_CS/MCAL/IO/PORT/Por
 Wdg_Clear                                     F   (./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj)
 Wdg_Init                                      F   (./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj)
 Wdg_Trigger                                   F   (./SRC/BSW_CS/MCAL/MC/WDG/Wdg_c.obj)
-Wdg_Trigger                                   I   (./SRC/Events_c.obj)
 _Startup                                      F   (./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj)
 __SEG_END_SSTACK                              I   (./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj)
 __SEG_START_SSTACK                            I   (./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj)
 _startupData                                  O   (./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj)
 busy_waiting_ms                               F   (./SRC/Timer_c.obj)
-cnt                                           I   (./SRC/Events_c.obj)
-curPos_ui32                                   O   (./SRC/Events_c.obj)
-data                                          O   (./SRC/Events_c.obj)
-error                                         O   (./SRC/Events_c.obj)
-flags                                         I   (./SRC/Events_c.obj)
 get_time                                      F   (./SRC/Timer_c.obj)
 gpt_driverConfig_s                            O   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_PBcfg_c.obj)
 gpt_driverConfig_s                            I   (./SRC/BSW_CS/MCAL/MC/GPT/Gpt_c.obj)
-i2c_buf                                       O   (./SRC/Events_c.obj)
 init_time                                     F   (./SRC/Timer_c.obj)
 main                                          I   (./SRC/BSW_FS/MCAL/S12Z/starts12z_c.obj)
 mcu_initialConfiguration_s                    I   (./SRC/BSW_CS/MCAL/MC/MCU/Mcu_c.obj)
@@ -111,9 +88,7 @@ ms                                            I   (./SRC/Timer_c.obj)
 mtr_channelConfigReg_apui8                    O   (./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj)
 mtr_channelDutyCycleReg_apui16                O   (./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj)
 mtr_register_s                                O   (./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj)
-pos_speed_acc                                 O   (./SRC/Events_c.obj)
 rcv                                           I   (./SRC/BSW_CS/MCAL/COM/IIC/IIC0_c.obj)
-sent                                          I   (./SRC/Events_c.obj)
 update_Mtr_TimerCounterOverflowInterruptFp    F   (./SRC/BSW_CS/MCAL/IO/MTR/Mtr_c.obj)
 wait_ms                                       F   (./SRC/Timer_c.obj)
 wait_s                                        F   (./SRC/Timer_c.obj)

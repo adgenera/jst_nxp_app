@@ -19,7 +19,7 @@
 #include <Wdg.h>
 
 /* HAL ************************* */
-#include "IIc_Lcfg.h"
+#include "Cdd_IIC.h"
 
 /* SL ************************* */
 #include "Cdd_Motor.h"
@@ -50,7 +50,7 @@ const Ecum_CallbackType ecum_initFunctionPtr_apf[] =
 
    /* HAL ****************************************************************** */
    (Ecum_CallbackType) &Cdd_Motor_Init,
-
+   (Ecum_CallbackType) &Cdd_IIC_Init,
    /* SL ******************************************************************* */
    (Ecum_CallbackType) &Al_Motor_Init
 };
@@ -97,7 +97,6 @@ static const Ecum_MainFuncConfigType ecum_mainFctCfgNormalMode_as[] =
 //   { &Wdg_Trigger, 2000, 2000 },
 //#endif
    { &Al_Motor_MainFunction, 200, 20 },
-   { &IIc_LcfgMainFunction, 20, 5}, //4
 };
 /* DID YOU UPDATE *** ECUM_MAX_NUM_OF_MAIN_FUNC *** in EcuM_Cfg.h */
 
@@ -114,7 +113,6 @@ static const Ecum_MainFuncConfigType ecum_mainFctCfgSleepMode_as[] =
 //   { &Wdg_Trigger, 1, 1 },
 //#endif
    { &Al_Motor_MainFunction, 1, 1 },
-   { &IIc_LcfgMainFunction, 20, 5}
 
 };
 /* DID YOU UPDATE *** ECUM_MAX_NUM_OF_MAIN_FUNC *** in EcuM_Cfg.h */

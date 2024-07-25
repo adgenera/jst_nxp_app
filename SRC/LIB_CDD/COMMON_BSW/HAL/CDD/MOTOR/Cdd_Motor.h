@@ -47,15 +47,8 @@ typedef enum
 
 typedef enum
 {
-// #if defined(USE_MOTOR_NB) && ((USE_MOTOR_NB == 1) || (USE_MOTOR_NB == 2))
-#if defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 1)
-   CDD_MOTOR_MTR_HHSS = 0,
-#elif defined(USE_MOTOR_NB) && (USE_MOTOR_NB == 2)
-   CDD_MOTOR_MTR_MM = 0,
-#else
    CDD_MOTOR_MTR_HHSS = 0,
    CDD_MOTOR_MTR_MM,
-#endif
    CDD_MOTOR_MTR_NR_SIZE
 } Cdd_Motor_MotorNumberEnum;
 

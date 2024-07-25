@@ -1,8 +1,29 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/JST_BY_RELEASE_LIB_CENTRAL_DISPLAY.lib'
 Unit name            size     from       to
-Cdd_Motor_c.obj     81024      127    81151
+Cdd_IIC_c.obj       25008    81567   106575
+Cdd_Motor_c.obj     81440      127    81567
 
 EXPORTED OBJECTS
+Cdd_IIC_Get_Module_Speed_HHSS_ui16                       F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Module_Speed_MM_ui16                         F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Module_Speed_ui16                            F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Pos_HHSS                                     F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Pos_MM                                       F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Sign_Speed_HHSS_ui8                          F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Sign_Speed_MM_ui8                            F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Sign_Speed_ui8                               F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_HHSS_si16                              F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_HHSS_ui16                              F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_MM_si16                                F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_MM_ui16                                F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_si16                                   F   (Cdd_IIC_c.obj)
+Cdd_IIC_Get_Speed_ui16                                   F   (Cdd_IIC_c.obj)
+Cdd_IIC_Init                                             F   (Cdd_IIC_c.obj)
+Cdd_IIC_MainFunction                                     F   (Cdd_IIC_c.obj)
+Cdd_IIC_Set_Pos_HHSS                                     F   (Cdd_IIC_c.obj)
+Cdd_IIC_Set_Pos_MM                                       F   (Cdd_IIC_c.obj)
+Cdd_IIC_Set_Speed_HHSS                                   F   (Cdd_IIC_c.obj)
+Cdd_IIC_Set_Speed_MM                                     F   (Cdd_IIC_c.obj)
 Cdd_Motor_Cfg_as                                         I   (Cdd_Motor_c.obj)
 Cdd_Motor_ChangeDefaultFullStepCounter                   F   (Cdd_Motor_c.obj)
 Cdd_Motor_GetDirection                                   F   (Cdd_Motor_c.obj)
@@ -45,5 +66,6 @@ Cdd_Motor_ZD_IsCurrentPositionInZeroWindow               F   (Cdd_Motor_c.obj)
 Cdd_Motor_ZD_IsDetectionCompleteAndValid                 F   (Cdd_Motor_c.obj)
 Cdd_Motor_ZD_IsDetectionEnabled                          F   (Cdd_Motor_c.obj)
 Cdd_Motor_ZD_PerformWindowCheck                          F   (Cdd_Motor_c.obj)
+Dio_WriteChannel                                         I   (Cdd_Motor_c.obj)
 Mtr_SetMotorInterrupt                                    I   (Cdd_Motor_c.obj)
 update_Mtr_TimerCounterOverflowInterruptFp               I   (Cdd_Motor_c.obj)
