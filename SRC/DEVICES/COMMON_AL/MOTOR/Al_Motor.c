@@ -184,7 +184,7 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 	case AL_MOTOR_OPSUBSTATE_CALIB_START:
 		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
 			Cdd_Motor_ZD_CalibrateZeroToActivePosition(motor_e);
-			Cdd_Motor_RunToPositionAbsolute(motor_e, (uint32) 0uL);
+			//Cdd_Motor_RunToPositionAbsolute(motor_e, (uint32) 0uL);
 			Cdd_Motor_RunDistance(motor_e, CDD_MOTOR_DIR_BACKWARD,
 					AL_MOTOR_STATECALIB_FIRSTBACK_UI16, (uint8) 0u);
 
@@ -202,11 +202,13 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 			/* Wenn Zero Point Detect bei Position 0/0 schon an ist,
 			 * ein Stuck zuruckfahren um den Zero Detect Bereich voll zu erfassen */
 			if (Cdd_Motor_ZD_IsCurrentPositionInZeroWindow(
-					motor_e) == (uint8)TRUE) {Cdd_Motor_RunDistanceFullSteps(motor_e, (uint16) 2u);
+					motor_e) == (uint8)TRUE) {
+				
+				Cdd_Motor_RunDistanceFullSteps(motor_e, (uint16) 2u);
 
-			/* Next level ^^ �o� */
-			al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SECOND_REWARD;
-		}
+				/* Next level ^^ �o� */
+				al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SECOND_REWARD;
+			}
 		else
 		{
 			Cdd_Motor_ZD_CalibrateZeroToActivePosition (motor_e);

@@ -912,7 +912,7 @@ void Cdd_Motor_RunDistance(const Cdd_Motor_MotorNumberEnum motor_e,
 	/* Direction change may be taken over immediately because this is a relative movement */
 	/* Apply direction change request if required */
 	/* TODO COMPASS: AUFPASSEN */
-	// Cdd_Motor_ApplyDirChangeAndGearPlayComp (motor_e);
+	Cdd_Motor_ApplyDirChangeAndGearPlayComp(motor_e);
 	if (CDD_MOTOR_DIR_FORWARD == cdd_motor_Data_as[motor_e].dir_e) {
 		cdd_motor_Data_as[motor_e].trgtPosLevel1_ui32 += distance_ui32;
 	} else if (CDD_MOTOR_DIR_BACKWARD == cdd_motor_Data_as[motor_e].dir_e) {
