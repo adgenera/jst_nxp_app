@@ -1378,8 +1378,7 @@ void Cdd_Motor_ZD_CalibrateZeroToActivePosition(
 		const Cdd_Motor_MotorNumberEnum motor_e) {
 	uint32 usteps_ui32;
 
-	/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */
-	DISABLE_ALL_INTERRUPTS();
+	/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */DISABLE_ALL_INTERRUPTS();
 	/*lint !e960 */
 
 	/* Save actual microstep position */
@@ -1418,9 +1417,9 @@ Std_ReturnType Cdd_Motor_ZD_CalibrateZeroToWindow(
 			|| (cdd_motor_zeroDetectionWindow_as[motor_e].falling_s.valid_ui8
 					!= (uint8) TRUE)
 			|| (cdd_motor_zeroDetectionWindow_as[motor_e].rising_s.dir_e
-					!= CDD_MOTOR_DIR_FORWARD)
+					== CDD_MOTOR_DIR_UNDEF)
 			|| (cdd_motor_zeroDetectionWindow_as[motor_e].falling_s.dir_e
-					!= CDD_MOTOR_DIR_FORWARD)) {
+					== CDD_MOTOR_DIR_UNDEF)) {
 		cdd_motor_zeroDetectionWindow_as[motor_e].rising_s.valid_ui8 =
 				(uint8) FALSE;
 		cdd_motor_zeroDetectionWindow_as[motor_e].falling_s.valid_ui8 =
@@ -1661,6 +1660,94 @@ uint8 Cdd_Motor_ZD_GetDistanceZeroPositionAndLeftWindowEdge(
 	return cdd_motor_zeroDetectionWindow_as[motor_e].lastResult_s.windowSizeLeftMiddle_ui8;
 }
 
+/**
+ *  \brief	Zero detection: called by ISR, saves window values
+ *
+ * \param [in]  ---
+ * \param [out] ---
+ * \return      ---
+ */
+
+static void Cdd_Motor_ZD_Window_Values(Cdd_Motor_MotorNumberEnum motor_e,
+		uint8 pos_sense_value_ui8) {
+	/* DEBOUNCING FOR ZERO DETECTION */
+	/* Detect rising edge / active zero window */
+	if (pos_sense_value_ui8 != (uint8) 0U) {
+		if (cdd_motor_debounceRise_as[motor_e].ctr_ui8
+				<= cdd_motor_debouncingThresh_ui8) {
+			if (cdd_motor_debounceRise_as[motor_e].ctr_ui8 == (uint8) 0U) {
+				/* store second detection point */
+				cdd_motor_debounceRise_as[motor_e].posAbsolute_ui32 =
+						cdd_motor_Data_as[motor_e].currPosLevel1_ui32;
+				/* store direction */
+				cdd_motor_debounceRise_as[motor_e].dir_e =
+						cdd_motor_Data_as[motor_e].dir_e;
+			}
+
+			cdd_motor_debounceRise_as[motor_e].ctr_ui8++;
+		} else {
+			/* Reset falling counter if threshold reached */
+			cdd_motor_debounceFall_as[motor_e].ctr_ui8 = (uint8) 0U;
+
+			if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST
+					== cdd_motor_zeroDetectionWindow_as[motor_e].state_e) {
+				/* store first detection information */
+				cdd_motor_zeroDetectionWindow_as[motor_e].rising_s.pos_ui32 =
+						cdd_motor_debounceRise_as[motor_e].posAbsolute_ui32;
+				cdd_motor_zeroDetectionWindow_as[motor_e].rising_s.dir_e =
+						cdd_motor_debounceRise_as[motor_e].dir_e;
+				cdd_motor_zeroDetectionWindow_as[motor_e].rising_s.valid_ui8 =
+						(uint8) TRUE;
+
+				cdd_motor_zeroDetectionWindow_as[motor_e].state_e =
+						CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
+			} else {
+				; /* do nothing */
+			}
+		}
+	}
+	/* Detect failing edge / NO zero window */
+	else {
+		if (cdd_motor_debounceFall_as[motor_e].ctr_ui8
+				<= cdd_motor_debouncingThresh_ui8) {
+			if (cdd_motor_debounceFall_as[motor_e].ctr_ui8 == (uint8) 0U) {
+				/* store second detection point */
+				cdd_motor_debounceFall_as[motor_e].posAbsolute_ui32 =
+						cdd_motor_Data_as[motor_e].currPosLevel1_ui32;
+				/* store direction */
+				cdd_motor_debounceFall_as[motor_e].dir_e =
+						cdd_motor_Data_as[motor_e].dir_e;
+			}
+
+			cdd_motor_debounceFall_as[motor_e].ctr_ui8++;
+		} else {
+			/* Reset rising counter if threshold reached */
+			cdd_motor_debounceRise_as[motor_e].ctr_ui8 = (uint8) 0U;
+
+			if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND
+					== cdd_motor_zeroDetectionWindow_as[motor_e].state_e) {
+				/* store second detection information */
+				cdd_motor_zeroDetectionWindow_as[motor_e].falling_s.pos_ui32 =
+						cdd_motor_debounceFall_as[motor_e].posAbsolute_ui32;
+				cdd_motor_zeroDetectionWindow_as[motor_e].falling_s.dir_e =
+						cdd_motor_debounceFall_as[motor_e].dir_e;
+				cdd_motor_zeroDetectionWindow_as[motor_e].falling_s.valid_ui8 =
+						(uint8) TRUE;
+
+				cdd_motor_zeroDetectionWindow_as[motor_e].state_e =
+						CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
+			} else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL
+					== cdd_motor_zeroDetectionWindow_as[motor_e].state_e) {
+				/* Leave initial state ONLY if zero window is INactive */
+				cdd_motor_zeroDetectionWindow_as[motor_e].state_e =
+						CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
+			} else {
+				; /* do nothing */
+			}
+		}
+	}
+}
+
 /* ************************************************************************** *
  * ISR ********************************************************************** *
  * ************************************************************************** */
@@ -1722,86 +1809,8 @@ boolean Cdd_Motor_RunMotorISR_HHSS(void) {
 			/* Set POS_CHECK_M1 pin as output */
 			bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO2_BITPOS_UI8); /*lint !e923 */
 
-			/* DEBOUNCING FOR ZERO DETECTION */
-			/* Detect rising edge / active zero window */
-			if (bitpos_ui8 != (uint8) 0U) {
-				if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8
-						<= cdd_motor_debouncingThresh_ui8) {
-					if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8
-							== (uint8) 0U) {
-						/* store second detection point */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32 =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].dir_e =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].dir_e;
-					}
-
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8++;
-				} else {
-					/* Reset falling counter if threshold reached */
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 =
-							(uint8) 0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST
-							== cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e) {
-						/* store first detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.pos_ui32 =
-								cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.dir_e =
-								cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].rising_s.valid_ui8 =
-								(uint8) TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e =
-								CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
-					} else {
-						; /* do nothing */
-					}
-				}
-			}
-			/* Detect failing edge / NO zero window */
-			else {
-				if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8
-						<= cdd_motor_debouncingThresh_ui8) {
-					if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8
-							== (uint8) 0U) {
-						/* store second detection point */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32 =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].dir_e =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_HHSS].dir_e;
-					}
-
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].ctr_ui8++;
-				} else {
-					/* Reset rising counter if threshold reached */
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_HHSS].ctr_ui8 =
-							(uint8) 0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND
-							== cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e) {
-						/* store second detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.pos_ui32 =
-								cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.dir_e =
-								cdd_motor_debounceFall_as[CDD_MOTOR_MTR_HHSS].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].falling_s.valid_ui8 =
-								(uint8) TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e =
-								CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
-					} else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL
-							== cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e) {
-						/* Leave initial state ONLY if zero window is INactive */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_HHSS].state_e =
-								CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
-					} else {
-						; /* do nothing */
-					}
-				}
-			}
+			// Call the function
+			Cdd_Motor_ZD_Window_Values(CDD_MOTOR_MTR_HHSS, bitpos_ui8);
 		}
 	} else /* c:7,5 */
 	{
@@ -1925,88 +1934,10 @@ boolean Cdd_Motor_RunMotorISR_MM(void) {
 			uint8 bitpos_ui8;
 
 			/* Set POS_CHECK_M1 pin as output */
-			bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO2_BITPOS_UI8); /*lint !e923 */
+			bitpos_ui8 = CDD_MOTOR_PTT_GET(CDD_MOTOR_NO1_BITPOS_UI8); /*lint !e923 */
 
-			/* DEBOUNCING FOR ZERO DETECTION */
-			/* Detect rising edge / active zero window */
-			if (bitpos_ui8 != (uint8) 0U) {
-				if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8
-						<= cdd_motor_debouncingThresh_ui8) {
-					if (cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8
-							== (uint8) 0U) {
-						/* store second detection point */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32 =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].dir_e =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-					}
-
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8++;
-				} else {
-					/* Reset falling counter if threshold reached */
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8 =
-							(uint8) 0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST
-							== cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e) {
-						/* store first detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.pos_ui32 =
-								cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.dir_e =
-								cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].rising_s.valid_ui8 =
-								(uint8) TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e =
-								CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND;
-					} else {
-						; /* do nothing */
-					}
-				}
-			}
-			/* Detect failing edge / NO zero window */
-			else {
-				if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8
-						<= cdd_motor_debouncingThresh_ui8) {
-					if (cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8
-							== (uint8) 0U) {
-						/* store second detection point */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32 =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_MM].currPosLevel1_ui32;
-						/* store direction */
-						cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].dir_e =
-								cdd_motor_Data_as[CDD_MOTOR_MTR_MM].dir_e;
-					}
-
-					cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].ctr_ui8++;
-				} else {
-					/* Reset rising counter if threshold reached */
-					cdd_motor_debounceRise_as[CDD_MOTOR_MTR_MM].ctr_ui8 =
-							(uint8) 0U;
-
-					if (CDD_MOTOR_ZERO_DET_STATE_DETECTING_SECOND
-							== cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e) {
-						/* store second detection information */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.pos_ui32 =
-								cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].posAbsolute_ui32;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.dir_e =
-								cdd_motor_debounceFall_as[CDD_MOTOR_MTR_MM].dir_e;
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].falling_s.valid_ui8 =
-								(uint8) TRUE;
-
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e =
-								CDD_MOTOR_ZERO_DET_STATE_DETECTION_VALIDATE;
-					} else if (CDD_MOTOR_ZERO_DET_STATE_INITIAL
-							== cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e) {
-						/* Leave initial state ONLY if zero window is INactive */
-						cdd_motor_zeroDetectionWindow_as[CDD_MOTOR_MTR_MM].state_e =
-								CDD_MOTOR_ZERO_DET_STATE_DETECTING_FIRST;
-					} else {
-						; /* do nothing */
-					}
-				}
-			}
+			// Call the function
+			Cdd_Motor_ZD_Window_Values(CDD_MOTOR_MTR_MM, bitpos_ui8);
 		}
 	} else /* c:7,5 */
 	{

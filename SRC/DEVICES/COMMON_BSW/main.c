@@ -75,7 +75,7 @@ void main (void)
 	/* Initialize external Peripherals */
 	    /* WDG is initialized separately **************************************** */
 	//#if ! ((defined DEBUG_WATCHDOG_DISABLE) && (DEBUG_WATCHDOG_DISABLE == 1))
-		//Wdg_Init((uint8)DEVICE_TYPE);
+		Wdg_Init((uint8)DEVICE_TYPE);
 	//#endif
 	API_Init();
 	/* Enable all interrupts */
@@ -88,7 +88,7 @@ void main (void)
 		Ecum_MainFunction();
   		if (ms) 
         {
-  			//Wdg_Clear();
+  			Wdg_Clear();
   			ms = FALSE;	
   			ms_counter++;
         }

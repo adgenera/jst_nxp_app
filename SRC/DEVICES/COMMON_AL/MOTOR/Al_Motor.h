@@ -54,23 +54,12 @@ typedef enum
    AL_MOTOR_OPSTATE_CRITICAL_TEMP,
    AL_MOTOR_OPSTATE_UNDER_VOLTAGE,
    AL_MOTOR_OPSTATE_OVER_VOLTAGE,
-   AL_MOTOR_OPSTATE_STELLGLIEDTEST,
 #if (AL_MOTOR_DEINIT_API == STD_ON)
    ,
    AL_MOTOR_OPSTATE_SHUTDOWN
 #endif
    AL_MOTOR_OPSTATE_SIZE
 } Al_Motor_OperationStateEnum;
-
-typedef enum
-{
-   AL_MOTOR_OPSUBSTATE_STELLTEST_UNDEF = 0,
-   AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE,
-   AL_MOTOR_OPSUBSTATE_STELLTEST_TOP,
-   AL_MOTOR_OPSUBSTATE_STELLTEST_TOP_LEFT,
-   AL_MOTOR_OPSUBSTATE_STELLTEST_TOP_RIGHT,
-   AL_MOTOR_OPSUBSTATE_STELLTEST_SIZE
-} Al_Motor_OperationSubStateStelltestEnum;
 
 typedef enum
 {
@@ -105,19 +94,8 @@ typedef enum
    AL_MOTOR_EVENT_TEMP_CRITICAL_NOTIFY = 64,
    AL_MOTOR_EVENT_VOLT_NORMAL_NOTIFY = 128,
    AL_MOTOR_EVENT_VOLT_UNDER_NOTIFY = 256,
-   AL_MOTOR_EVENT_VOLT_OVER_NOTIFY = 512,
-   AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST = 1024
-
+   AL_MOTOR_EVENT_VOLT_OVER_NOTIFY = 512
 } Al_Motor_EventBitEnum;
-
-typedef enum
-{
-   AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF = 0,
-   AL_MOTOR_EVENT_STELLTEST_REQ_TOP = 1,
-   AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT = 2,
-   AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT = 4
-} Al_Motor_Event_StellTestEnum;
-
 
 /* ***************************** structs ************************************ */
 
@@ -174,11 +152,6 @@ void Al_Motor_SleepModeRequest (void);
 void Al_Motor_ProductionModeRequest (void);
 
 /**
- * \brief Request Change To Stellgliedtest Mode
- */
-void Al_Motor_StellgliedtestModeRequest (void);
-
-/**
  * \brief Request re-calibration
  */
 void Al_Motor_RequestCalibration(void);
@@ -228,27 +201,5 @@ void Al_Motor_UnderVoltageEvtNotify (void);
  * \brief Notification about voltage is in a critical status.
  */
 void Al_Motor_OverVoltageEvtNotify (void);
-
-
-/**
- * \brief setter function start the motor sequence
- */
-void Al_Motor_StellgliedtestSubModeRequest (Al_Motor_Event_StellTestEnum stellTestReq_e);
-
-
-/**
- * \brief getter function to check the status of the motor sequence
- */
-boolean Al_Motor_StellgliedtestSubModeGetResult (Al_Motor_Event_StellTestEnum stellTestReqComplete_e);
-
-
-/**
- * \brief Reset result of StellgliedTest
- *
- * \param [in]  stellTestReqComplete_e
- * \param [out] ---
- * \return ---
- */
-void Al_Motor_StellgliedtestSubModeResetResult (Al_Motor_Event_StellTestEnum stellTestReqComplete_e);
 
 #endif /* AL_MOTOR_H */

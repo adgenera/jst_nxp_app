@@ -52,16 +52,14 @@ static volatile Std_ModuleStatusReturnType al_motor_moduleState_e =
 #endif
 
 static Al_Motor_OperationStateEnum al_motor_opState_e = AL_MOTOR_OPSTATE_UNDEF;
-//static Al_Motor_OperationSubStateCalibEnum al_motor_opSubStateCalib_e = AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
+
 static Al_Motor_OperationSubStateCalibEnum al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_NR_SIZE] =
 		{ AL_MOTOR_OPSUBSTATE_CALIB_UNDEF };
 
-static Al_Motor_OperationSubStateStelltestEnum al_motor_stellgliedtestState_e =
-		AL_MOTOR_OPSUBSTATE_STELLTEST_UNDEF;
-
 static uint16 al_motor_event_e = (uint16) AL_MOTOR_EVENT_UNDEF;
 
-static volatile uint8 al_motor_calibrationDone_ui8 = (uint8) FALSE;
+static volatile uint8 al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_NR_SIZE] = {
+		(uint8) FALSE };
 
 /**
  * When the calibration is triggered from Production Mode, the state machine
@@ -71,12 +69,6 @@ static volatile uint8 al_motor_calibrationDone_ui8 = (uint8) FALSE;
  * after re-calibration. */
 static uint8 al_motor_returnToProductionMode_ui8 =
 		AL_MOTOR_PRODUCTION_MODE_CALIBRATION_FALSE;
-
-/* STELLGLIEDTEST ***************************************************** */
-static Al_Motor_Event_StellTestEnum al_motor_eventStellTestReq_e =
-		AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF;
-static Al_Motor_Event_StellTestEnum al_motor_resultStellTestComplete_e =
-		AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF;
 
 /* ******************************************************************** */
 
@@ -101,8 +93,6 @@ static Cdd_Motor_DirectionEnum Al_Motor_GetResetDirection(
 
 static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e);
 
-static void Al_Motor_StellgliedtestStateMgmt(Cdd_Motor_MotorNumberEnum motor_e);
-
 static void Al_Motor_RunStateMgmt(Cdd_Motor_MotorNumberEnum motor_e);
 
 static void Al_Motor_SleepStateMgmt(Cdd_Motor_MotorNumberEnum motor_e);
@@ -116,8 +106,6 @@ static void Al_Motor_SleepModeTransition(void);
 static void Al_Motor_ProductionModeRequestTransition(void);
 
 static void Al_Motor_ProductionModeTransition(void);
-
-static void Al_Motor_StellgliedtestModeTransition(void);
 
 static void Al_Motor_CriticalStateTransition(void);
 
@@ -184,7 +172,6 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 	case AL_MOTOR_OPSUBSTATE_CALIB_START:
 		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
 			Cdd_Motor_ZD_CalibrateZeroToActivePosition(motor_e);
-			//Cdd_Motor_RunToPositionAbsolute(motor_e, (uint32) 0uL);
 			Cdd_Motor_RunDistance(motor_e, CDD_MOTOR_DIR_BACKWARD,
 					AL_MOTOR_STATECALIB_FIRSTBACK_UI16, (uint8) 0u);
 
@@ -203,12 +190,12 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 			 * ein Stuck zuruckfahren um den Zero Detect Bereich voll zu erfassen */
 			if (Cdd_Motor_ZD_IsCurrentPositionInZeroWindow(
 					motor_e) == (uint8)TRUE) {
-				
-				Cdd_Motor_RunDistanceFullSteps(motor_e, (uint16) 2u);
 
-				/* Next level ^^ �o� */
-				al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SECOND_REWARD;
-			}
+Cdd_Motor_RunDistanceFullSteps			(motor_e, (uint16) 2u);
+
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SECOND_REWARD;
+		}
 		else
 		{
 			Cdd_Motor_ZD_CalibrateZeroToActivePosition (motor_e);
@@ -297,7 +284,7 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 	if (Cdd_Motor_ReachedFinalPosition (motor_e) == (uint8)TRUE)
 	{
 		Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
-		Cdd_Motor_RunToPosition (motor_e, (uint32) AL_MOTOR_STELLTEST_POSITION_TOP);
+		Cdd_Motor_RunToPosition (motor_e, (uint32) 0);
 
 		/* Next level ^^ �o� */
 		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_FINALLY_FWD;
@@ -333,157 +320,6 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 
 	break;
 }
-}
-
-			/**
-			 * \brief State management for Stellgliedtest
-			 *
-			 * \param [in]  ---
-			 * \param [out] ---
-			 * \return      ---
-			 */
-static void Al_Motor_StellgliedtestStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
-	uint16 targetPos_ui16 = (uint16) 0u;
-	uint16 maximumFS_ui16 = 0u;
-
-	/** \req CS_REQ_BY634_5_000301 The device's analogue pointer moves directly the shortest way to the TOP position. */
-	/** \req CS_REQ_BY634_5_000374  */
-	/** \req CS_REQ_BY634_5_000375  */
-	/** \req CS_REQ_BY634_5_000378 The device's analogue pointer (dial for compass) moves the defined way (shortest way/clockwise/counter-clockwise) back to TOP position. */
-
-	switch (al_motor_stellgliedtestState_e) {
-	case AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE: {
-		/* Get maximum number of fullsteps */
-		maximumFS_ui16 = (uint16) Cdd_Motor_GetMaximumFullStepUsed(
-				motor_e) / CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE;
-
-		/* Handle incoming requests */
-		if ((al_motor_eventStellTestReq_e & AL_MOTOR_EVENT_STELLTEST_REQ_TOP)
-				!= AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF) /*lint !e655 !e9029 !e9027 */
-				{
-			Cdd_Motor_DirectionEnum resetDir_e;
-			uint32 usedHalfRound_ui32;
-
-			/* delete requested event */
-			al_motor_eventStellTestReq_e &=
-					(~((uint16) AL_MOTOR_EVENT_STELLTEST_REQ_TOP)); /*lint !e641, !e64 !e9029 !e9027 !e9034 */
-			/* define next state */
-			al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_TOP;
-
-			/* perform state transition */
-			/* Determine movement direction */
-			usedHalfRound_ui32 = ((uint32) Cdd_Motor_GetMaximumFullStepUsed(
-					motor_e) / (uint32) 2uL);
-			resetDir_e = Al_Motor_GetResetDirection(motor_e,
-					usedHalfRound_ui32);
-			Cdd_Motor_SetDirectionReq(motor_e, resetDir_e);
-
-			/* drive pointer to TOP position */
-			Cdd_Motor_RunToFullStepPosition(motor_e,
-					(uint16) AL_MOTOR_STELLTEST_POSITION_TOP);
-		} else if ((al_motor_eventStellTestReq_e
-				& AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT)
-				!= AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF) /*lint !e655 !e9029 !e9027  */
-				{
-			/* delete requested event */
-			al_motor_eventStellTestReq_e &=
-					(~AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT); /*lint !e641, !e64 !e9029 !e9027 !e9034 */
-			/* define next state */
-			al_motor_stellgliedtestState_e =
-					AL_MOTOR_OPSUBSTATE_STELLTEST_TOP_LEFT;
-
-			/* perform state transition */
-			/* determine TOP LEFT position */
-#if (AL_MOTOR_STELLTEST_POSITION_TOP < AL_MOTOR_STELLTEST_POSITION_TOP_LEFT_DELTA)
-			targetPos_ui16 = (uint16)(maximumFS_ui16 - (uint16)AL_MOTOR_STELLTEST_POSITION_TOP_LEFT_DELTA);
-#else
-			targetPos_ui16 = (uint16) AL_MOTOR_STELLTEST_POSITION_TOP
-					- (uint16) AL_MOTOR_STELLTEST_POSITION_TOP_LEFT_DELTA;
-#endif
-
-			/* Set drive direction counter clockwise */
-			Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_BACKWARD);
-
-			/* drive to TOP LEFT position */
-			Cdd_Motor_RunToFullStepPosition(motor_e, targetPos_ui16);
-		} else if ((al_motor_eventStellTestReq_e
-				& AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT)
-				!= AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF) /*lint !e655 !e9029 !e9027 */
-				{
-			/* delete requested event */
-			al_motor_eventStellTestReq_e &=
-					(~AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT); /*lint !e641, !e64 !e9027 !e9034*/
-			/* define next state */
-			al_motor_stellgliedtestState_e =
-					AL_MOTOR_OPSUBSTATE_STELLTEST_TOP_RIGHT;
-
-			/* perform state transition */
-			/* determine TOP LEFT position */
-			targetPos_ui16 = (uint16) AL_MOTOR_STELLTEST_POSITION_TOP
-					+ (uint16) AL_MOTOR_STELLTEST_POSITION_TOP_RIGHT_DELTA;
-			if (targetPos_ui16 >= maximumFS_ui16) {
-				targetPos_ui16 -= maximumFS_ui16;
-			} else {
-				; /* do nothing */
-			}
-
-			/* Set drive direction counter clockwise */
-			Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
-
-			/* drive pointer to TOP RIGHT position */
-			Cdd_Motor_RunToFullStepPosition(motor_e, targetPos_ui16);
-		} else {
-			/* delete all illegal events */
-			al_motor_eventStellTestReq_e &= (~(AL_MOTOR_EVENT_STELLTEST_REQ_TOP
-					| AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT
-					| AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT)); /*lint !e655, !e641, !e64 !e9027 !e9029 !e9034 */
-
-			/* nothing else to do */
-		}
-
-		break;
-	}
-
-	case AL_MOTOR_OPSUBSTATE_STELLTEST_TOP: {
-		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
-			/* define next state */
-			al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE;
-			/* set result marker */
-			al_motor_resultStellTestComplete_e |=
-					AL_MOTOR_EVENT_STELLTEST_REQ_TOP; /*lint !e655 !e9027*/
-		}
-		break;
-	}
-	case AL_MOTOR_OPSUBSTATE_STELLTEST_TOP_LEFT: {
-		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
-			/* define next state */
-			al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE;
-			/* set result marker */
-			al_motor_resultStellTestComplete_e |=
-					AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT; /*lint !e655 !e9027*/
-		}
-		break;
-	}
-	case AL_MOTOR_OPSUBSTATE_STELLTEST_TOP_RIGHT: {
-		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
-			/* define next state */
-			al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE;
-			/* set result marker */
-			al_motor_resultStellTestComplete_e |=
-					AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT; /*lint !e655 !e9027*/
-		}
-		break;
-	}
-
-	case AL_MOTOR_OPSUBSTATE_STELLTEST_UNDEF:
-	case AL_MOTOR_OPSUBSTATE_STELLTEST_SIZE:
-	default: {
-		/* Back to start */
-		al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE;
-
-		break;
-	}
-	}
 }
 
 static void Al_Motor_RunStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
@@ -569,7 +405,8 @@ static void Al_Motor_SleepStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
  */
 void Al_Motor_CalibrationModeTransition(void) {
 	/* Reset calibration mode */
-	al_motor_calibrationDone_ui8 = (uint8) FALSE;
+	al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] = FALSE;
+	al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = FALSE;
 
 //HHSS
 	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_HHSS,
@@ -810,46 +647,6 @@ static void Al_Motor_ProductionModeTransition(void) {
 }
 
 /**
- *  \brief Function configure the motor for the Stellgliedtest Mode
- *
- */
-static void Al_Motor_StellgliedtestModeTransition(void) {
-	//HHSS
-	Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_HHSS,
-			AL_MOTOR_DEF_FULL_STEP_COUNTER_STELLTEST);
-
-	Cdd_Motor_ZD_EnableDetection(CDD_MOTOR_MTR_HHSS);
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_HHSS, AL_MOTOR_STEPMODE_STELLTEST);
-	Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_HHSS, CDD_MOTOR_DIR_FORWARD);
-
-	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_HHSS,
-			AL_MOTOR_SLOWDOWN_FAC_STELLTEST);
-
-	//MM
-	Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_DEF_FULL_STEP_COUNTER_STELLTEST);
-
-	Cdd_Motor_ZD_EnableDetection(CDD_MOTOR_MTR_MM);
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_STELLTEST);
-	Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-
-	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_SLOWDOWN_FAC_STELLTEST);
-
-	/* Clear all states */
-	al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_IDLE;
-
-	/* Do NOT clear the request flags: al_motor_eventStellTestReq_e */
-	/* Clear all result flags */
-	al_motor_resultStellTestComplete_e = AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF;
-
-	/* Give status back to application control */
-	//Al_App_Ctrl_StellgliedtestModeChangeAllowedResponse (AL_APP_CTRL_APP_MOTOR);
-	/* set next motor opState to AL_MOTOR_OPSTATE_STELLGLIEDTEST */
-	al_motor_opState_e = AL_MOTOR_OPSTATE_STELLGLIEDTEST;
-}
-
-/**
  *  \brief Function configure the motor for the Critical Temp State
  *
  */
@@ -905,17 +702,14 @@ void Al_Motor_Init(void) {
 	al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
 			AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
 
-	al_motor_stellgliedtestState_e = AL_MOTOR_OPSUBSTATE_STELLTEST_UNDEF;
-
 	al_motor_event_e = (uint16) AL_MOTOR_EVENT_UNDEF;
 
-	al_motor_calibrationDone_ui8 = (uint8) FALSE;
+	al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] = FALSE;
+	al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = FALSE;
 
 	al_motor_returnToProductionMode_ui8 =
 			AL_MOTOR_PRODUCTION_MODE_CALIBRATION_FALSE;
 
-	al_motor_eventStellTestReq_e = AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF;
-	al_motor_resultStellTestComplete_e = AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF;
 }
 
 #if (AL_MOTOR_DEINIT_API == STD_ON)
@@ -1090,24 +884,6 @@ void Al_Motor_MainFunction(void) {
 			Al_Motor_CriticalStateTransition();
 
 		}
-	} else if ((al_motor_event_e
-			& (uint16) AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST)
-			== (uint16) AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST) {
-		if ((AL_MOTOR_OPSTATE_UNCALIBRATED == al_motor_opState_e)
-				|| (AL_MOTOR_OPSTATE_CALIBRATION == al_motor_opState_e)) {
-			/* Only keep Stellgliedtest mode request */
-			al_motor_event_e =
-					(uint16) AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST;
-		} else {
-			/* Delete all events */
-			al_motor_event_e = (uint16) AL_MOTOR_EVENT_UNDEF;
-
-			if (al_motor_opState_e != AL_MOTOR_OPSTATE_STELLGLIEDTEST) {
-				Al_Motor_StellgliedtestModeTransition();
-			} else {
-				/* nothing to be done */
-			}
-		}
 	} else {
 		/* do nothing */
 	}
@@ -1161,17 +937,10 @@ void Al_Motor_MainFunction(void) {
 
 		if (al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_HHSS]
 				== AL_MOTOR_OPSUBSTATE_CALIB_FINISHED) {
-			al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_HHSS] =
-					AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
 
-			al_motor_calibrationDone_ui8 = (uint8) TRUE;
+			al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] = (uint8) TRUE;
 
-			if ((al_motor_event_e & (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST)
-					== (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST) {
-				al_motor_event_e &=
-						(~((uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST));
-				Al_Motor_RunModeTransition();
-			} else if (al_motor_returnToProductionMode_ui8
+			if (al_motor_returnToProductionMode_ui8
 					== AL_MOTOR_PRODUCTION_MODE_CALIBRATION_TRUE) {
 				al_motor_event_e =
 						(uint16) AL_MOTOR_EVENT_PRODUCTIONMODE_REQUEST;
@@ -1218,17 +987,10 @@ void Al_Motor_MainFunction(void) {
 
 		if (al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM]
 				== AL_MOTOR_OPSUBSTATE_CALIB_FINISHED) {
-			al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
-					AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
 
-			al_motor_calibrationDone_ui8 = (uint8) TRUE;
+			al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = (uint8) TRUE;
 
-			if ((al_motor_event_e & (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST)
-					== (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST) {
-				al_motor_event_e &=
-						(~((uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST));
-				Al_Motor_RunModeTransition();
-			} else if (al_motor_returnToProductionMode_ui8
+			if (al_motor_returnToProductionMode_ui8
 					== AL_MOTOR_PRODUCTION_MODE_CALIBRATION_TRUE) {
 				al_motor_event_e =
 						(uint16) AL_MOTOR_EVENT_PRODUCTIONMODE_REQUEST;
@@ -1241,6 +1003,17 @@ void Al_Motor_MainFunction(void) {
 					AL_MOTOR_PRODUCTION_MODE_CALIBRATION_FALSE;
 		} else {
 			/* do nothing */
+		}
+
+		/* When calibration was finished, return to normal operation */
+		if (al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] == (uint8) TRUE
+				&& al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM]
+						== (uint8) TRUE) {
+			al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_HHSS] =
+					AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
+			al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
+					AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
+			Al_Motor_RunModeTransition();
 		}
 
 		break;
@@ -1369,7 +1142,9 @@ void Al_Motor_MainFunction(void) {
 		} else if (al_motor_criticalEnvironment_ui8
 				== AL_MOTOR_CRITICAL_ENV_NORMAL) {
 			/* When calibration was finished, return to normal operation */
-			if (al_motor_calibrationDone_ui8 == (uint8) TRUE) {
+			if (al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] == (uint8) TRUE
+					&& al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM]
+							== (uint8) TRUE) {
 				Al_Motor_RunModeTransition();
 			} else {
 				Al_Motor_CalibrationModeTransition();
@@ -1459,35 +1234,6 @@ case AL_MOTOR_OPSTATE_PRODUCTION:
 	break;
 }
 
-case AL_MOTOR_OPSTATE_STELLGLIEDTEST:
-{
-	if ((al_motor_event_e & (uint16) AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST)
-			== (uint16) AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST)
-	{
-		/* Delete event */
-		al_motor_event_e &= (~((uint16)AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST)); /*lint !e655 */
-		/* Acknowledge sleep request */
-		//Al_App_Ctrl_StellgliedtestModeChangeAllowedResponse (AL_APP_CTRL_APP_MOTOR);
-	}
-	else if ((al_motor_event_e & (uint16)AL_MOTOR_EVENT_RUNMODE_REQUEST) == (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST) /*lint !e655 */
-	{
-		/* Delete event */
-		al_motor_event_e &= (~((uint16)AL_MOTOR_EVENT_RUNMODE_REQUEST)); /*lint !e655 */
-
-		/* change to run mode */
-		Al_Motor_RunModeTransition ();
-	}
-	else
-	{
-		//Al_Motor_StellgliedtestStateMgmt (CDD_MOTOR_MTR_HHSS);
-		//Al_Motor_StellgliedtestStateMgmt (CDD_MOTOR_MTR_MM);
-
-		/* nothing to be done */
-	}
-
-	break;
-}
-
 #if (AL_MOTOR_DEINIT_API == STD_ON)
 					case AL_MOTOR_OPSTATE_SHUTDOWN:
 					{
@@ -1563,15 +1309,6 @@ void Al_Motor_SleepModeRequest(void) {
 }
 
 /**
- * \brief Request Change To Stellgliedtest Mode
- */
-void Al_Motor_StellgliedtestModeRequest(void) {
-	/* In order to that request all prior mode requests shall be deleted*/
-	/* Add new mode request */
-	al_motor_event_e = (uint16) AL_MOTOR_EVENT_STELLGLIEDTESTMODE_REQUEST;
-}
-
-/**
  * \brief Request Change To Production Mode
  */
 void Al_Motor_ProductionModeRequest(void) {
@@ -1583,15 +1320,7 @@ void Al_Motor_ProductionModeRequest(void) {
 /**
  * \brief Request re-calibration
  */
-//void Al_Motor_RequestCalibration (void)
-//{
-//   /* only allowed in production mode */
-//   if (al_motor_opState_e == AL_MOTOR_OPSTATE_PRODUCTION)
-//   {
-//      Al_Motor_CalibrationModeTransition ();
-//      al_motor_returnToProductionMode_ui8 = AL_MOTOR_PRODUCTION_MODE_CALIBRATION_TRUE;
-//   }
-//}
+
 void Al_Motor_RequestCalibration(void) {
 	/* only allowed in production mode */
 	if (al_motor_opState_e == AL_MOTOR_OPSTATE_PRODUCTION) {
@@ -1666,79 +1395,5 @@ void Al_Motor_OverVoltageEvtNotify(void) {
 	al_motor_event_e &= (~((uint16) AL_MOTOR_EVENT_VOLT_NORMAL_NOTIFY
 			| (uint16) AL_MOTOR_EVENT_VOLT_UNDER_NOTIFY));
 	al_motor_criticalEnvironment_ui8 |= AL_MOTOR_CRITICAL_SET_VOLTAGE_FLAG;
-}
-
-/**
- * \brief Request function to trigger StellGlied test specific functionality
- *
- * \param [in]  stellTestReq_e
- * \param [out] ---
- * \return      ---
- */
-void Al_Motor_StellgliedtestSubModeRequest(
-		Al_Motor_Event_StellTestEnum stellTestReq_e) {
-	switch (stellTestReq_e) {
-	case AL_MOTOR_EVENT_STELLTEST_REQ_TOP:
-	case AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT:
-	case AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT: {
-		/* set motor sequence 1 TRUE/FALSE */
-		al_motor_eventStellTestReq_e |= stellTestReq_e; /*lint !e655 !e9027*/
-
-		break;
-	}
-
-	case AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF:
-	default: {
-		break;
-	}
-	}
-}
-
-/**
- * \brief Getter function to check the status of the motor sequence
- *
- * \param [in]  al_motor_stellTestReq_e
- * \param [out] ---
- * \return al_motor_return_value_b
- */
-boolean Al_Motor_StellgliedtestSubModeGetResult(
-		Al_Motor_Event_StellTestEnum stellTestReqComplete_e) {
-	boolean ret_b = (boolean) FALSE;
-
-	switch (stellTestReqComplete_e) {
-	case AL_MOTOR_EVENT_STELLTEST_REQ_TOP:
-	case AL_MOTOR_EVENT_STELLTEST_REQ_TOP_LEFT:
-	case AL_MOTOR_EVENT_STELLTEST_REQ_TOP_RIGHT: {
-		if ((stellTestReqComplete_e & al_motor_resultStellTestComplete_e)
-				== stellTestReqComplete_e) /*lint !e655 !e9027 !e9029 */
-				{
-			ret_b = (boolean) TRUE;
-		} else {
-			ret_b = (boolean) FALSE;
-		}
-
-		break;
-	}
-
-	case AL_MOTOR_EVENT_STELLTEST_REQ_UNDEF:
-	default: {
-		break;
-	}
-	}
-
-	/* Get status chosen sequence variable */
-	return ret_b;
-}
-
-/**
- * \brief Reset result of StellgliedTest
- *
- * \param [in]  al_motor_stellTestReq_e
- * \param [out] ---
- * \return ---
- */
-void Al_Motor_StellgliedtestSubModeResetResult(
-		Al_Motor_Event_StellTestEnum stellTestReqComplete_e) {
-	al_motor_resultStellTestComplete_e &= ~(stellTestReqComplete_e); /*lint !e641, !e64 !e9027 !e9034*/
 }
 

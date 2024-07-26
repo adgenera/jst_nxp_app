@@ -1,7 +1,7 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/JST_BY_RELEASE_LIB_CENTRAL_DISPLAY.lib'
 Unit name            size     from       to
-Cdd_IIC_c.obj       25008    81567   106575
-Cdd_Motor_c.obj     81440      127    81567
+Cdd_IIC_c.obj       25008    83407   108415
+Cdd_Motor_c.obj     83280      127    83407
 
 EXPORTED OBJECTS
 Cdd_IIC_Get_Module_Speed_HHSS_ui16                       F   (Cdd_IIC_c.obj)

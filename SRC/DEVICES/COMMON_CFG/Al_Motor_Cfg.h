@@ -21,16 +21,15 @@
 */
 #define AL_MOTOR_DEV_ERROR_DETECT          PROJECT_SETTINGS_GLOBAL_DET_SWITCH
 
-#define AL_MOTOR_STATECALIB_FIRSTBACK_UI16         (uint16)60
-#define AL_MOTOR_STATECALIB_FIRSTFWD_UI16          (uint16)240
+#define AL_MOTOR_STATECALIB_FIRSTBACK_UI16         (uint16)30
+#define AL_MOTOR_STATECALIB_FIRSTFWD_UI16          (uint16)396
 #define AL_MOTOR_STATECALIB_FIRSTCP_UI16           (uint16)180
-#define AL_MOTOR_STATECALIB_ENDPOS                 (uint16)120
+#define AL_MOTOR_STATECALIB_ENDPOS                 (uint16)0
 
-#define AL_MOTOR_SLOWDOWN_FAC_CALIBRATION      CDD_MOTOR_SPEED_1000US
+#define AL_MOTOR_SLOWDOWN_FAC_CALIBRATION      CDD_MOTOR_SPEED_198US
 #define AL_MOTOR_SLOWDOWN_FAC_RUN              CDD_MOTOR_SPEED_1000US
 #define AL_MOTOR_SLOWDOWN_FAC_SLEEP            CDD_MOTOR_SPEED_1000US
 #define AL_MOTOR_SLOWDOWN_FAC_PRODUCTION       CDD_MOTOR_SPEED_1000US
-#define AL_MOTOR_SLOWDOWN_FAC_STELLTEST        CDD_MOTOR_SPEED_1000US
 #define AL_MOTOR_SLOWDOWN_FAC_EXCEPTION        CDD_MOTOR_SPEED_1000US
 #define AL_MOTOR_SLOWDOWN_FAC_SHUTDOWN         CDD_MOTOR_SPEED_1000US
 
@@ -40,7 +39,6 @@
 #define AL_MOTOR_DEF_FULL_STEP_COUNTER_RUN                      CDD_MOTOR_USED_FSTEP_CTR_ABSOLUTE
 #define AL_MOTOR_DEF_FULL_STEP_COUNTER_SLEEP                    CDD_MOTOR_USED_FSTEP_CTR_ABSOLUTE
 #define AL_MOTOR_DEF_FULL_STEP_COUNTER_PRODUCTION               CDD_MOTOR_USED_FSTEP_CTR_ABSOLUTE
-#define AL_MOTOR_DEF_FULL_STEP_COUNTER_STELLTEST                CDD_MOTOR_USED_FSTEP_CTR_ABSOLUTE
 #define AL_MOTOR_DEF_FULL_STEP_COUNTER_EXCEPTION                CDD_MOTOR_USED_FSTEP_CTR_ABSOLUTE
 #define AL_MOTOR_DEF_FULL_STEP_COUNTER_SHUTDOWN                 CDD_MOTOR_USED_FSTEP_CTR_ABSOLUTE
 /* ############################################################################################## */
@@ -57,7 +55,6 @@
 #define AL_MOTOR_STEPMODE_SLEEP                                CDD_MOTOR_STEPMODE_MICRO_FAST
 #define AL_MOTOR_STEPMODE_PRODUCTION_REQUEST                   CDD_MOTOR_STEPMODE_MICRO_FAST
 #define AL_MOTOR_STEPMODE_PRODUCTION                           CDD_MOTOR_STEPMODE_STOP
-#define AL_MOTOR_STEPMODE_STELLTEST                            CDD_MOTOR_STEPMODE_MICRO_FAST
 #define AL_MOTOR_STEPMODE_EXCEPTION                            CDD_MOTOR_STEPMODE_STOP
 #define AL_MOTOR_STEPMODE_SHUTDOWN                             CDD_MOTOR_STEPMODE_STOP
 /* ############################################################################################## */
@@ -68,14 +65,9 @@
 
 
 /* ############################################################################################## */
-#if (DEVICE_TYPE == DEVICE_CENTRAL_DISPLAY)
-#define AL_MOTOR_STELLTEST_POSITION_TOP                     0
-#define AL_MOTOR_STELLTEST_POSITION_TOP_LEFT_DELTA          0
-#define AL_MOTOR_STELLTEST_POSITION_TOP_RIGHT_DELTA         360
+
 /* ############################################################################################## */
-#else
-#error "Unconfigured device"
-#endif
+
 /* ############################################################################################## */
 
 /* Module configuration ***************************************************** */

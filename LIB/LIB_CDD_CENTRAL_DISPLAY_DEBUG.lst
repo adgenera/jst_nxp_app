@@ -1,7 +1,7 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib'
 Unit name                                       size     from       to
-./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj         25008    81914   106922
-./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     81792      122    81914
+./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj         25008    83770   108778
+./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     83648      122    83770
 
 EXPORTED OBJECTS
 Cdd_IIC_Get_Module_Speed_HHSS_ui16                       F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
