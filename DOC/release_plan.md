@@ -17,7 +17,7 @@
 - [ ] Abilitazione del secondo motore solo su MCU2 in base a messaggio
 - [ ] Aggiungere un comando di I2C da STm32 di N byte (8 potrebbero bastare ma potremmo fare anche 16).
 - [ ] Scrittura:
-  - MCU identifier ( HHMM o SS)
+  - MCU identifier (HHMM o SS)
   - Stato
   - A lot of dummy
   - Lettura

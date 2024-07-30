@@ -896,16 +896,6 @@ void Cdd_Motor_RunDistance(const Cdd_Motor_MotorNumberEnum motor_e,
 
 	Cdd_Motor_SetDirectionReq(motor_e, dir_e);
 
-	//   if (distance_ui32 >= Cdd_Motor_Cfg_as[motor_e].uStepMaximumAbsolute_ui32)
-	//   {
-	//      distance_ui32 %= Cdd_Motor_Cfg_as[motor_e].uStepMaximumAbsolute_ui32;
-	//   }
-	//
-	//   if (distance_ui32 == (uint32) 0uL)
-	//   {
-	//      return;
-	//   }
-
 	/* THIS SEQUENCE MAY NOT BE INTERRUPTED ********************************** */DISABLE_ALL_INTERRUPTS();
 	/*lint !e960 */
 

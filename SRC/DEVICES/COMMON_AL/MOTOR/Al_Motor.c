@@ -48,7 +48,7 @@
 
 #if (AL_MOTOR_MODULE_STATE_API == STD_ON)
 static volatile Std_ModuleStatusReturnType al_motor_moduleState_e =
-		MODULE_UNINIT;
+MODULE_UNINIT;
 #endif
 
 static Al_Motor_OperationStateEnum al_motor_opState_e = AL_MOTOR_OPSTATE_UNDEF;
@@ -172,154 +172,189 @@ static void Al_Motor_CalibrationStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 	case AL_MOTOR_OPSUBSTATE_CALIB_START:
 		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
 			Cdd_Motor_ZD_CalibrateZeroToActivePosition(motor_e);
-			Cdd_Motor_RunDistance(motor_e, CDD_MOTOR_DIR_BACKWARD,
-					AL_MOTOR_STATECALIB_FIRSTBACK_UI16, (uint8) 0u);
 
 			/* Next level */
 			al_motor_opSubStateCalib_e[motor_e] =
-					AL_MOTOR_OPSUBSTATE_CALIB_FIRST_REWARD;
+					AL_MOTOR_OPSUBSTATE_CALIB_FIRST_SEARCH_BW;
 		} else {
 			;/* do nothing */
 		}
 
 		break;
 
-	case AL_MOTOR_OPSUBSTATE_CALIB_FIRST_REWARD:
+	case AL_MOTOR_OPSUBSTATE_CALIB_FIRST_SEARCH_BW:
 		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
-			/* Wenn Zero Point Detect bei Position 0/0 schon an ist,
-			 * ein Stuck zuruckfahren um den Zero Detect Bereich voll zu erfassen */
-			if (Cdd_Motor_ZD_IsCurrentPositionInZeroWindow(
-					motor_e) == (uint8)TRUE) {
+			Cdd_Motor_ZD_EnableDetection(motor_e);
+			Cdd_Motor_RunDistance(motor_e, CDD_MOTOR_DIR_BACKWARD, 
+			AL_MOTOR_STATECALIB_FIRSTBACK_UI16, (uint8) 0u);
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO_FIRST_SEARCH;
+			Cdd_Motor_ZD_DeleteResult(motor_e);
+		} else {
+			; // do nothing 
+		}
+		break;
 
-Cdd_Motor_RunDistanceFullSteps			(motor_e, (uint16) 2u);
+	case AL_MOTOR_OPSUBSTATE_CALIB_FIRST_SEARCH_FW:
+		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
+			Cdd_Motor_RunDistance(motor_e, CDD_MOTOR_DIR_FORWARD, 
+			AL_MOTOR_STATECALIB_FIRSTFWD_UI16, (uint8) 0u);
 
 			/* Next level ^^ �o� */
-			al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SECOND_REWARD;
-		}
-		else
-		{
-			Cdd_Motor_ZD_CalibrateZeroToActivePosition (motor_e);
-			Cdd_Motor_ZD_EnableDetection (motor_e);
-			Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
-			Cdd_Motor_RunDistanceFullSteps (motor_e, AL_MOTOR_STATECALIB_FIRSTFWD_UI16);
-			al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO;
-			Cdd_Motor_ZD_DeleteResult (motor_e);
-		}
-	}
-	else
-	{
-		;/* do nothing */
-	}
-	break;
-
-	case AL_MOTOR_OPSUBSTATE_CALIB_SECOND_REWARD:
-	if (Cdd_Motor_ReachedFinalPosition (motor_e) == (uint8)TRUE)
-	{
-		Cdd_Motor_ZD_EnableDetection (motor_e);
-		Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
-		Cdd_Motor_RunDistanceFullSteps (motor_e, (sint16)(AL_MOTOR_STATECALIB_FIRSTFWD_UI16));
-
-		/* Next level ^^ �o� */
-		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO;
-	}
-	else
-	{
-		; /* do nothing */
-	}
-	break;
-
-	case AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO:
-	if (Cdd_Motor_ZD_IsDetectionCompleteAndValid(motor_e) == (uint8)TRUE)
-	{
-		Cdd_Motor_ZD_DisableDetection (motor_e);
-
-		/* Drive to next full step position */
-		Cdd_Motor_RunToNextFullStep (motor_e);
-
-		/* Next level ^^ �o� */
-		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_ZERO_WINDOW_DETECTED;
-	}
-	/* Motor runs till position 45 with first command, so should be enough from point of timing */
-	else
-	{
-		currentPos_ui32 = Cdd_Motor_GetFullStepPositionAbsolute(motor_e);
-		if ((currentPos_ui32 > AL_MOTOR_STATECALIB_ENDPOS) &&
-				currentPos_ui32 <= AL_MOTOR_STATECALIB_FIRSTCP_UI16)
-		{
-			Cdd_Motor_RunToPosition(motor_e, (uint32) AL_MOTOR_STATECALIB_ENDPOS * (uint32)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE);
-		}
-		else
-		{
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO_SECOND_SEARCH;
+		} else {
 			; /* do nothing */
 		}
-	}
+		break;
 
-	break;
+	case AL_MOTOR_OPSUBSTATE_CALIB_SECOND_SEARCH_FW:
+		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
+			Cdd_Motor_RunDistance(motor_e, CDD_MOTOR_DIR_FORWARD, 
+			AL_MOTOR_STATECALIB_SECONDFWD_UI16, (uint8) 0u);
+
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO_THIRD_SEARCH;
+		} else {
+			; /* do nothing */
+		}
+		break;
+
+	case AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO_FIRST_SEARCH:
+		if (Cdd_Motor_ZD_IsDetectionCompleteAndValid(motor_e) == (uint8) TRUE) {
+			Cdd_Motor_ZD_DisableDetection(motor_e);
+
+			/* Drive to next full step position */
+			Cdd_Motor_RunToNextFullStep(motor_e);
+
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_ZERO_WINDOW_DETECTED;
+		}
+		/* Motor runs till position 45 with first command, so should be enough from point of timing */
+		else {
+			if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
+				al_motor_opSubStateCalib_e[motor_e] =
+						AL_MOTOR_OPSUBSTATE_CALIB_FIRST_SEARCH_FW;
+			} else {
+				; /* do nothing */
+			}
+		}
+
+		break;
+
+	case AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO_SECOND_SEARCH:
+		if (Cdd_Motor_ZD_IsDetectionCompleteAndValid(motor_e) == (uint8) TRUE) {
+			Cdd_Motor_ZD_DisableDetection(motor_e);
+
+			/* Drive to next full step position */
+			Cdd_Motor_RunToNextFullStep(motor_e);
+
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_ZERO_WINDOW_DETECTED;
+		}
+		/* Motor runs till position 45 with first command, so should be enough from point of timing */
+		else {
+			currentPos_ui32 = Cdd_Motor_GetPositionCurrentAbsolute(motor_e);
+			// if we are in the first half go backward
+			if (((CDD_MOTOR_RNDS_THRSH * CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE / 2)
+					- currentPos_ui32)
+					< (CDD_MOTOR_MINIRNDS_THRSH
+							* CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE / 2)) {
+				al_motor_opSubStateCalib_e[motor_e] =
+						AL_MOTOR_OPSUBSTATE_CALIB_SECOND_SEARCH_FW;
+			} else {
+				; /* do nothing */
+			}
+		}
+
+		break;
+
+	case AL_MOTOR_OPSUBSTATE_CALIB_SEARCH_ZERO_THIRD_SEARCH:
+		if (Cdd_Motor_ZD_IsDetectionCompleteAndValid(motor_e) == (uint8) TRUE) {
+			Cdd_Motor_ZD_DisableDetection(motor_e);
+
+			/* Drive to next full step position */
+			Cdd_Motor_RunToNextFullStep(motor_e);
+
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_ZERO_WINDOW_DETECTED;
+		}
+		/* Motor runs till position 45 with first command, so should be enough from point of timing */
+		else {
+			if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
+				al_motor_opSubStateCalib_e[motor_e] =
+						AL_MOTOR_OPSUBSTATE_CALIB_FINISHED;
+			} else {
+				; /* do nothing */
+			}
+		}
+
+		break;
 
 	case AL_MOTOR_OPSUBSTATE_CALIB_ZERO_WINDOW_DETECTED:
-	/* go back to zero position if current end position reached */
-	if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8)TRUE)
-	{
-		if (Cdd_Motor_GetFullStepPositionAbsolute(motor_e) > CDD_MOTOR_RNDS_THRSH_HALF_UI16)
-		{
-			Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
-		}
-		else
-		{
-			Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_BACKWARD);
-		}
-		Cdd_Motor_RunToPosition (motor_e, ((uint32)CDD_MOTOR_RNDS_THRSH_UI16 - (uint32) 1uL) * (uint32)CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE);
+		/* go back to zero position if current end position reached */
+		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
 
-		/* Next level ^^ �o� */
-		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_ZERO_POS_REACHED;
-	}
-	else
-	{
-		; /* wait to reach full step position */
-	}
+			currentPos_ui32 = Cdd_Motor_GetPositionCurrentAbsolute(motor_e);
+			// if we are in the first half go backward
+			if (currentPos_ui32
+					< (CDD_MOTOR_RNDS_THRSH * CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE
+							/ 2)) {
+				Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_BACKWARD);
+			} else {
+				Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
+			}
 
-	break;
+			Cdd_Motor_RunToPosition(motor_e, (uint32) 0);
+
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_ZERO_POS_REACHED;
+		} else {
+			; /* wait to reach full step position */
+		}
+
+		break;
 
 	case AL_MOTOR_OPSUBSTATE_CALIB_ZERO_POS_REACHED:
-	if (Cdd_Motor_ReachedFinalPosition (motor_e) == (uint8)TRUE)
-	{
-		Cdd_Motor_SetDirectionReq(motor_e, CDD_MOTOR_DIR_FORWARD);
-		Cdd_Motor_RunToPosition (motor_e, (uint32) 0);
+		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
 
-		/* Next level ^^ �o� */
-		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_FINALLY_FWD;
-	}
-	else
-	{
-		; /* do nothing */
-	}
-	break;
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_FINALLY_FWD;
+		} else {
+			; /* do nothing */
+		}
+		break;
 
 	case AL_MOTOR_OPSUBSTATE_CALIB_FINALLY_FWD:
-	if (Cdd_Motor_ReachedFinalPosition (motor_e) == (uint8)TRUE)
-	{
-		/* Next level ^^ �o� */
-		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_FINISHED;
-	}
-	else
-	{
-		; /* do nothing */
-	}
-	break;
+		if (Cdd_Motor_ReachedFinalPosition(motor_e) == (uint8) TRUE) {
+			/* Next level ^^ �o� */
+			al_motor_opSubStateCalib_e[motor_e] =
+					AL_MOTOR_OPSUBSTATE_CALIB_FINISHED;
+		} else {
+			; /* do nothing */
+		}
+		break;
 
 	case AL_MOTOR_OPSUBSTATE_CALIB_FINISHED:
-	/* FINISH - await calibration end */
-	asm(nop); /*lint !e960 */
-	break;
+		/* FINISH - await calibration end */
+		asm(nop);
+		/*lint !e960 */
+		break;
 
 	case AL_MOTOR_OPSUBSTATE_CALIB_UNDEF:
 	default:
-	/* DET ERROR could be triggered here if enabled */
-	/* This may not happen - however back to start */
-	al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_START;
+		/* DET ERROR could be triggered here if enabled */
+		/* This may not happen - however back to start */
+		al_motor_opSubStateCalib_e[motor_e] = AL_MOTOR_OPSUBSTATE_CALIB_START;
 
-	break;
-}
+		break;
+	}
 }
 
 static void Al_Motor_RunStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
