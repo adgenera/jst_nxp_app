@@ -314,7 +314,8 @@ typedef enum {
 	M2_CUR_ACC_H = 0x5F,
 	M2_CUR_ACC_L = 0x60,
 
-	RESET = 0x7A
+	RESET = 0x7A,
+	MCU_INFO = 0x8A
 } st_nxp_registers;
 
 typedef enum {
@@ -340,124 +341,17 @@ typedef struct {
 } nxp_version;
 
 typedef struct {
+	uint8 mcu;
+	uint8 status;
+} nxp_info_s;
+
+typedef struct {
 	uint8 diag_kl30;
 	uint8 diag_temp;
 	uint8 diag_rtc_hh;
 	uint8 diag_rtc_mm;
 	uint8 diag_rtc_sss;
 } nxp_diagnostic;
-
-// Define read request flags for MOT1
-typedef union {
-	struct {
-		boolean current :1;
-		boolean ctrl :1;
-		boolean target :1;
-	};
-	uint8 flags;
-} MOT1_ReadRequest;
-
-// Define write request flags for MOT1
-typedef union {
-	struct {
-		boolean target :1;
-		boolean ctrl :1;
-	};
-	uint8 flags;
-} MOT1_WriteRequest;
-
-// Define read request flags for MOT2
-typedef union {
-	struct {
-		boolean current :1;
-		boolean ctrl :1;
-		boolean target :1;
-	};
-	uint8 flags;
-} MOT2_ReadRequest;
-
-// Define write request flags for MOT2
-typedef union {
-	struct {
-		boolean target :1;
-		boolean ctrl :1;
-	};
-	uint8 flags;
-} MOT2_WriteRequest;
-
-// Define read request flags for MOT3
-typedef union {
-	struct {
-		boolean current :1;
-		boolean ctrl :1;
-		boolean target :1;
-	};
-	uint8 flags;
-} MOT3_ReadRequest;
-
-// Define write request flags for MOT3
-typedef union {
-	struct {
-		boolean target :1;
-		boolean ctrl :1;
-	};
-	uint8 flags;
-} MOT3_WriteRequest;
-
-// Define read request flags for MOT4
-typedef union {
-	struct {
-		boolean current :1;
-		boolean ctrl :1;
-		boolean target :1;
-	};
-	uint8 flags;
-} MOT4_ReadRequest;
-
-// Define write request flags for MOT4
-typedef union {
-	struct {
-		boolean target :1;
-		boolean ctrl :1;
-	};
-	uint8 flags;
-} MOT4_WriteRequest;
-
-// Define read request flags for MCU2
-typedef union {
-	struct {
-		MOT1_ReadRequest mot1;
-		MOT2_ReadRequest mot2;
-	};
-	uint16 flags;
-} MCU2_ReadRequest;
-
-// Define write request flags for MCU2
-typedef union {
-	struct {
-		MOT1_WriteRequest mot1;
-		MOT2_WriteRequest mot2;
-	};
-	uint16 flags;
-} MCU2_WriteRequest;
-
-// Define read request flags for MCU3
-typedef union {
-	struct {
-		MOT3_ReadRequest mot3;
-		MOT4_ReadRequest mot4;
-	};
-	uint16 flags;
-} MCU3_ReadRequest;
-
-// Define write request flags for MCU3
-typedef union {
-	struct {
-		MOT3_WriteRequest mot3;
-		MOT4_WriteRequest mot4;
-	};
-	uint16 flags;
-} MCU3_WriteRequest;
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ *
  * Structs                                                                                                            *

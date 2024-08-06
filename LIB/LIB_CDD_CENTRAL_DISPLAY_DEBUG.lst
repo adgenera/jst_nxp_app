@@ -1,7 +1,7 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/LIB_CDD_CENTRAL_DISPLAY_DEBUG.lib'
 Unit name                                       size     from       to
-./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj         25008    83770   108778
-./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     83648      122    83770
+./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj         25008    84090   109098
+./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj     83968      122    84090
 
 EXPORTED OBJECTS
 Cdd_IIC_Get_Module_Speed_HHSS_ui16                       F   (./COMMON_BSW/HAL/CDD/IIC/Cdd_IIC_c.obj)
@@ -67,5 +67,6 @@ Cdd_Motor_ZD_IsDetectionCompleteAndValid                 F   (./COMMON_BSW/HAL/C
 Cdd_Motor_ZD_IsDetectionEnabled                          F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Cdd_Motor_ZD_PerformWindowCheck                          F   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Dio_WriteChannel                                         I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
+MCU                                                      O   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 Mtr_SetMotorInterrupt                                    I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)
 update_Mtr_TimerCounterOverflowInterruptFp               I   (./COMMON_BSW/HAL/CDD/MOTOR/Cdd_Motor_c.obj)

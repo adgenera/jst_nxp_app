@@ -118,9 +118,9 @@ void Wdg_Init(uint8 DeviceType)
 	  //setReg8(CPMURFLG, 0x00U);            /* Clear COP reset flag */ 
     *((uint8*)MCU_CPMURFLG_ADR_UI16) = 0x00U;
 		
-	/* CPMUCOP: WCOP=0,CR2=1,CR1=1,CR0=0 */
+	/* CPMUCOP: WCOP=0,RSBCK=1,CR2=1,CR1=1,CR0=0 */
 	  //clrSetReg8Bits(CPMUCOP, 0x83U, 0x04U); 
-    *((uint8*)WDG_CPMUCOP_ADR_UI16) = 0b00000110U;
+    *((uint8*)WDG_CPMUCOP_ADR_UI16) = 0b01000110U;
 }
 
 

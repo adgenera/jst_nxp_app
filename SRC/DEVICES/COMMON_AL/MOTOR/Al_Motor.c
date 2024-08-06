@@ -48,7 +48,7 @@
 
 #if (AL_MOTOR_MODULE_STATE_API == STD_ON)
 static volatile Std_ModuleStatusReturnType al_motor_moduleState_e =
-MODULE_UNINIT;
+		MODULE_UNINIT;
 #endif
 
 static Al_Motor_OperationStateEnum al_motor_opState_e = AL_MOTOR_OPSTATE_UNDEF;
@@ -116,7 +116,7 @@ static void Al_Motor_ShutdownTransition (void);
 static uint32 uSteps_ui32 = 0;
 
 /* ***************************** external global data ************************* */
-
+extern uint8 MCU;
 /* ***************************** global data ******************************** */
 
 /* ***************************** module functions ********************* */
@@ -441,7 +441,9 @@ static void Al_Motor_SleepStateMgmt(Cdd_Motor_MotorNumberEnum motor_e) {
 void Al_Motor_CalibrationModeTransition(void) {
 	/* Reset calibration mode */
 	al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] = FALSE;
-	al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = FALSE;
+	if (2 == MCU) {
+		al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = FALSE;
+	}
 
 //HHSS
 	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_HHSS,
@@ -465,30 +467,30 @@ void Al_Motor_CalibrationModeTransition(void) {
 	al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_HHSS] =
 			AL_MOTOR_OPSUBSTATE_CALIB_START;
 
+	if (2 == MCU) {
 //MM
-	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_SLOWDOWN_FAC_CALIBRATION);
+		(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_SLOWDOWN_FAC_CALIBRATION);
 
-	/* Change full step counter mode to absolute positioning */
-	Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_DEF_FULL_STEP_COUNTER_CALIBRATION);
+		/* Change full step counter mode to absolute positioning */
+		Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_DEF_FULL_STEP_COUNTER_CALIBRATION);
 
-	/* MVH: YES this is correct!
-	 * Zero detection has to be disabled first, will be enabled during calibration drive */
-	Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
+		/* MVH: YES this is correct!
+		 * Zero detection has to be disabled first, will be enabled during calibration drive */
+		Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
 
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_CALIBRATION);
+		Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_CALIBRATION);
 
-	if (Cdd_Motor_GetPartStepPosition(CDD_MOTOR_MTR_MM) != (uint8) 0U) {
-		Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_BACKWARD);
-		Cdd_Motor_RunToNextFullStep(CDD_MOTOR_MTR_MM);
+		if (Cdd_Motor_GetPartStepPosition(CDD_MOTOR_MTR_MM) != (uint8) 0U) {
+			Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_BACKWARD);
+			Cdd_Motor_RunToNextFullStep(CDD_MOTOR_MTR_MM);
+		}
+
+		al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
+				AL_MOTOR_OPSUBSTATE_CALIB_START;
 	}
-
-	al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
-			AL_MOTOR_OPSUBSTATE_CALIB_START;
-
 	al_motor_opState_e = AL_MOTOR_OPSTATE_CALIBRATION;
-
 }
 
 /**
@@ -514,24 +516,25 @@ static void Al_Motor_RunModeTransition(void) {
 		Al_Motor_CriticalStateTransition();
 	}
 
-	//MM   
-	if (al_motor_criticalEnvironment_ui8 == AL_MOTOR_CRITICAL_ENV_NORMAL) {
-		/* Change full step counter mode to absolute positioning */
-		Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
-				AL_MOTOR_DEF_FULL_STEP_COUNTER_RUN);
+	//MM  
+	if (2 == MCU) {
+		if (al_motor_criticalEnvironment_ui8 == AL_MOTOR_CRITICAL_ENV_NORMAL) {
+			/* Change full step counter mode to absolute positioning */
+			Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
+					AL_MOTOR_DEF_FULL_STEP_COUNTER_RUN);
 
-		/* Change request will start on next second tick */
-		Cdd_Motor_ZD_EnableDetection(CDD_MOTOR_MTR_MM);
+			/* Change request will start on next second tick */
+			Cdd_Motor_ZD_EnableDetection(CDD_MOTOR_MTR_MM);
 
-		Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_RUN);
+			Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_RUN);
 
-		(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
-				AL_MOTOR_SLOWDOWN_FAC_RUN);
-		al_motor_opState_e = AL_MOTOR_OPSTATE_RUN;
-	} else {
-		Al_Motor_CriticalStateTransition();
+			(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
+					AL_MOTOR_SLOWDOWN_FAC_RUN);
+			al_motor_opState_e = AL_MOTOR_OPSTATE_RUN;
+		} else {
+			Al_Motor_CriticalStateTransition();
+		}
 	}
-
 	//Al_App_Ctrl_RunModeChangeAllowedResponse(AL_APP_CTRL_APP_MOTOR);
 }
 
@@ -598,17 +601,19 @@ static void Al_Motor_SleepModeTransition(void) {
 			AL_MOTOR_SLOWDOWN_FAC_SLEEP);
 
 //MM
-	/* Change full step counter mode to absolute positioning */
-	Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_DEF_FULL_STEP_COUNTER_SLEEP);
+	if (2 == MCU) {
+		/* Change full step counter mode to absolute positioning */
+		Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_DEF_FULL_STEP_COUNTER_SLEEP);
 
-	Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
+		Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
 
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_SLEEP);
-	Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
+		Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_SLEEP);
+		Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
 
-	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM, AL_MOTOR_SLOWDOWN_FAC_SLEEP);
-
+		(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_SLOWDOWN_FAC_SLEEP);
+	}
 	al_motor_opState_e = AL_MOTOR_OPSTATE_SLEEP;
 }
 
@@ -631,18 +636,19 @@ static void Al_Motor_ProductionModeRequestTransition(void) {
 	}
 
 //MM
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_STEPMODE_PRODUCTION_REQUEST);
+	if (2 == MCU) {
+		Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_STEPMODE_PRODUCTION_REQUEST);
 
-	/* If not at a stable fullstep position, drive the pointers to next fullstep position */
-	if (Cdd_Motor_GetUStepPosition(CDD_MOTOR_MTR_MM) != (uint8) 0U) {
-		/* Only in clockwise direction the virtual position equals the physical position */
-		Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-		Cdd_Motor_RunToNextFullStep(CDD_MOTOR_MTR_MM);
-	} else {
-		/* Already at a fullstep position, nothing to do */
+		/* If not at a stable fullstep position, drive the pointers to next fullstep position */
+		if (Cdd_Motor_GetUStepPosition(CDD_MOTOR_MTR_MM) != (uint8) 0U) {
+			/* Only in clockwise direction the virtual position equals the physical position */
+			Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
+			Cdd_Motor_RunToNextFullStep(CDD_MOTOR_MTR_MM);
+		} else {
+			/* Already at a fullstep position, nothing to do */
+		}
 	}
-
 	al_motor_opState_e = AL_MOTOR_OPSTATE_TRANSITION_TO_PRODUCTION;
 }
 
@@ -665,18 +671,19 @@ static void Al_Motor_ProductionModeTransition(void) {
 			AL_MOTOR_SLOWDOWN_FAC_PRODUCTION);
 
 //MM
-	/* Change full step counter mode to absolute positioning */
-	Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_DEF_FULL_STEP_COUNTER_PRODUCTION);
+	if (2 == MCU) {
+		/* Change full step counter mode to absolute positioning */
+		Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_DEF_FULL_STEP_COUNTER_PRODUCTION);
 
-	Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
+		Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
 
-	Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_PRODUCTION);
+		Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
+		Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_PRODUCTION);
 
-	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_SLOWDOWN_FAC_PRODUCTION);
-
+		(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_SLOWDOWN_FAC_PRODUCTION);
+	}
 	//Al_App_Ctrl_ProductionModeChangeAllowedResponse(AL_APP_CTRL_APP_MOTOR);
 	al_motor_opState_e = AL_MOTOR_OPSTATE_PRODUCTION;
 }
@@ -704,22 +711,23 @@ static void Al_Motor_CriticalStateTransition(void) {
 			AL_MOTOR_SLOWDOWN_FAC_EXCEPTION);
 
 //MM
-	Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_DEF_FULL_STEP_COUNTER_EXCEPTION);
+	if (2 == MCU) {
+		Cdd_Motor_ChangeDefaultFullStepCounter(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_DEF_FULL_STEP_COUNTER_EXCEPTION);
 
-	Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
+		Cdd_Motor_ZD_DisableDetection(CDD_MOTOR_MTR_MM);
 
-	if (Cdd_Motor_GetUStepPosition(CDD_MOTOR_MTR_MM) != (uint8) 0U) {
-		/* Only in clockwise direction virtual and physical positions are equal */
+		if (Cdd_Motor_GetUStepPosition(CDD_MOTOR_MTR_MM) != (uint8) 0U) {
+			/* Only in clockwise direction virtual and physical positions are equal */
+			Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
+			Cdd_Motor_RunToNextFullStep(CDD_MOTOR_MTR_MM);
+		}
+		Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_EXCEPTION);
 		Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-		Cdd_Motor_RunToNextFullStep(CDD_MOTOR_MTR_MM);
+
+		(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
+				AL_MOTOR_SLOWDOWN_FAC_EXCEPTION);
 	}
-	Cdd_Motor_SetStepMode(CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_EXCEPTION);
-	Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-
-	(void) Cdd_Motor_SetSpeedFac(CDD_MOTOR_MTR_MM,
-			AL_MOTOR_SLOWDOWN_FAC_EXCEPTION);
-
 	/* Set overtemp state */
 	al_motor_opState_e = AL_MOTOR_OPSTATE_CRITICAL_TEMP;
 }
@@ -866,11 +874,13 @@ void Al_Motor_MainFunction(void) {
 	}
 
 //MM   
-	if (Cdd_Motor_ZD_IsDetectionEnabled(CDD_MOTOR_MTR_MM)) /*lint !e9036*/
-	{
-		Cdd_Motor_ZD_PerformWindowCheck(CDD_MOTOR_MTR_MM);
-	} else {
-		; /* do nothing */
+	if (2 == MCU) {
+		if (Cdd_Motor_ZD_IsDetectionEnabled(CDD_MOTOR_MTR_MM)) /*lint !e9036*/
+		{
+			Cdd_Motor_ZD_PerformWindowCheck(CDD_MOTOR_MTR_MM);
+		} else {
+			; /* do nothing */
+		}
 	}
 
 #if (AL_MOTOR_DEINIT_API == STD_ON)
@@ -991,59 +1001,62 @@ void Al_Motor_MainFunction(void) {
 		}
 
 //MM		 
-		Al_Motor_CalibrationStateMgmt(CDD_MOTOR_MTR_MM);
+		if (2 == MCU) {
+			Al_Motor_CalibrationStateMgmt(CDD_MOTOR_MTR_MM);
 
-		/* Timeout for CALIBRATION
-		 * Count up timeout if motor does not move anymore
-		 */
-		result_ui8 = Cdd_Motor_ReachedFinalPosition(CDD_MOTOR_MTR_MM);
-		if (result_ui8 == (uint8) TRUE) {
-			al_motor_calibCntr_ui16++;
-		} else {
-			al_motor_calibCntr_ui16 = (uint16) 0u;
-		}
+			/* Timeout for CALIBRATION
+			 * Count up timeout if motor does not move anymore
+			 */
+			result_ui8 = Cdd_Motor_ReachedFinalPosition(CDD_MOTOR_MTR_MM);
+			if (result_ui8 == (uint8) TRUE) {
+				al_motor_calibCntr_ui16++;
+			} else {
+				al_motor_calibCntr_ui16 = (uint16) 0u;
+			}
 
 #if ((defined TEST_ERRORHANDLER_1_ZERODETECTION) && (TEST_ERRORHANDLER_1_ZERODETECTION == 1))
-		al_motor_calibCntr_ui16 = AL_MOTOR_CALIBRATION_TIMEOUT_THRESHOLD_UI16 + (uint16) 1u;
-		al_motor_opSubStateCalib_e = AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
+			al_motor_calibCntr_ui16 = AL_MOTOR_CALIBRATION_TIMEOUT_THRESHOLD_UI16 + (uint16) 1u;
+			al_motor_opSubStateCalib_e = AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
 #endif
-		/* Timeout handling for zero detection fail */
-		if (al_motor_calibCntr_ui16
-				>= AL_MOTOR_CALIBRATION_TIMEOUT_THRESHOLD_UI16) {
-			al_motor_calibCntr_ui16 = (uint16) 0U;
+			/* Timeout handling for zero detection fail */
+			if (al_motor_calibCntr_ui16
+					>= AL_MOTOR_CALIBRATION_TIMEOUT_THRESHOLD_UI16) {
+				al_motor_calibCntr_ui16 = (uint16) 0U;
+
+				if (al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM]
+						!= AL_MOTOR_OPSUBSTATE_CALIB_FINISHED) {
+					Cdd_Motor_RunToFullStepPosition(CDD_MOTOR_MTR_MM,
+							(uint16) 0U);
+					al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
+							AL_MOTOR_OPSUBSTATE_CALIB_FINISHED;
+				}
+			}
 
 			if (al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM]
-					!= AL_MOTOR_OPSUBSTATE_CALIB_FINISHED) {
-				Cdd_Motor_RunToFullStepPosition(CDD_MOTOR_MTR_MM, (uint16) 0U);
-				al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
-						AL_MOTOR_OPSUBSTATE_CALIB_FINISHED;
-			}
-		}
+					== AL_MOTOR_OPSUBSTATE_CALIB_FINISHED) {
 
-		if (al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM]
-				== AL_MOTOR_OPSUBSTATE_CALIB_FINISHED) {
+				al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = (uint8) TRUE;
 
-			al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM] = (uint8) TRUE;
-
-			if (al_motor_returnToProductionMode_ui8
-					== AL_MOTOR_PRODUCTION_MODE_CALIBRATION_TRUE) {
-				al_motor_event_e =
-						(uint16) AL_MOTOR_EVENT_PRODUCTIONMODE_REQUEST;
+				if (al_motor_returnToProductionMode_ui8
+						== AL_MOTOR_PRODUCTION_MODE_CALIBRATION_TRUE) {
+					al_motor_event_e =
+							(uint16) AL_MOTOR_EVENT_PRODUCTIONMODE_REQUEST;
+				} else {
+					/* MavonHinten: Do NOT delete sleep mode request - this is done in sleep mode */
+					//Al_Motor_SleepModePrepareTransition ();
+				}
+				/* Always reset this flag after finished calibration */
+				al_motor_returnToProductionMode_ui8 =
+						AL_MOTOR_PRODUCTION_MODE_CALIBRATION_FALSE;
 			} else {
-				/* MavonHinten: Do NOT delete sleep mode request - this is done in sleep mode */
-				//Al_Motor_SleepModePrepareTransition ();
+				/* do nothing */
 			}
-			/* Always reset this flag after finished calibration */
-			al_motor_returnToProductionMode_ui8 =
-					AL_MOTOR_PRODUCTION_MODE_CALIBRATION_FALSE;
-		} else {
-			/* do nothing */
 		}
-
 		/* When calibration was finished, return to normal operation */
-		if (al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] == (uint8) TRUE
+		if ((al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] == (uint8) TRUE
 				&& al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM]
-						== (uint8) TRUE) {
+						== (uint8) TRUE && 2 == MCU)
+				|| (al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] && 3 == MCU)) {
 			al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_HHSS] =
 					AL_MOTOR_OPSUBSTATE_CALIB_UNDEF;
 			al_motor_opSubStateCalib_e[CDD_MOTOR_MTR_MM] =
@@ -1072,8 +1085,9 @@ void Al_Motor_MainFunction(void) {
 		//else
 		//{
 		Al_Motor_RunStateMgmt(CDD_MOTOR_MTR_HHSS);
-		Al_Motor_RunStateMgmt(CDD_MOTOR_MTR_MM);
-
+		if (2 == MCU) {
+			Al_Motor_RunStateMgmt(CDD_MOTOR_MTR_MM);
+		}
 		break;
 		//}
 	}
@@ -1110,36 +1124,38 @@ void Al_Motor_MainFunction(void) {
 		}
 
 //MM		   
-		/* check if a runmode-request was received while driving to zero position */
-		if ((al_motor_event_e & (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST)
-				== (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST) {
-			/* Delete event */
-			al_motor_event_e &= (~((uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST));
-			/* change to run mode */
-			Al_Motor_RunModeTransition();
-		}
-		/* If not on zero, drive to zero deg pos, also check if arrived at target */
-		else if ((Cdd_Motor_GetUStepPosition(CDD_MOTOR_MTR_MM) == (uint8) 0U)
-				&& (Cdd_Motor_ReachedFinalPosition(CDD_MOTOR_MTR_MM)
-						== (uint8) TRUE)) /*lint !e9007 */
-				{
-			/* MavonHinten: Do NOT delete sleep mode request - this is done in sleep mode */
-			Al_Motor_SleepModeTransition();
-		} else {
-#if (DEVICE_TYPE == DEVICE_CENTRAL_DISPLAY)
-			/* Continue running until sleep mode condition is valid */
-			Al_Motor_RunStateMgmt(CDD_MOTOR_MTR_MM);
-#else
-			/* Nothing to do */
-			if (Cdd_Motor_ReachedFinalPosition (CDD_MOTOR_MTR_MM) == (uint8)TRUE)
-			{
-				Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-				Cdd_Motor_RunToPosition(CDD_MOTOR_MTR_MM, (uint32) AL_MOTOR_STELLTEST_POSITION_TOP);
+		if (2 == MCU) {
+			/* check if a runmode-request was received while driving to zero position */
+			if ((al_motor_event_e & (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST)
+					== (uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST) {
+				/* Delete event */
+				al_motor_event_e &=
+						(~((uint16) AL_MOTOR_EVENT_RUNMODE_REQUEST));
+				/* change to run mode */
+				Al_Motor_RunModeTransition();
 			}
+			/* If not on zero, drive to zero deg pos, also check if arrived at target */
+			else if ((Cdd_Motor_GetUStepPosition(CDD_MOTOR_MTR_MM) == (uint8) 0U)
+					&& (Cdd_Motor_ReachedFinalPosition(CDD_MOTOR_MTR_MM)
+							== (uint8) TRUE)) /*lint !e9007 */
+					{
+				/* MavonHinten: Do NOT delete sleep mode request - this is done in sleep mode */
+				Al_Motor_SleepModeTransition();
+			} else {
+#if (DEVICE_TYPE == DEVICE_CENTRAL_DISPLAY)
+				/* Continue running until sleep mode condition is valid */
+				Al_Motor_RunStateMgmt(CDD_MOTOR_MTR_MM);
+#else
+				/* Nothing to do */
+				if (Cdd_Motor_ReachedFinalPosition (CDD_MOTOR_MTR_MM) == (uint8)TRUE)
+				{
+					Cdd_Motor_SetDirectionReq(CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
+					Cdd_Motor_RunToPosition(CDD_MOTOR_MTR_MM, (uint32) AL_MOTOR_STELLTEST_POSITION_TOP);
+				}
 #endif
 
+			}
 		}
-
 		break;
 	}
 
@@ -1177,9 +1193,12 @@ void Al_Motor_MainFunction(void) {
 		} else if (al_motor_criticalEnvironment_ui8
 				== AL_MOTOR_CRITICAL_ENV_NORMAL) {
 			/* When calibration was finished, return to normal operation */
-			if (al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS] == (uint8) TRUE
+			if ((al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS]
+					== (uint8) TRUE
 					&& al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_MM]
-							== (uint8) TRUE) {
+					&& 2 == MCU == (uint8) TRUE)
+					|| (al_motor_calibrationDone_ui8[CDD_MOTOR_MTR_HHSS]
+							== (uint8) TRUE && 3 == MCU)) {
 				Al_Motor_RunModeTransition();
 			} else {
 				Al_Motor_CalibrationModeTransition();
@@ -1207,26 +1226,28 @@ void Al_Motor_MainFunction(void) {
 		}
 
 //MM            
-		if (Cdd_Motor_ReachedFinalPosition (CDD_MOTOR_MTR_MM) == (uint8) TRUE) /*lint !e9007 */
-		{
-			if (Cdd_Motor_GetUStepPosition (CDD_MOTOR_MTR_MM) == (uint8) 0u)
+		if (2 == MCU) {
+			if (Cdd_Motor_ReachedFinalPosition (CDD_MOTOR_MTR_MM) == (uint8) TRUE) /*lint !e9007 */
 			{
-				Cdd_Motor_StopPWM (CDD_MOTOR_MTR_MM);
+				if (Cdd_Motor_GetUStepPosition (CDD_MOTOR_MTR_MM) == (uint8) 0u)
+				{
+					Cdd_Motor_StopPWM (CDD_MOTOR_MTR_MM);
+				}
+				else
+				{
+					/*  && (Cdd_Motor_GetPartStepPosition () == (uint8) 0u) */
+					uint32 currentPos_ui32;
+
+					Cdd_Motor_SetDirectionReq (CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
+					currentPos_ui32 = Cdd_Motor_GetPositionCurrentUsed (CDD_MOTOR_MTR_MM);
+					Cdd_Motor_RunToPosition (CDD_MOTOR_MTR_MM, currentPos_ui32);
+				}
 			}
+
 			else
 			{
-				/*  && (Cdd_Motor_GetPartStepPosition () == (uint8) 0u) */
-				uint32 currentPos_ui32;
-
-				Cdd_Motor_SetDirectionReq (CDD_MOTOR_MTR_MM, CDD_MOTOR_DIR_FORWARD);
-				currentPos_ui32 = Cdd_Motor_GetPositionCurrentUsed (CDD_MOTOR_MTR_MM);
-				Cdd_Motor_RunToPosition (CDD_MOTOR_MTR_MM, currentPos_ui32);
+				/* Final position not yet reached */
 			}
-		}
-
-		else
-		{
-			/* Final position not yet reached */
 		}
 	}
 
@@ -1244,13 +1265,14 @@ case AL_MOTOR_OPSTATE_TRANSITION_TO_PRODUCTION:
 	}
 
 //MM
-	Cdd_Motor_SetStepMode (CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_PRODUCTION);
+	if (2 == MCU) {
+		Cdd_Motor_SetStepMode (CDD_MOTOR_MTR_MM, AL_MOTOR_STEPMODE_PRODUCTION);
 
-	if ((Cdd_Motor_ReachedFinalPosition (CDD_MOTOR_MTR_MM) == (uint8)TRUE) && (Cdd_Motor_GetStepMode(CDD_MOTOR_MTR_MM) == CDD_MOTOR_STEPMODE_STOP))
-	{
-		Al_Motor_ProductionModeTransition ();
+		if ((Cdd_Motor_ReachedFinalPosition (CDD_MOTOR_MTR_MM) == (uint8)TRUE) && (Cdd_Motor_GetStepMode(CDD_MOTOR_MTR_MM) == CDD_MOTOR_STEPMODE_STOP))
+		{
+			Al_Motor_ProductionModeTransition ();
+		}
 	}
-
 	break;
 }
 

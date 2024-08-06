@@ -1,7 +1,7 @@
 Units and locations in library 'C:/git/jst_nxp_app/LIB/JST_BY_RELEASE_LIB_CENTRAL_DISPLAY.lib'
 Unit name            size     from       to
-Cdd_IIC_c.obj       25008    83407   108415
-Cdd_Motor_c.obj     83280      127    83407
+Cdd_IIC_c.obj       25008    83727   108735
+Cdd_Motor_c.obj     83600      127    83727
 
 EXPORTED OBJECTS
 Cdd_IIC_Get_Module_Speed_HHSS_ui16                       F   (Cdd_IIC_c.obj)
@@ -67,5 +67,6 @@ Cdd_Motor_ZD_IsDetectionCompleteAndValid                 F   (Cdd_Motor_c.obj)
 Cdd_Motor_ZD_IsDetectionEnabled                          F   (Cdd_Motor_c.obj)
 Cdd_Motor_ZD_PerformWindowCheck                          F   (Cdd_Motor_c.obj)
 Dio_WriteChannel                                         I   (Cdd_Motor_c.obj)
+MCU                                                      O   (Cdd_Motor_c.obj)
 Mtr_SetMotorInterrupt                                    I   (Cdd_Motor_c.obj)
 update_Mtr_TimerCounterOverflowInterruptFp               I   (Cdd_Motor_c.obj)

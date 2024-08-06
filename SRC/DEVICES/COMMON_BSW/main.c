@@ -10,20 +10,25 @@
 #include "Dio.h"
 /**********************************************************************************************
  * External objects
-// **********************************************************************************************/
+ // **********************************************************************************************/
 
 /**********************************************************************************************
  * Constants and macros
  **********************************************************************************************/
 
-
 /**********************************************************************************************
  * Global variables
  **********************************************************************************************/
-flags_t flags;
 boolean ms = FALSE;
 
 const uint16 jst_code @0x00FFE600 = 0x2540;
+
+const uint8 _SW_VERSION[2] = {'0', '1'};
+
+//nxp_status nxp_ver_id;
+
+//nxp_ver_id.app_sw_version[0] = '0';
+//nxp_ver_id.app_sw_version[1] = '1';
 
 /**********************************************************************************************
  * Local types
@@ -53,13 +58,13 @@ const uint16 jst_code @0x00FFE600 = 0x2540;
  *
  ************************************************************************************************/
 
-void main (void)
-{
+void main(void) {
 	/* Disable all interrupts for initialization */
-	DISABLE_ALL_INTERRUPTS(); /*lint !e960 */
-    
+	DISABLE_ALL_INTERRUPTS();
+	/*lint !e960 */
+
 	/* initialize the ECUM module */
-	Ecum_Init ();
+	Ecum_Init();
 
 	/* ******************************************************* *
 	 *                                                         *
@@ -70,27 +75,25 @@ void main (void)
 	 *  False configuration can result in hardware malfunction *
 	 *                                                         *
 	 * ******************************************************* */
-	Ecum_Start ();
-	
+	Ecum_Start();
+
 	/* Initialize external Peripherals */
-	    /* WDG is initialized separately **************************************** */
+	/* WDG is initialized separately **************************************** */
 	//#if ! ((defined DEBUG_WATCHDOG_DISABLE) && (DEBUG_WATCHDOG_DISABLE == 1))
-		Wdg_Init((uint8)DEVICE_TYPE);
+	Wdg_Init((uint8) DEVICE_TYPE);
 	//#endif
 	API_Init();
-	/* Enable all interrupts */
-	ENABLE_ALL_INTERRUPTS(); /*lint !e960 */	
+	/* Enable all interrupts */ENABLE_ALL_INTERRUPTS();
+	/*lint !e960 */
 
 	/* infinite loop */
-	for (;;)
-	{			
+	for (;;) {
 		/* Call ECUM MainFunction */
 		Ecum_MainFunction();
-  		if (ms) 
-        {
-  			Wdg_Clear();
-  			ms = FALSE;	
-        }
+		if (ms) {
+			Wdg_Clear();
+			ms = FALSE;
+		}
 	}
 }
 

@@ -44,6 +44,8 @@ bool us100 = FALSE;
 byte cnt = 0;
 word sent = 0;
 
+const uint8 BL_VERSION[2] = { '0', '1' };
+
 /* User includes */
 void main(void) {
 	/* Write your local variable definition here */
@@ -55,7 +57,7 @@ void main(void) {
 	for (;;) {
 		if (us100) {
 			BL_FSM();
-			us100 = FALSE;		
+			us100 = FALSE;
 		}
 	}
 } /*** End of main routine ***/

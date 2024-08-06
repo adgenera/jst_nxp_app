@@ -57,6 +57,9 @@ static uint8 IIC0_SerFlag;             /* Flags for serial communication */
                                        /*       6 - Full RX buffer */
                                        /*       7 - Master x Slave */
 
+// TODO TEMP
+nxp_info_s mcu_info;
+
 static uint8 received;
 uint8 Flags = 0U; 
 

@@ -5,7 +5,7 @@ Dio_PBcfg_c.obj      1864    69861    71725
 Dio_c.obj            8216    61645    69861
 Gpt_PBcfg_c.obj      3400    37709    41109
 Gpt_c.obj           12368    25341    37709
-IIC0_c.obj          19168    71725    90893
+IIC0_c.obj          19616    71725    91341
 Mcu_c.obj            5848    19493    25341
 Mtr_c.obj           16432    45213    61645
 Port_c.obj           4104    41109    45213
@@ -78,6 +78,7 @@ gpt_driverConfig_s                            O   (Gpt_PBcfg_c.obj)
 gpt_driverConfig_s                            I   (Gpt_c.obj)
 init_time                                     F   (Timer_c.obj)
 main                                          I   (starts12z_c.obj)
+mcu_info                                      O   (IIC0_c.obj)
 mcu_initialConfiguration_s                    I   (Mcu_c.obj)
 ms                                            I   (Timer_c.obj)
 mtr_channelConfigReg_apui8                    O   (Mtr_c.obj)

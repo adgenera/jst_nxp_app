@@ -7,14 +7,14 @@
 #include "Wdg.h"
 #include "Cdd_IIC.h"
 
-/* User includes (#include below this line is not maintained by Processor Expert) */
-extern flags_t flags;
+flags_t flags;
 extern char *char_read;
 static uint8 cnt = 0;
 static uint16 sent = 0;
 
 extern uint8 InpBufferS[9];
 extern uint8 OutBufferS[9];
+extern nxp_info_s mcu_info;
 uint8 pos_speed_acc[9];
 uint8 error[9] = "666777888";
 
@@ -24,6 +24,9 @@ uint8 data;
 uint8 i2c_buf[8];
 
 static uint8 command = 0;
+
+// TODO TEMP
+extern uint8 MCU;
 
 /*
  ** ===================================================================
@@ -84,6 +87,11 @@ void IIC0_OnRxChar(void) {
 			speed = speed << 8;
 			speed |= InpBufferS[3];
 			Cdd_IIC_Set_Speed_MM(speed);
+			break;
+
+		case MCU_INFO:
+			mcu_info.mcu = InpBufferS[0];
+			mcu_info.status = InpBufferS[1];
 			break;
 		default:
 			break;
@@ -148,7 +156,7 @@ void IIC0_OnReadReq(void) {
 		curPos_ui32 *= AL_MOTORPOS_GEAR_DIVISOR;
 		curPos_ui32 /= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE
 				* AL_MOTORPOS_GEAR_FACTOR);
-		
+
 		curSpeed_ui16 = Cdd_IIC_Get_Speed_ui16(CDD_MOTOR_MTR_HHSS);
 
 		pos_speed_acc[0] = (uint8) ((curPos_ui32 >> 8) & 0xFF);
@@ -163,13 +171,18 @@ void IIC0_OnReadReq(void) {
 		IIC0_SendBlock(pos_speed_acc, 8, &sent);
 		break;
 	case M2_CUR_ALL:
-		curPos_ui32 = Cdd_Motor_GetPositionCurrentAbsolute(CDD_MOTOR_MTR_MM);
-		curPos_ui32 *= AL_MOTORPOS_GEAR_DIVISOR;
-		curPos_ui32 /= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE
-				* AL_MOTORPOS_GEAR_FACTOR);
-		
-		curSpeed_ui16 = Cdd_IIC_Get_Speed_ui16(CDD_MOTOR_MTR_MM);
+		if (2 == MCU) {
+			curPos_ui32 = Cdd_Motor_GetPositionCurrentAbsolute(
+					CDD_MOTOR_MTR_MM);
+			curPos_ui32 *= AL_MOTORPOS_GEAR_DIVISOR;
+			curPos_ui32 /= (CDD_MOTOR_MICRO_STEPS_ARRAY_SIZE
+					* AL_MOTORPOS_GEAR_FACTOR);
 
+			curSpeed_ui16 = Cdd_IIC_Get_Speed_ui16(CDD_MOTOR_MTR_MM);
+		} else {
+			curPos_ui32 = 0xFFFFFFFF;
+			curSpeed_ui16 = 0xFFFF;
+		}
 		pos_speed_acc[0] = (uint8) ((curPos_ui32 >> 8) & 0xFF);
 		pos_speed_acc[1] = (uint8) (curPos_ui32 & 0xFF);
 		pos_speed_acc[2] = (uint8) ((curSpeed_ui16 >> 8) & 0xFF);
@@ -195,6 +208,18 @@ void IIC0_OnReadReq(void) {
 		IIC0_SendBlock(InpBufferS, 8, &sent);
 		break;
 
+	case MCU_INFO:
+		InpBufferS[0] = mcu_info.mcu;
+		InpBufferS[1] = mcu_info.status;
+		InpBufferS[2] += 0xFF;
+		InpBufferS[3] += 0xFF;
+		InpBufferS[4] += 0xFF;
+		InpBufferS[5] += 0xFF;
+		InpBufferS[6] += 0xFF;
+		InpBufferS[7] += 0xFF;
+
+		IIC0_SendBlock(InpBufferS, 8, &sent);
+		break;
 	default:
 		IIC0_SendBlock(error, 8, &sent);
 		break;

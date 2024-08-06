@@ -59,6 +59,9 @@ static uint8 cdd_motor_zeroWinWidthMin_ui8;
 /** \brief Zero detection window debouncing threshold (loaded from EEPROM) */
 static uint8 cdd_motor_debouncingThresh_ui8;
 
+/** \brief MCU declaration */
+uint8 MCU = 2;
+
 /* ***************************** module global function definitions ********** */
 // static void Cdd_Motor_ChangeStepModeConfig (void);
 static void Cdd_Motor_ChangeStepModeConfig(
